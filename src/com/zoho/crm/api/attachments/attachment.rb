@@ -15,10 +15,12 @@ module Attachments
       @size = nil
       @parent_id = nil
       @editable = nil
+      @sharing_permission = nil
       @file_id = nil
       @type = nil
       @se_module = nil
       @modified_by = nil
+      @attachment_type = nil
       @state = nil
       @id = nil
       @created_by = nil
@@ -154,6 +156,24 @@ module Attachments
       @key_modified['$editable'] = 1
     end
 
+      # The method to get the sharing_permission
+      # @return A String value
+
+    def sharing_permission
+      @sharing_permission
+    end
+
+      # The method to set the value to sharing_permission
+      # @param sharing_permission [String] A String
+
+    def sharing_permission=(sharing_permission)
+      if sharing_permission!=nil and !sharing_permission.is_a? String
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: sharing_permission EXPECTED TYPE: String', nil, nil)
+      end
+      @sharing_permission = sharing_permission
+      @key_modified['$sharing_permission'] = 1
+    end
+
       # The method to get the file_id
       # @return A String value
 
@@ -224,6 +244,24 @@ module Attachments
       end
       @modified_by = modified_by
       @key_modified['Modified_By'] = 1
+    end
+
+      # The method to get the attachment_type
+      # @return A Integer value
+
+    def attachment_type
+      @attachment_type
+    end
+
+      # The method to set the value to attachment_type
+      # @param attachment_type [Integer] A Integer
+
+    def attachment_type=(attachment_type)
+      if attachment_type!=nil and !attachment_type.is_a? Integer
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: attachment_type EXPECTED TYPE: Integer', nil, nil)
+      end
+      @attachment_type = attachment_type
+      @key_modified['$attachment_type'] = 1
     end
 
       # The method to get the state

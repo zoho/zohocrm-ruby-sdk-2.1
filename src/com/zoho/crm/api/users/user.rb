@@ -80,6 +80,23 @@ module Users
       add_key_value('signature', signature)
     end
 
+      # The method to get the sort_order_preference
+      # @return A String value
+
+    def sort_order_preference
+      get_key_value('sort_order_preference')
+    end
+
+      # The method to set the value to sort_order_preference
+      # @param sort_order_preference [String] A String
+
+    def sort_order_preference=(sort_order_preference)
+      if sort_order_preference!=nil and !sort_order_preference.is_a? String
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: sort_order_preference EXPECTED TYPE: String', nil, nil)
+      end
+      add_key_value('sort_order_preference', sort_order_preference)
+    end
+
       # The method to get the city
       # @return A String value
 
@@ -333,6 +350,23 @@ module Users
         raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: country_locale EXPECTED TYPE: String', nil, nil)
       end
       add_key_value('country_locale', country_locale)
+    end
+
+      # The method to get the sandboxdeveloper
+      # @return A Boolean value
+
+    def sandboxdeveloper
+      get_key_value('sandboxDeveloper')
+    end
+
+      # The method to set the value to sandboxdeveloper
+      # @param sandboxdeveloper [Boolean] A Boolean
+
+    def sandboxdeveloper=(sandboxdeveloper)
+      if sandboxdeveloper!=nil and ! [true, false].include?sandboxdeveloper
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: sandboxdeveloper EXPECTED TYPE: Boolean', nil, nil)
+      end
+      add_key_value('sandboxDeveloper', sandboxdeveloper)
     end
 
       # The method to get the first_name

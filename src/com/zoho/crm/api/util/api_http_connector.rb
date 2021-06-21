@@ -96,7 +96,7 @@ module Util
 
     def to_s
       req_headers = @headers.clone
-      req_headers [Constants::AUTHORIZATION] = Constants::CANT_DISCLOSE
+      req_headers[Constants::AUTHORIZATION] = Constants::CANT_DISCLOSE
       @request_method + ' - ' + Constants::URL + ' = ' + @url + ', ' + Constants::HEADERS + ' = ' + req_headers.to_s + ', ' + Constants::PARAMS + ' = ' + @parameters.to_s
     end
 

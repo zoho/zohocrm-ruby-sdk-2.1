@@ -51,7 +51,7 @@ module Util
     def self.refresh_fields(module_api_name)
       @@sync_lock.synchronize do
         delete_fields(module_api_name)
-        Utility.get_fields(module_api_name)
+        Utility.get_fields_info(module_api_name)
       end
     rescue SDKException => e
       SDKLog::SDKLogger.severe(Constants::REFRESH_SINGLE_MODULE_FIELDS_ERROR + module_api_name, e)

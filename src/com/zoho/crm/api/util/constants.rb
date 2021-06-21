@@ -96,16 +96,10 @@ class Constants
 
   HTTP = 'http'
 
-  KEY_VS_INVENTORY_MODULE = {
-    "Quoted_Items"=>"quotes",
+  INVENTORY_MODULES_ITEMS = ["invoiced_items", "quoted_items","purchase_items","ordered_items"]
 
-    "Invoiced_Items" => "invoices",
+  PRODUCT_NAME = "Product_Name"
 
-    "Purchase_Items" => "purchase_orders",
-
-    "Ordered_Items" => "sales_orders"
-
-  }
   DEFAULT_MODULENAME_VS_APINAME = {
 
     "leads" => "Leads",
@@ -166,7 +160,7 @@ class Constants
 
   ZOHO_SDK = 'X-ZOHO-SDK'
 
-  SDK_VERSION = '3.0.0-beta'
+  SDK_VERSION = '3.0.0'
 
   SET_CONTENT_TYPE_HEADER = ['/crm/bulk/v2.1/read', '/crm/bulk/v2.1/write']
 
@@ -210,15 +204,17 @@ class Constants
 
   NULL_VALUE_ERROR_MESSAGE = ' MUST NOT be null'
 
-  PARAM_INSTANCE_NULL_ERROR = 'Param<T> Instance MUST NOT be null'
+  PARAM_INSTANCE_NULL_ERROR = 'Param Instance MUST NOT be null'
 
-  HEADER_INSTANCE_NULL_ERROR = 'Header<T> Instance MUST NOT be null'
+  HEADER_INSTANCE_NULL_ERROR = 'Header Instance MUST NOT be null'
 
   SDK_UNINITIALIZATION_ERROR = 'SDK UNINITIALIZED ERROR'
 
   SDK_UNINITIALIZATION_MESSAGE = 'SDK is uninitialized'
 
   MYSQL_HOST = 'localhost'
+
+  LINEITEM_PRODUCT = "com.zoho.crm.api.record.LineItemProduct"
 
   REFRESH_TOKEN_MESSAGE = 'Access Token has expired. Hence refreshing.'
 
@@ -397,6 +393,8 @@ class Constants
   HASH = 'Hash'
 
   CASES = 'cases'
+
+  DISCOUNT = "DISCOUNT"
 
   CANT_DISCLOSE = " ## can't disclose ## "
 

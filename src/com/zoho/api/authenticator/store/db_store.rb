@@ -34,15 +34,25 @@ module Store
       con.close
 
       rs.each do |row|
-        oauthtoken = Authenticator::OAuthToken.new(client_id: row[Constants::CLIENT_ID],client_secret: row[Constants::CLIENT_SECRET],grant_token: row[Constants::GRANT_TOKEN],refresh_token: row[Constants::REFRESH_TOKEN],redirect_url: row[Constants::REDIRECT_URL])
+        oauthtoken = token
 
-        oauthtoken.id  = row[Constants::ID]
+        oauthtoken.client_id = row[Constants::CLIENT_ID]
+
+        oauthtoken.client_secret = row[Constants::CLIENT_SECRET]
+
+        oauthtoken.grant_token = row[Constants::GRANT_TOKEN]
+
+        oauthtoken.redirect_url = row[Constants::REDIRECT_URL]
+
+        oauthtoken.refresh_token = row[Constants::REFRESH_TOKEN]
+
+        oauthtoken.id = row[Constants::ID]
+
+        oauthtoken.user_mail = row[Constants::USER_MAIL]
 
         oauthtoken.access_token = row[Constants::ACCESS_TOKEN]
 
         oauthtoken.expires_in = row[Constants::EXPIRY_TIME]
-
-        oauthtoken.refresh_token = row[Constants::REFRESH_TOKEN]
 
         return oauthtoken
       end
@@ -111,6 +121,8 @@ module Store
 
         oauthtoken.access_token = row[Constants::ACCESS_TOKEN]
 
+        oauthtoken.redirect_url = row[Constants::REDIRECT_URL]
+
         oauthtoken.expires_in = row[Constants::EXPIRY_TIME]
 
         tokens.push(oauthtoken)
@@ -147,7 +159,17 @@ module Store
 
         rs.each do |row|
           if id == row[Constants::ID]
-            oauthtoken = Authenticator::OAuthToken.new(client_id: row[Constants::CLIENT_ID],client_secret: row[Constants::CLIENT_SECRET],grant_token: row[Constants::GRANT_TOKEN],refresh_token: row[Constants::REFRESH_TOKEN],redirect_url: row[Constants::REDIRECT_URL])
+            oauthtoken = token
+
+            oauthtoken.client_id = row[Constants::CLIENT_ID]
+
+            oauthtoken.client_secret = row[Constants::CLIENT_SECRET]
+
+            oauthtoken.grant_token = row[Constants::GRANT_TOKEN]
+
+            oauthtoken.redirect_url = row[Constants::REDIRECT_URL]
+
+            oauthtoken.refresh_token = row[Constants::REFRESH_TOKEN]
 
             oauthtoken.id = row[Constants::ID]
 

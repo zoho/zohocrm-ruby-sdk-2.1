@@ -10,6 +10,7 @@ module Record
       @name = nil
       @id = nil
       @value = nil
+      @display_name = nil
       @key_modified = Hash.new
     end
 
@@ -83,6 +84,24 @@ module Record
       end
       @value = value
       @key_modified['value'] = 1
+    end
+
+      # The method to get the display_name
+      # @return A String value
+
+    def display_name
+      @display_name
+    end
+
+      # The method to set the value to display_name
+      # @param display_name [String] A String
+
+    def display_name=(display_name)
+      if display_name!=nil and !display_name.is_a? String
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: display_name EXPECTED TYPE: String', nil, nil)
+      end
+      @display_name = display_name
+      @key_modified['display_name'] = 1
     end
 
       # The method to check if the user has modified the given key

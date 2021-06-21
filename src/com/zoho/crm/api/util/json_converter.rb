@@ -106,13 +106,11 @@ module Util
 
             if request_instance.is_a? Record::FileDetails
               lower_case_key_name = key_name.downcase
-              
-              
-              request_json[lower_case_key_name] = if field_value.nil?
-                                                    nil
-                                                  else
-                                                    field_value
-                                                  end
+              if field_value.nil? || (field_value.is_a? (String) && field_value.downcase == "null")
+                request_json[lower_case_key_name] = nil
+              else
+                request_json[lower_case_key_name] = field_value
+              end      
             else
               request_json[key_name] = set_data(member_detail, field_value)
             end
@@ -706,9 +704,9 @@ module Util
       member_value
     end
 
-    def build_name(member_name)
+    def build_name(key_name)
       sdk_name = ''
-      name_split = member_name.to_s.split('_')
+      name_split = key_name.to_s.split('_')
       sdk_name = name_split[0].to_s.downcase
       index = 1
 

@@ -16,6 +16,8 @@ module Wizards
       @color = nil
       @shape = nil
       @background_color = nil
+      @visibility = nil
+      @transition = nil
       @key_modified = Hash.new
     end
 
@@ -179,6 +181,42 @@ module Wizards
       end
       @background_color = background_color
       @key_modified['background_color'] = 1
+    end
+
+      # The method to get the visibility
+      # @return A String value
+
+    def visibility
+      @visibility
+    end
+
+      # The method to set the value to visibility
+      # @param visibility [String] A String
+
+    def visibility=(visibility)
+      if visibility!=nil and !visibility.is_a? String
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: visibility EXPECTED TYPE: String', nil, nil)
+      end
+      @visibility = visibility
+      @key_modified['visibility'] = 1
+    end
+
+      # The method to get the transition
+      # @return An instance of Transition
+
+    def transition
+      @transition
+    end
+
+      # The method to set the value to transition
+      # @param transition [Transition] An instance of Transition
+
+    def transition=(transition)
+      if transition!=nil and !transition.is_a? Transition
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: transition EXPECTED TYPE: Transition', nil, nil)
+      end
+      @transition = transition
+      @key_modified['transition'] = 1
     end
 
       # The method to check if the user has modified the given key

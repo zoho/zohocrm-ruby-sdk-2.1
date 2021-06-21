@@ -1,8 +1,25 @@
 # Ruby SDK API version 2.1
 
+## Table Of Contents
+
+* [Overview](#overview)
+* [Registering a Zoho Client](#registering-a-zoho-client)
+* [Environmental Setup](#environmental-setup)
+* [Including the SDK in your project](#including-the-sdk-in-your-project)
+* [Persistence](#token-persistence)
+  * [DataBase Persistence](#database-persistence)
+  * [File Persistence](#file-persistence)
+  * [Custom Persistence](#custom-persistence)
+* [Configuration](#configuration)
+* [Initialization](#initializing-the-application)
+* [Class Hierarchy](#class-hierarchy)
+* [Responses And Exceptions](#responses-and-exceptions)
+* [Multithreading in a Multi-user App](#multithreading-in-a-multi-user-app)
+* [Sample Code](#sdk-sample-code)
+
 ## Overview
 
-RUBY SDK offers a way to create client Ruby applications that can be integrated with Zoho CRM.
+Zoho CRM RUBY SDK offers a way to create client Ruby applications that can be integrated with Zoho CRM.
 
 ## Registering a Zoho Client
 
@@ -62,6 +79,8 @@ The persistence is achieved by extending the Store::TokenStore class **[TokenSto
 - **get_tokens()** - The method to retrieve all the stored tokens.
 
 - **delete_tokens()** - The method to delete all the stored tokens.
+
+- **get_token_by_id(id, [Token](src/com/zoho/api/authenticator/Token.ruby) token)** - This method is used to retrieve the user token details based on unique ID.
 
 ### DataBase Persistence
 
@@ -450,6 +469,10 @@ All other exceptions such as SDK anomalies and other unexpected behaviours are t
 
   - **APIResponse&ltMassUpdateResponseHandler&gt**
 
+- For Transfer Pipeline operation
+
+  - **APIResponse&lt;TransferActionHandler&gt;**
+
 ### GET Requests
 
 - The **data_object** variable of the returned APIResponse instance returns the response handler interface.
@@ -507,6 +530,10 @@ All other exceptions such as SDK anomalies and other unexpected behaviours are t
 
 - The **ConvertActionHandler** encompasses the following
   - **ConvertActionWrapper class** (for **application/json** responses)
+  - **APIException class**
+
+- The **TransferActionHandler interface** encompasses the following
+  - **TransferActionWrapper class** (for **application/json** responses)
   - **APIException class**
 
 ## Threading in the Ruby SDK

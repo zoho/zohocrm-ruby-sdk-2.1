@@ -17,7 +17,6 @@ module Profiles
       @default = nil
       @description = nil
       @id = nil
-      @category = nil
       @custom = nil
       @created_by = nil
       @sections = nil
@@ -204,24 +203,6 @@ module Profiles
       end
       @id = id
       @key_modified['id'] = 1
-    end
-
-      # The method to get the category
-      # @return A Boolean value
-
-    def category
-      @category
-    end
-
-      # The method to set the value to category
-      # @param category [Boolean] A Boolean
-
-    def category=(category)
-      if category!=nil and ! [true, false].include?category
-        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: category EXPECTED TYPE: Boolean', nil, nil)
-      end
-      @category = category
-      @key_modified['category'] = 1
     end
 
       # The method to get the custom

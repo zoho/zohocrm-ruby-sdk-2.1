@@ -46,15 +46,25 @@ module Store
 
             redirect_url = (!row[8].nil? &&  !row[8].empty?) ? row[8] : nil
             
-            oauthtoken = Authenticator::OAuthToken.new(client_id: row[2],client_secret: row[3],grant_token: grant_token,refresh_token: row[4],redirect_url: redirect_url)
+            oauthtoken = token
 
             oauthtoken.id = row[0]
 
             oauthtoken.user_mail = row[1]
 
+            oauthtoken.client_id = row[2]
+
+            oauthtoken.client_secret = row[3]
+
+            oauthtoken.refresh_token = row[4]
+
             oauthtoken.access_token = row[5]
+    
+            oauthtoken.grant_token = grant_token
 
             oauthtoken.expires_in = row[7]
+    
+            oauthtoken.redirect_url = redirect_url
             return oauthtoken
           end
         end
@@ -73,8 +83,7 @@ module Store
 
           redirect_url = (!row[8].nil? &&  !row[8].empty?) ? row[8] : nil
 
-
-          token = Authenticator::OAuthToken.new(client_id: row[2],client_secret: nil,grant_token: grant_token,refresh_token: row[4],redirect_url: redirect_url)
+          token = Authenticator::OAuthToken.new(client_id: row[2],client_secret: row[3],grant_token: grant_token,refresh_token: row[4])
             
           token.id  = row[0]
 
@@ -83,6 +92,8 @@ module Store
           token.access_token = row[5]
 
           token.expires_in = row[7]
+
+          token.redirect_url = redirect_url
 
           tokens.push(token)
         end
@@ -189,15 +200,26 @@ module Store
 
             redirect_url = (!row[8].nil? &&  !row[8].empty?) ? row[8] : nil
 
-            oauthtoken = Authenticator::OAuthToken.new(client_id: row[2],client_secret: row[3],grant_token: grant_token,refresh_token: row[4],redirect_url: redirect_url)
+            oauthtoken = token
 
             oauthtoken.id = row[0]
 
             oauthtoken.user_mail = row[1]
 
+            oauthtoken.client_id = row[2]
+
+            oauthtoken.client_secret = row[3]
+
+            oauthtoken.refresh_token = row[4]
+
             oauthtoken.access_token = row[5]
+    
+            oauthtoken.grant_token = grant_token
 
             oauthtoken.expires_in = row[7]
+    
+            oauthtoken.redirect_url = redirect_url
+    
             return oauthtoken
           end
         end

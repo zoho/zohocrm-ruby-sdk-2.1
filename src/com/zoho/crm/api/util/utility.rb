@@ -26,6 +26,10 @@ module Util
 
     @@get_modified_modules = false
 
+    @@api_supported_module = {}
+
+    @@module_api_name = nil
+
     @@force_refresh = false
     def self.set_handler_api_path(module_api_name, handler_instance)
       if handler_instance.nil?
@@ -75,7 +79,7 @@ module Util
         record_field_details_json = JSON.parse(File.read(record_field_details_path))
         return if module_api_name.nil? || record_field_details_json.key?(module_api_name.downcase)
 
-        fill_data_type
+        fill_data_type()
 
         record_field_details_json[module_api_name.downcase] = {}
 
@@ -94,6 +98,13 @@ module Util
     end
 
     def self.get_fields(module_api_name, handler_instance=nil)
+      @@sync_lock.synchronize do
+        @@module_api_name = module_api_name
+        get_fields_info(module_api_name,handler_instance)
+      end
+    end
+
+    def self.get_fields_info(module_api_name, handler_instance=nil)
       require_relative '../initializer'
       initializer = Initializer.get_initializer
       record_field_details_path = nil
@@ -106,7 +117,7 @@ module Util
           resoures_folder_path = initializer.resources_path + '/' + Constants::RESOURCES
 
           Dir.mkdir resoures_folder_path unless File.exist? resoures_folder_path
-          record_field_details_path = get_record_json_file_path
+          record_field_details_path = get_record_json_file_path()
           module_api_name = verify_module_api_name(module_api_name)
           set_handler_api_path(module_api_name,handler_instance)
           
@@ -114,18 +125,19 @@ module Util
             file_exists_flow(module_api_name,record_field_details_path,last_modified_time)
           elsif initializer.sdk_config.auto_refresh_fields
             @@new_file = true
-            fill_data_type
-            api_supported_modules = get_modules(nil)
+            fill_data_type()
+            @@api_supported_module = @@api_supported_module.length == 0 ? get_modules(nil) : @@api_supported_module
+          
             record_field_details_json  = File.exist? record_field_details_path ? JSON.parse(File.read(record_field_details_path)) : {}
            
             record_field_details_json = { Constants::FIELDS_LAST_MODIFIED_TIME => get_current_time_in_millis }
-            api_supported_modules.each_key do |module_name|
+            @@api_supported_module.each_key do |module_name|
               unless record_field_details_json.key? module_name.downcase
                 record_field_details_json[module_name.downcase] = {}
                 File.open(record_field_details_path, 'w') do |f|
                   f.write(record_field_details_json.to_json)
                 end
-                field_details = get_fields_details(api_supported_modules[module_name][Constants::API_NAME])
+                field_details = get_fields_details( @@api_supported_module[module_name][Constants::API_NAME])
                 record_field_details_json = JSON.parse(File.read(record_field_details_path))
                 record_field_details_json[module_name.downcase] = field_details
                 File.open(record_field_details_path, 'w') do |f|
@@ -143,7 +155,7 @@ module Util
             modify_fields(record_field_details_path, last_modified_time)
             @@get_modified_modules = false
           else
-            fill_data_type
+            fill_data_type()
 
             record_field_details_json = { module_api_name.downcase => {} }
 
@@ -195,9 +207,9 @@ module Util
     end
 
     def self.modify_fields(record_field_details_path, modified_time)
-      modified_modules = get_modules_api_names(modified_time)
+      modified_modules = get_modules(modified_time)
       record_field_details_json = JSON.parse(File.open(record_field_details_path).read)
-      record_field_details_json[Constants::FIELDS_LAST_MODIFIED_TIME] = get_current_time_in_millis
+      record_field_details_json[Constants::FIELDS_LAST_MODIFIED_TIME] = get_current_time_in_millis()
       File.open(record_field_details_path, 'w') do |f|
         f.write(record_field_details_json.to_json)
       end
@@ -214,7 +226,7 @@ module Util
       end
       modified_modules.each_key do |module_api_name|
         module_data = modified_modules[module_api_name]
-        get_fields(module_data[Constants::API_NAME])
+        get_fields_info(module_data[Constants::API_NAME])
       end
     end
 
@@ -226,7 +238,7 @@ module Util
         end
       end
 
-      record_field_details_path = get_record_json_file_path
+      record_field_details_path = get_record_json_file_path()
 
       if File.exist? record_field_details_path
         fields_json =  JSON.parse(File.open(record_field_details_path).read)
@@ -256,8 +268,8 @@ module Util
       end
     end
 
-    def self.get_record_json_file_path
-      Converter.new(nil).get_record_json_file_path
+    def self.get_record_json_file_path()
+      Converter.new(nil).get_record_json_file_path()
     end
 
     def self.get_related_lists(related_module_name, module_api_name, common_api_handler)
@@ -273,7 +285,7 @@ module Util
           resoures_folder_path = initializer.resources_path + '/' + Constants::RESOURCES
           Dir.mkdir resoures_folder_path unless File.exist? resoures_folder_path
 
-          record_field_details_path = get_record_json_file_path
+          record_field_details_path = get_record_json_file_path()
           if !File.exist?(record_field_details_path) || (File.exist?(record_field_details_path) && !(JSON.parse(File.read(record_field_details_path)).key? key))
             is_new_data = true
             related_list_values = get_related_list_details(module_api_name)
@@ -412,8 +424,9 @@ module Util
       field_api_names_recurring_activity = %w[RRULE]
       field_api_names_reminder = %w[multireminder]
       field_api_names_consent_look_up = %w[consent_lookup]
-      field_api_name_image_upload = %w["imageupload"]
-      field_api_name_multiselect_lookup = %w["multiselectlookup"]
+      field_api_name_image_upload = %w[imageupload]
+      field_api_name_multiselect_lookup = %w[multiselectlookup]
+      field_api_name_line_tax = %w[linetax]
 
       field_api_names_string.each do |field_api_name|
         @@apitype_vs_datatype[field_api_name] = Constants::STRING
@@ -511,11 +524,20 @@ module Util
 
       field_api_name_image_upload.each do |field_api_name|
         @@apitype_vs_datatype[field_api_name] = Constants::LIST_NAMESPACE
+        
         @@apitype_vs_structurename[field_api_name] = Constants::IMAGEUPLOAD_NAMESPACE
       end
+
       field_api_name_multiselect_lookup.each do |field_api_name|
         @@apitype_vs_datatype[field_api_name] = Constants::LIST_NAMESPACE
+        
         @@apitype_vs_structurename[field_api_name] = Constants::RECORD_NAMESPACE
+      end
+
+      field_api_name_line_tax.each do |field_api_name|
+        @@apitype_vs_datatype[field_api_name] = Constants::LIST_NAMESPACE
+        
+        @@apitype_vs_structurename[field_api_name] = Constants::LINE_TAX_NAMESPACE
       end
     end
 
@@ -531,13 +553,7 @@ module Util
         field_detail[Constants::REQUIRED] = true
       end
     
-      if Constants::KEY_VS_INVENTORY_MODULE.key?(key_name) && (module_api_name.downcase == Constants::KEY_VS_INVENTORY_MODULE[key_name].downcase)
-        field_detail[Constants::NAME] = key_name
-        field_detail[Constants::TYPE] = Constants::LIST_NAMESPACE
-        field_detail[Constants::STRUCTURE_NAME] = Constants::INVENTORY_LINE_ITEMS
-        field_detail[Constants::SKIP_MANDATORY] = true
-        return
-      elsif (key_name.downcase == Constants::PRICING_DETAILS.downcase) && (module_api_name == Constants::PRICE_BOOKS.downcase)
+      if (key_name.downcase == Constants::PRICING_DETAILS.downcase) && (module_api_name == Constants::PRICE_BOOKS.downcase)
         field_detail[Constants::NAME] = key_name
         field_detail[Constants::TYPE] = Constants::LIST_NAMESPACE
         field_detail[Constants::STRUCTURE_NAME] = Constants::PRICINGDETAILS
@@ -567,6 +583,16 @@ module Util
         field_detail[Constants::STRUCTURE_NAME] = Constants::TERRITORY_NAMESPACE
         field_detail[Constants::LOOKUP] = true
         return
+      elsif key_name.downcase() == Constants::PRODUCT_NAME.downcase and  Constants::INVENTORY_MODULES_ITEMS.include? module_api_name.downcase
+        field_detail[Constants::NAME] = key_name
+        field_detail[Constants::TYPE] = Constants::LINEITEM_PRODUCT
+        field_detail[Constants::STRUCTURE_NAME] = Constants::LINEITEM_PRODUCT
+        field_detail[Constants::LOOKUP] = true
+        return
+      elsif key_name.downcase() == Constants::DISCOUNT.downcase and  Constants::INVENTORY_MODULES_ITEMS.include? module_api_name.downcase
+        field_detail[Constants::NAME] = key_name
+        field_detail[Constants::TYPE] = Constants::STRING
+        return
       elsif key_name.downcase() == Constants::TAX.downcase and module_api_name.downcase() == Constants::PRODUCTS.downcase
         field_detail[Constants::NAME] = key_name
         field_detail[Constants::TYPE] = Constants::LIST_NAMESPACE
@@ -588,12 +614,11 @@ module Util
       field_detail[Constants::LOOKUP] = true if data_type.downcase.include? Constants::LOOKUP
       field_detail[Constants::SKIP_MANDATORY] = true if data_type.downcase.include? Constants::CONSENT_LOOKUP
 
-
       if data_type.downcase.include? Constants::MULTI_SELECT_LOOKUP
         field_detail[Constants::SKIP_MANDATORY] = true
-        if !field.multiselectlookup.nil?
-          if !field.multiselectlookup.linking_module.nil?
-            linking_module = field.multiselectlookup.linking_module
+        if !field_instance.multiselectlookup.nil?
+          if !field_instance.multiselectlookup.linking_module.nil?
+            linking_module = field_instance.multiselectlookup.linking_module
             field_detail[Constants::MODULE] = linking_module
             module_name = linking_module
           end
@@ -603,9 +628,9 @@ module Util
 
       if data_type.downcase.include? Constants::MULTI_USER_LOOKUP
         field_detail[Constants::SKIP_MANDATORY] = true
-        if !field.multiuserlookup.nil?
-          if !field.multiuserlookup.linking_module.nil?
-            linking_module = field.multiuserlookup.linking_module
+        if !field_instance.multiuserlookup.nil?
+          if !field_instance.multiuserlookup.linking_module.nil?
+            linking_module = field_instance.multiuserlookup.linking_module
             field_detail[Constants::MODULE] = linking_module
             module_name = linking_module
           end
@@ -634,7 +659,7 @@ module Util
         field_detail[Constants::MODULE] = module_name
       end
 
-      if data_type.downcase == Constants::LOOKUP.downcase
+      if data_type.downcase == Constants::LOOKUP.downcase && !field_instance.lookup.nil?
         module_name = field_instance.lookup.module
         if !module_name.nil? && (module_name.downcase != Constants::SE_MODULE.downcase)
           field_detail[Constants::MODULE] = module_name
@@ -646,7 +671,7 @@ module Util
         end
         field_detail[Constants::LOOKUP] = true
       end
-      get_fields(module_name) if !module_name.nil? && !module_name.empty?
+      get_fields_info(module_name) if !module_name.nil? && !module_name.empty?
       field_detail[Constants::NAME] = key_name
     end
    
@@ -671,9 +696,9 @@ module Util
             modules.each do |module_ins|
               if module_ins.api_supported
                 module_details = {}
-                module_details[Constants::API_NAME] = module_ins.api_name
-                module_details[Constants::GENERATED_TYPE] = module_ins.generated_type.value
-                api_names[module_ins.api_name.downcase] = module_details
+                module_details[Constants::API_NAME]=module_ins.api_name
+                module_details[Constants::GENERATED_TYPE]=module_ins.generated_type.value 
+                api_names[module_ins.api_name.downcase] =module_details
               end
             end
           elsif response_object.is_a? Modules::APIException
@@ -685,11 +710,13 @@ module Util
           end
         end
       end
-      if @@force_refresh
+      if header.nil?
         begin
-          write_module_meta_data(get_record_json_file_path, api_names)
-        rescue StandardError => e
-          raise SDKException.new(Constants::EXCEPTION,e)
+          initializer = Initializer.get_initializer
+          resoures_folder_path = initializer.resources_path + '/' + Constants::RESOURCES
+          Dir.mkdir resoures_folder_path unless File.exist? resoures_folder_path
+          record_field_details_path = get_record_json_file_path()
+          write_module_meta_data(record_field_details_path, api_names)
         end
       end
       api_names
@@ -705,7 +732,7 @@ module Util
 
           if related_list_jo[Constants::MODULE] != Constants::NULL_VALUE
             common_api_handler.module_api_name = related_list_jo[Constants::MODULE]
-            get_fields(related_list_jo[Constants::MODULE])
+            get_fields_info(related_list_jo[Constants::MODULE])
           end
           return true
         end
@@ -717,14 +744,15 @@ module Util
       @@sync_lock.synchronize do
         begin
           module_api_name = verify_module_api_name(module_api_name)
-          if Constants::PHOTO_SUPPORTED_MODULES.key? module_api_name
+          if Constants::PHOTO_SUPPORTED_MODULES.include? module_api_name.downcase
             return true
           end
           modules = get_module_names()
+
           if modules.key? module_api_name.downcase || !modules[module_api_name.downcase].nil?
             module_meta_data = modules[module_api_name.downcase]
 
-            if module_meta_data[Constants::GENERATED_TYPE] != Constants::GENERATED_TYPE_CUSTOM
+            if module_meta_data.key? Constants::GENERATED_TYPE && module_meta_data[Constants::GENERATED_TYPE] != Constants::GENERATED_TYPE_CUSTOM
                 raise SDKException.new(Constants::UPLOAD_PHOTO_UNSUPPORTED_ERROR,Constants::UPLOAD_PHOTO_UNSUPPORTED_MESSAGE + module_api_name)
             end
           end
@@ -741,21 +769,24 @@ module Util
     
     def self.get_module_names()
       module_data = {}
+      initializer = Initializer.get_initializer
       resoures_folder_path = initializer.resources_path + '/' + Constants::RESOURCES
       Dir.mkdir resoures_folder_path unless File.exist? resoures_folder_path
 
-      record_field_details_path = get_record_json_file_path
+      record_field_details_path = get_record_json_file_path()
 
-      is_null = false
+      call_get_modules = false
       if File.exists? record_field_details_path
         json = JSON.parse(File.read(record_field_details_path))
         if !json.key? Constants::SDK_MODULE_METADATA
-          is_null = true
-        elsif json[Constants::SDK_MODULE_METADATA].nil?
-          is_null = true
+          call_get_modules = true
+        elsif json[Constants::SDK_MODULE_METADATA].nil? || json[Constants::SDK_MODULE_METADATA].length == 0
+          call_get_modules = true
         end
+      else
+        call_get_modules = true
       end
-      if !File.exists? os.path.exists(record_field_details_path) || is_null
+      if call_get_modules
         module_data = get_modules(nil)
         write_module_meta_data(record_field_details_path, module_data)
         return module_data
@@ -766,7 +797,7 @@ module Util
     end
 
     def self.write_module_meta_data(record_field_details_path, module_data)
-      field_details_json = File.exist? record_field_details_path ? JSON.parse(File.read(record_field_details_path)):{}
+      field_details_json = (File.exist? record_field_details_path) ? JSON.parse(File.read(record_field_details_path)):{}
       field_details_json[Constants::SDK_MODULE_METADATA] = module_data
       File.open(record_field_details_path, 'w') do |f|
         f.write(field_details_json.to_json)
@@ -816,7 +847,7 @@ module Util
 
     def self.refresh_modules
       @@force_refresh = true
-      get_fields(nil)
+      get_fields_info(nil)
       @@force_refresh = false
     end
 

@@ -61,7 +61,7 @@ module Util
 
         member_data = request_instance.instance_variable_get(Constants::AT + member_name)
 
-        if !modified.nil? && (modified != 0) && value_checker(request_instance.class.name, member_name, member_details, member_data, @unique_hash, instance_no)
+        if !modified.nil? && (modified != 0) && !member_data.nil? && value_checker(request_instance.class.name, member_name, member_details, member_data, @unique_hash, instance_no)
           key_name = member_details[Constants::NAME]
           type = member_details[Constants::TYPE]
           if type.downcase == Constants::LIST_NAMESPACE.downcase

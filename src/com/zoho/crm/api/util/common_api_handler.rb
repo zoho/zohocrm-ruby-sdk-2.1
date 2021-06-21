@@ -121,10 +121,12 @@ module Handler
         unless response.body.nil?
           mime_type = headers[Constants::CONTENT_TYPE]
 
-          mime_type = mime_type.split(';')[0] if mime_type.include? ';'
-          converter_instance = get_converter_class_instance(mime_type.to_s.downcase)
+          unless mime_type.nil?
+            mime_type = mime_type.split(';')[0] if mime_type.include? ';'
+            converter_instance = get_converter_class_instance(mime_type.to_s.downcase)
 
-          return_object = converter_instance.get_wrapped_response(response, class_name)
+            return_object = converter_instance.get_wrapped_response(response, class_name)
+          end
         end
 
         unless return_object.nil?

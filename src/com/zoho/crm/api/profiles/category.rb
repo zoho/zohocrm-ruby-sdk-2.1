@@ -9,6 +9,7 @@ module Profiles
       @display_label = nil
       @permissions_details = nil
       @name = nil
+      @module_1 = nil
       @key_modified = Hash.new
     end
 
@@ -64,6 +65,24 @@ module Profiles
       end
       @name = name
       @key_modified['name'] = 1
+    end
+
+      # The method to get the module
+      # @return A String value
+
+    def module
+      @module_1
+    end
+
+      # The method to set the value to module
+      # @param module_1 [String] A String
+
+    def module=(module_1)
+      if module_1!=nil and !module_1.is_a? String
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: module_1 EXPECTED TYPE: String', nil, nil)
+      end
+      @module_1 = module_1
+      @key_modified['module'] = 1
     end
 
       # The method to check if the user has modified the given key

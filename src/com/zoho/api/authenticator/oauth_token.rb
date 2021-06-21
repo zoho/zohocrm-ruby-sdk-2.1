@@ -11,8 +11,7 @@ require_relative '../../crm/api/exception/sdk_exception'
 module Authenticator
   # This class gets and refreshes the tokens based on the expiry time.
   class OAuthToken < Token
-    attr_reader :client_id , :client_secret ,:redirect_url ,:grant_token
-    attr_accessor :refresh_token, :access_token ,:user_mail ,:id ,:expires_in
+    attr_accessor :client_id , :client_secret ,:redirect_url ,:grant_token,:refresh_token, :access_token ,:user_mail ,:id ,:expires_in
     @@sync_lock = Monitor.new
 
     # Creates an OAuthToken class instance with the specified parameters.

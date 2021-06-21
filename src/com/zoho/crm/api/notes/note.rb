@@ -15,6 +15,7 @@ module Notes
       @created_time = nil
       @parent_id = nil
       @editable = nil
+      @sharing_permission = nil
       @se_module = nil
       @is_shared_to_client = nil
       @modified_by = nil
@@ -134,6 +135,24 @@ module Notes
       end
       @editable = editable
       @key_modified['$editable'] = 1
+    end
+
+      # The method to get the sharing_permission
+      # @return A String value
+
+    def sharing_permission
+      @sharing_permission
+    end
+
+      # The method to set the value to sharing_permission
+      # @param sharing_permission [String] A String
+
+    def sharing_permission=(sharing_permission)
+      if sharing_permission!=nil and !sharing_permission.is_a? String
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: sharing_permission EXPECTED TYPE: String', nil, nil)
+      end
+      @sharing_permission = sharing_permission
+      @key_modified['$sharing_permission'] = 1
     end
 
       # The method to get the se_module

@@ -116,7 +116,10 @@ class Initializer
   end
 
   def self.get_JSONDetails
-    JSON.parse(File.open(File.join(File.dirname(File.expand_path(__FILE__)), '../../../../' + Constants::JSON_DETAILS_FILE_PATH)).read)
+    if @@json_details.nil? || @@json_details.length == 0
+      return JSON.parse(File.open(File.join(File.dirname(File.expand_path(__FILE__)), '../../../../' + Constants::JSON_DETAILS_FILE_PATH)).read)
+    end
+    @@json_details
   rescue StandardError => e
     raise SDKException.new(nil, Constants::EXCEPTION_JSONDETAILS, nil, e)
   end

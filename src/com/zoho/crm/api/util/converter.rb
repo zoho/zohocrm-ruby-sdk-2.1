@@ -57,13 +57,13 @@ module Util
 
       unless value.nil? 
         if key_details.key? Constants::INTERFACE and key_details[Constants::INTERFACE] == true
-          json_details = Initializer.get_initializer.json_details
+          json_details = Initializer.json_details
           interface_details = json_details[key_details[Constants::STRUCTURE_NAME]]
           classes = interface_details[Constants::CLASSES]
           check = false
           classes.each do |each_class_name|
             class_name_lower = each_class_name.to_s.downcase
-            value_class_name = til::Utility.path_to_package(value.class.name).downcase
+            value_class_name = Util::Utility.path_to_package(value.class.name).downcase
   
             if class_name_lower.downcase == value_class_name
               check = true
@@ -96,9 +96,15 @@ module Util
         elsif !value.nil? 
           check = Util::Utility.check_data_type(value,type)
         end
-      elsif (type.downcase != Constants::OBJECT.downcase)
-        if type.downcase != Util::Utility.path_to_package(var_type).downcase 
-          check = false
+      elsif (type.downcase == Constants::OBJECT.downcase || (!var_type.nil? && var_type.downcase == Constants::OBJECT.downcase))
+        if type.downcase == Constants::OBJECT.downcase
+          check = true
+        else 
+          class_name1 = value.class.name
+          if type.downcase != Util::Utility.path_to_package(class_name1).downcase 
+            check = false
+          end
+          var_type = class_name1
         end
       end
       if !check 

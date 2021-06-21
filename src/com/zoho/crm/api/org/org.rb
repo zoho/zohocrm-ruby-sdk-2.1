@@ -7,6 +7,7 @@ module Org
     # Creates an instance of Org
     def initialize
       @country = nil
+      @hierarchy_preferences = nil
       @photo_id = nil
       @city = nil
       @description = nil
@@ -36,6 +37,7 @@ module Org
       @company_name = nil
       @privacy_settings = nil
       @primary_email = nil
+      @hipaa_compliance_enabled = nil
       @iso_code = nil
       @key_modified = Hash.new
     end
@@ -56,6 +58,24 @@ module Org
       end
       @country = country
       @key_modified['country'] = 1
+    end
+
+      # The method to get the hierarchy_preferences
+      # @return An instance of HierarchyPreference
+
+    def hierarchy_preferences
+      @hierarchy_preferences
+    end
+
+      # The method to set the value to hierarchy_preferences
+      # @param hierarchy_preferences [HierarchyPreference] An instance of HierarchyPreference
+
+    def hierarchy_preferences=(hierarchy_preferences)
+      if hierarchy_preferences!=nil and !hierarchy_preferences.is_a? HierarchyPreference
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: hierarchy_preferences EXPECTED TYPE: HierarchyPreference', nil, nil)
+      end
+      @hierarchy_preferences = hierarchy_preferences
+      @key_modified['hierarchy_preferences'] = 1
     end
 
       # The method to get the photo_id
@@ -578,6 +598,24 @@ module Org
       end
       @primary_email = primary_email
       @key_modified['primary_email'] = 1
+    end
+
+      # The method to get the hipaa_compliance_enabled
+      # @return A Boolean value
+
+    def hipaa_compliance_enabled
+      @hipaa_compliance_enabled
+    end
+
+      # The method to set the value to hipaa_compliance_enabled
+      # @param hipaa_compliance_enabled [Boolean] A Boolean
+
+    def hipaa_compliance_enabled=(hipaa_compliance_enabled)
+      if hipaa_compliance_enabled!=nil and ! [true, false].include?hipaa_compliance_enabled
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: hipaa_compliance_enabled EXPECTED TYPE: Boolean', nil, nil)
+      end
+      @hipaa_compliance_enabled = hipaa_compliance_enabled
+      @key_modified['hipaa_compliance_enabled'] = 1
     end
 
       # The method to get the iso_code

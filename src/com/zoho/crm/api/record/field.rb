@@ -1,5 +1,4 @@
 require_relative '../layouts/layout'
-require_relative '../record/inventory_line_items'
 require_relative '../record/participants'
 require_relative '../record/pricing_details'
 require_relative '../record/record'
@@ -791,6 +790,10 @@ module Record
       def self.Carrier
         @@Carrier
       end
+      @@Quoted_items = Field.new('Quoted_Items')
+      def self.Quoted_items
+        @@Quoted_items
+      end
       @@Quote_stage = Field.new('Quote_Stage')
       def self.Quote_stage
         @@Quote_stage
@@ -826,10 +829,6 @@ module Record
       @@Billing_code = Field.new('Billing_Code')
       def self.Billing_code
         @@Billing_code
-      end
-      @@Product_details = Field.new('Product_Details')
-      def self.Product_details
-        @@Product_details
       end
       @@Subject = Field.new('Subject')
       def self.Subject
@@ -906,6 +905,10 @@ module Record
       def self.Modified_by
         @@Modified_by
       end
+      @@Invoiced_items = Field.new('Invoiced_Items')
+      def self.Invoiced_items
+        @@Invoiced_items
+      end
       @@Billing_country = Field.new('Billing_Country')
       def self.Billing_country
         @@Billing_country
@@ -969,10 +972,6 @@ module Record
       @@Billing_code = Field.new('Billing_Code')
       def self.Billing_code
         @@Billing_code
-      end
-      @@Product_details = Field.new('Product_Details')
-      def self.Product_details
-        @@Product_details
       end
       @@Subject = Field.new('Subject')
       def self.Subject
@@ -1163,6 +1162,10 @@ module Record
       def self.Carrier
         @@Carrier
       end
+      @@Ordered_items = Field.new('Ordered_Items')
+      def self.Ordered_items
+        @@Ordered_items
+      end
       @@Quote_name = Field.new('Quote_Name')
       def self.Quote_name
         @@Quote_name
@@ -1210,10 +1213,6 @@ module Record
       @@Billing_code = Field.new('Billing_Code')
       def self.Billing_code
         @@Billing_code
-      end
-      @@Product_details = Field.new('Product_Details')
-      def self.Product_details
-        @@Product_details
       end
       @@Subject = Field.new('Subject')
       def self.Subject
@@ -1691,6 +1690,10 @@ module Record
       def self.Billing_country
         @@Billing_country
       end
+      @@Purchase_items = Field.new('Purchase_Items')
+      def self.Purchase_items
+        @@Purchase_items
+      end
       @@id = Field.new('id')
       def self.id
         @@id
@@ -1746,10 +1749,6 @@ module Record
       @@Billing_code = Field.new('Billing_Code')
       def self.Billing_code
         @@Billing_code
-      end
-      @@Product_details = Field.new('Product_Details')
-      def self.Product_details
-        @@Product_details
       end
       @@Subject = Field.new('Subject')
       def self.Subject

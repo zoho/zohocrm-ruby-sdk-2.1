@@ -41,6 +41,7 @@ module Fields
       @id = nil
       @custom_field = nil
       @lookup = nil
+      @filterable = nil
       @visible = nil
       @pick_list_values_sorted_lexically = nil
       @length = nil
@@ -59,7 +60,6 @@ module Fields
       @pick_list_values = nil
       @auto_number = nil
       @default_value = nil
-      @section_id = nil
       @validation_rule = nil
       @convert_mapping = nil
       @type = nil
@@ -538,18 +538,18 @@ module Fields
     end
 
       # The method to get the multi_module_lookup
-      # @return An instance of Hash
+      # @return An instance of MultiModuleLookup
 
     def multi_module_lookup
       @multi_module_lookup
     end
 
       # The method to set the value to multi_module_lookup
-      # @param multi_module_lookup [Hash] An instance of Hash
+      # @param multi_module_lookup [MultiModuleLookup] An instance of MultiModuleLookup
 
     def multi_module_lookup=(multi_module_lookup)
-      if multi_module_lookup!=nil and !multi_module_lookup.is_a? Hash
-        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: multi_module_lookup EXPECTED TYPE: Hash', nil, nil)
+      if multi_module_lookup!=nil and !multi_module_lookup.is_a? MultiModuleLookup
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: multi_module_lookup EXPECTED TYPE: MultiModuleLookup', nil, nil)
       end
       @multi_module_lookup = multi_module_lookup
       @key_modified['multi_module_lookup'] = 1
@@ -625,6 +625,24 @@ module Fields
       end
       @lookup = lookup
       @key_modified['lookup'] = 1
+    end
+
+      # The method to get the filterable
+      # @return A Boolean value
+
+    def filterable
+      @filterable
+    end
+
+      # The method to set the value to filterable
+      # @param filterable [Boolean] A Boolean
+
+    def filterable=(filterable)
+      if filterable!=nil and ! [true, false].include?filterable
+        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: filterable EXPECTED TYPE: Boolean', nil, nil)
+      end
+      @filterable = filterable
+      @key_modified['filterable'] = 1
     end
 
       # The method to get the visible
@@ -949,24 +967,6 @@ module Fields
       end
       @default_value = default_value
       @key_modified['default_value'] = 1
-    end
-
-      # The method to get the section_id
-      # @return A Integer value
-
-    def section_id
-      @section_id
-    end
-
-      # The method to set the value to section_id
-      # @param section_id [Integer] A Integer
-
-    def section_id=(section_id)
-      if section_id!=nil and !section_id.is_a? Integer
-        raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: section_id EXPECTED TYPE: Integer', nil, nil)
-      end
-      @section_id = section_id
-      @key_modified['section_id'] = 1
     end
 
       # The method to get the validation_rule

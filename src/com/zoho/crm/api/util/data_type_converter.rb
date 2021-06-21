@@ -108,7 +108,10 @@ module Util
     # @raise Exception
     def self.pre_convert(obj, type)
       init
-      @@pre_converter_map[type].call(obj)
+      if @@pre_converter_map.key? type
+        return @@pre_converter_map[type].call(obj)
+      end
+      obj
     end
 
     # This method is to convert Java data to JSON data value.
@@ -118,7 +121,10 @@ module Util
     # @raise Exception
     def self.post_convert(obj, type)
       init
-      @@post_converter_map[type].call(obj)
+      if @@post_converter_map.key? type
+        return @@post_converter_map[type].call(obj)
+      end
+      obj
     end
 
     def self.pre_convert_object_data(obj)
