@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Profile
   def self.get_profiles
@@ -6,7 +6,7 @@ class Profile
     # This method is used to retrieve the profiles data through an API request and print the response.
     # """
     # Get instance of ProfilesOperations Class
-    po = Profiles::ProfilesOperations.new(DateTime.new(2018, 8, 10, 4, 11, 9, '+03:00'))
+    po = ZOHOCRMSDK::Profiles::ProfilesOperations.new(DateTime.new(2018, 8, 10, 4, 11, 9, '+03:00'))
     # Call get_profiles method
     response = po.get_profiles
     status_code = response.status_code
@@ -19,7 +19,7 @@ class Profile
     if response.is_expected
       response_handler = response.data_object
       # Check if expected ResponseWrapper instance is received
-      if response_handler.is_a? Profiles::ResponseWrapper
+      if response_handler.is_a? ZOHOCRMSDK::Profiles::ResponseWrapper
         # Get the list of obtained Profile instances
         profiles = response_handler.profiles
         profiles.each do |profile|
@@ -91,7 +91,7 @@ class Profile
 
         end
       # Check if the request returned an exception
-      elsif response_handler.is_a? Profiles::APIException
+      elsif response_handler.is_a? ZOHOCRMSDK::Profiles::APIException
         exception = response_handler
         # Get the Code
         print 'code:'
@@ -127,7 +127,7 @@ class Profile
     # :param profile_id: The ID of the Profile to be obtained
     # """
     # Get instance of ProfilesOperations Class
-    po = Profiles::ProfilesOperations.new(DateTime.new(2018, 8, 10, 4, 11, 9, '+03:00'))
+    po = ZOHOCRMSDK::Profiles::ProfilesOperations.new(DateTime.new(2018, 8, 10, 4, 11, 9, '+03:00'))
     # Call get_profile method that takes profile_id as parameter
     response = po.get_profile(profile_id)
     # Get the status code from response
@@ -141,7 +141,7 @@ class Profile
     if response.is_expected
       response_handler = response.data_object
       # Check if expected ResponseWrapper instance is received
-      if response_handler.is_a? Profiles::ResponseWrapper
+      if response_handler.is_a? ZOHOCRMSDK::Profiles::ResponseWrapper
         # Get the list of obtained Profile instances
         profiles = response_handler.profiles
         profiles.each do |profile|
@@ -277,7 +277,7 @@ class Profile
           end
         end
       # Check if the request returned an exception
-      elsif response_handler.is_a? Profiles::APIException
+      elsif response_handler.is_a? ZOHOCRMSDK::Profiles::APIException
         exception = response_handler
         # Get the Code
         print 'code:'

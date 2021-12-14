@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Organization
   def self.get_organization
@@ -6,7 +6,7 @@ class Organization
     # This method is used to get the organization data and print the response.
     # """
     # Get instance of OrgOperations Class
-    org_operation = Org::OrgOperations.new
+    org_operation = ZOHOCRMSDK::Org::OrgOperations.new
     # Call get_organization method
     response = org_operation.get_organization
     unless response.nil?
@@ -18,7 +18,7 @@ class Organization
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Org::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Org::ResponseWrapper
           # Get the list of obtained Org instances
           orgs = response_handler.org
           orgs.each do |org|
@@ -142,7 +142,7 @@ class Organization
             print org.iso_code
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Org::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Org::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -184,8 +184,8 @@ class Organization
     # absolute_file_path = "/Users/user_name/Desktop/logo.png";
     # """
     # Get instance of OrgOperations Class
-    org_operation = Org::OrgOperations.new
-    fbw = Org::FileBodyWrapper.new
+    org_operation = ZOHOCRMSDK::Org::OrgOperations.new
+    fbw = ZOHOCRMSDK::Org::FileBodyWrapper.new
     # """
     # StreamWrapper can be initialized in any of the following ways
 
@@ -194,7 +194,7 @@ class Organization
     # * param 3 -> Absolute File Path of the file to be attached
     # """
     # stream_wrapper = StreamWrapper.new(name,stream,absolutefilepath)
-    sw = Util::StreamWrapper.new(nil, nil, absolute_file_path)
+    sw = ZOHOCRMSDK::Util::StreamWrapper.new(nil, nil, absolute_file_path)
     # Set file to the FileBodyWrapper instance
     fbw.file = sw
     response = org_operation.upload_organization_photo(fbw)
@@ -207,7 +207,7 @@ class Organization
         # Get object from response
         action_handler = response.data_object
         # Check if expected SuccessResponse instance is received
-        if action_handler.is_a? Org::SuccessResponse
+        if action_handler.is_a? ZOHOCRMSDK::Org::SuccessResponse
           success_response = action_handler
           # Get the Code
           print 'code:'
@@ -226,7 +226,7 @@ class Organization
             print "\n"
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Org::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Org::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

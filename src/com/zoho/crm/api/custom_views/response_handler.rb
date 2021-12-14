@@ -1,10 +1,12 @@
-module CustomViews
-  module ResponseHandler
+module ZOHOCRMSDK
+  module CustomViews
+    module ResponseHandler
 
-    # Creates an instance of ResponseHandler
-    def initialize
+      # Creates an instance of ResponseHandler
+      def initialize
+      end
+
+
     end
-
-
   end
 end

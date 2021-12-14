@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Layout
   def self.get_layouts(module_api_name)
@@ -12,7 +12,7 @@ class Layout
     # module_api_name = "Leads";
     # """
     # Get instance of LayoutsOperations Class that takes module_api_name as parameter
-    lo = Layouts::LayoutsOperations.new(module_api_name)
+    lo = ZOHOCRMSDK::Layouts::LayoutsOperations.new(module_api_name)
     # Call get_layouts method
     response = lo.get_layouts
     unless response.nil?
@@ -28,7 +28,7 @@ class Layout
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received.
-        if response_handler.is_a? Layouts::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Layouts::ResponseWrapper
           # Get the list of obtained Layout instances
           layouts = response_handler.layouts
           layouts.each do |layout|
@@ -190,7 +190,7 @@ class Layout
             print layout.id.to_s
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Layouts::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Layouts::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -231,10 +231,10 @@ class Layout
     # """
     # example
     # module_api_name = "Leads"
-    # layout_id = "347706100091055"
+    # layout_id = "34770610091055"
     # """
     # Get instance of LayoutsOperations Class that takes module_api_name as parameter
-    lo = Layouts::LayoutsOperations.new(module_api_name)
+    lo = ZOHOCRMSDK::Layouts::LayoutsOperations.new(module_api_name)
     # Call get_layout method that takes layout_id as parameter
     response = lo.get_layout(layout_id)
     unless response.nil?
@@ -250,7 +250,7 @@ class Layout
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received.
-        if response_handler.is_a? Layouts::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Layouts::ResponseWrapper
           # Get the list of obtained Layout instances
           layouts = response_handler.layouts
           layouts.each do |layout|
@@ -418,7 +418,7 @@ class Layout
             
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Layouts::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Layouts::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

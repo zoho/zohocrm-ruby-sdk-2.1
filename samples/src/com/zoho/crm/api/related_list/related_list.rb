@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class RelatedList
   def self.get_related_lists(module_api_name)
@@ -13,7 +13,7 @@ class RelatedList
     # """
 
     # Get instance of RelatedListsOperations Class that takes module_api_name as parameter
-    rlo = RelatedLists::RelatedListsOperations.new(module_api_name)
+    rlo = ZOHOCRMSDK::RelatedLists::RelatedListsOperations.new(module_api_name)
     response = rlo.get_related_lists
 
     unless response.nil?
@@ -29,7 +29,7 @@ class RelatedList
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? RelatedLists::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::RelatedLists::ResponseWrapper
           # Get the list of obtained RelatedList instances
           related_lists = response_handler.related_lists
           related_lists.each do |related_list|
@@ -68,7 +68,7 @@ class RelatedList
             print related_list.linkingmodule
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? RelatedLists::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::RelatedLists::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -109,11 +109,11 @@ class RelatedList
     # """
     # example
     # module_api_name = "Contacts"
-    # related_list_id = '340964300062003'
+    # related_list_id = '34096430062003'
     # """
 
     # Get instance of RelatedListsOperations Class that takes module_api_name as parameter
-    rlo = RelatedLists::RelatedListsOperations.new(module_api_name)
+    rlo = ZOHOCRMSDK::RelatedLists::RelatedListsOperations.new(module_api_name)
     # Call get_related_list method which takes related_list_id as parameter
     response = rlo.get_related_list(related_list_id)
 
@@ -130,7 +130,7 @@ class RelatedList
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? RelatedLists::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::RelatedLists::ResponseWrapper
           # Get the list of obtained RelatedList instances
           related_lists = response_handler.related_lists
           related_lists.each do |related_list|
@@ -169,7 +169,7 @@ class RelatedList
             print related_list.linkingmodule
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? RelatedLists::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::RelatedLists::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

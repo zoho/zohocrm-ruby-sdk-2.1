@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 module SingleUser
   class MultiThreading
     def initialize(module_api_name)
@@ -19,7 +19,7 @@ module SingleUser
 
     def func1
       # Get instance of RecordOperations Class
-      ro = Record::RecordOperations.new
+      ro = ZOHOCRMSDK::Record::RecordOperations.new
       ro.get_records(@module_api_name,nil,nil)
       # print ro.data_objects
     end

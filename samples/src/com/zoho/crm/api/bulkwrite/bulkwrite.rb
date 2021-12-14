@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Bulkwrite
   def self.upload_file(org_id, absolute_file_path)
@@ -14,9 +14,9 @@ class Bulkwrite
     # absolute_file_path = "/Users/user_name/Documents/Leads.zip"
     # """
     # Get instance of BulkWriteOperations Class
-    bwo = BulkWrite::BulkWriteOperations.new
+    bwo = ZOHOCRMSDK::BulkWrite::BulkWriteOperations.new
     # Get instance of FileBodyWrapper class that will contain the request file
-    file_body_wrapper = BulkWrite::FileBodyWrapper.new
+    file_body_wrapper = ZOHOCRMSDK::BulkWrite::FileBodyWrapper.new
     # """
     # StreamWrapper can be initialized in any of the following ways
 
@@ -25,14 +25,14 @@ class Bulkwrite
     # * param 3 -> Absolute File Path of the file to be attached
     # """
     # stream_wrapper = StreamWrapper.new(name,stream,absolutefilepath)
-    sw = Util::StreamWrapper.new(nil, nil, absolute_file_path)
+    sw = ZOHOCRMSDK::Util::StreamWrapper.new(nil, nil, absolute_file_path)
     # Set file to the FileBodyWrapper instance
     file_body_wrapper.file = sw
     # Get instance of HeaderMap Class
-    header_instance = HeaderMap.new
+    header_instance = ZOHOCRMSDK::HeaderMap.new
     # Possible headers for upload_file operation
-    header_instance.add(BulkWrite::BulkWriteOperations::UploadFileHeader.feature, 'bulk-write')
-    header_instance.add(BulkWrite::BulkWriteOperations::UploadFileHeader.X_crm_org, org_id)
+    header_instance.add(ZOHOCRMSDK::BulkWrite::BulkWriteOperations::UploadFileHeader.feature, 'bulk-write')
+    header_instance.add(ZOHOCRMSDK::BulkWrite::BulkWriteOperations::UploadFileHeader.X_crm_org, org_id)
     # Call upload_file method that takes FileBodyWrapper instance and header_instance as parameter
     response = bwo.upload_file(file_body_wrapper, header_instance)
     unless response.nil?
@@ -44,7 +44,7 @@ class Bulkwrite
         # Get object from response
         action_response = response.data_object
         # Check if expected SuccessResponse instance is received
-        if action_response.is_a? BulkWrite::SuccessResponse
+        if action_response.is_a? ZOHOCRMSDK::BulkWrite::SuccessResponse
           success_response = action_response
           # Get the Code
           print "\n code:"
@@ -63,7 +63,7 @@ class Bulkwrite
             print "\n"
           end
         # Check if the request returned an exception
-        elsif action_response.is_a? BulkWrite::APIException
+        elsif action_response.is_a? ZOHOCRMSDK::BulkWrite::APIException
           api_exception = action_response
           # Get the Code
           print "\n code:"
@@ -128,47 +128,47 @@ class Bulkwrite
     # :param file_id: The ID of the uploaded file to create BulkWrite Job.
     # """
     # Get instance of BulkWriteOperations Class
-    bwo = BulkWrite::BulkWriteOperations.new
+    bwo = ZOHOCRMSDK::BulkWrite::BulkWriteOperations.new
     # Get instance of RequestWrapper Class that will contain the request body
-    request_wrapper = BulkWrite::RequestWrapper.new
+    request_wrapper = ZOHOCRMSDK::BulkWrite::RequestWrapper.new
     # Get instance of CallBack Class
-    call_back = BulkWrite::CallBack.new
+    call_back = ZOHOCRMSDK::BulkWrite::CallBack.new
     # Set valid callback URL
     call_back.url = 'https://www.example.com/callback'
     # Set the HTTP method of the callback URL. The allowed value is post.
-    call_back.method = Util::Choice.new('post')
+    call_back.method = ZOHOCRMSDK::Util::Choice.new('post')
     # The Bulk Read Job's details is posted to this URL on successful completion / failure of the job.
     request_wrapper.callback = call_back
     # Set the charset of the uploaded file
     request_wrapper.character_encoding = 'UTF-8'
     # To set the type of operation you want to perform on the bulk write job.
-    request_wrapper.operation = Util::Choice.new('insert')
+    request_wrapper.operation = ZOHOCRMSDK::Util::Choice.new('insert')
     # Get instance of Resource Class
-    resource_ins = BulkWrite::Resource.new
+    resource_ins = ZOHOCRMSDK::BulkWrite::Resource.new
     # To set the type of module that you want to import. The value is data.
-    resource_ins.type = Util::Choice.new('data')
+    resource_ins.type = ZOHOCRMSDK::Util::Choice.new('data')
     # To set the fileId obtained from file upload API.
     resource_ins.file_id = file_id
     # True - Ignores the empty values.The default value is false.
     resource_ins.ignore_empty = true
     # Get instance of FieldMapping Class
-    field_mapping0 = BulkWrite::FieldMapping.new
+    field_mapping0 = ZOHOCRMSDK::BulkWrite::FieldMapping.new
     # To set API name of the field present in Zoho module object that you want to import.
     field_mapping0.api_name = 'Last_Name'
     # To set the column index of the field you want to map to the CRM field.
     field_mapping0.index = 0
-    field_mapping1 = BulkWrite::FieldMapping.new
+    field_mapping1 = ZOHOCRMSDK::BulkWrite::FieldMapping.new
     field_mapping1.api_name = 'Email'
     field_mapping1.index = 1
-    field_mapping2 = BulkWrite::FieldMapping.new
+    field_mapping2 = ZOHOCRMSDK::BulkWrite::FieldMapping.new
     field_mapping2.api_name = 'Company'
     field_mapping2.index = 2
-    field_mapping3 = BulkWrite::FieldMapping.new
+    field_mapping3 = ZOHOCRMSDK::BulkWrite::FieldMapping.new
     field_mapping3.api_name = 'Phone'
     field_mapping3.index = 3
-    field_mapping4 = BulkWrite::FieldMapping.new
+    field_mapping4 = ZOHOCRMSDK::BulkWrite::FieldMapping.new
     field_mapping4.api_name = 'Website'
-    module_1=  Modules::Module.new
+    module_1=  ZOHOCRMSDK::Modules::Module.new
     module_1.api_name = "Leads"
     # To set the default value for an empty column in the uploaded file.
     default_value = { 'value' => 'https://www.zohoapis.com' }
@@ -191,7 +191,7 @@ class Bulkwrite
         # Get object from response
         action_response = response.data_object
         # Check if expected SuccessResponse instance is received
-        if action_response.is_a? BulkWrite::SuccessResponse
+        if action_response.is_a? ZOHOCRMSDK::BulkWrite::SuccessResponse
           success_response = action_response
           # Get the Code
           print "\n code:"
@@ -210,7 +210,7 @@ class Bulkwrite
             print "\n"
           end
 
-        elsif action_response.is_a? BulkWrite::APIException
+        elsif action_response.is_a? ZOHOCRMSDK::BulkWrite::APIException
           api_exception = action_response
           # Get the Code
           print "\n code:"
@@ -250,10 +250,10 @@ class Bulkwrite
 
     # """
     # example
-    # job_id = "347706105615003"
+    # job_id = "34770615615003"
     # """
     # Get instance of BulkWriteOperations Class
-    bwo = BulkWrite::BulkWriteOperations.new
+    bwo = ZOHOCRMSDK::BulkWrite::BulkWriteOperations.new
     # Call get_bulk_write_job_details method that takes job_id as parameter
     response = bwo.get_bulk_write_job_details(job_id)
     unless response.nil?
@@ -268,7 +268,7 @@ class Bulkwrite
       if response.is_expected
         response_wrapper = response.data_object
         # Check if expected BulkWriteResponse instance is received
-        if response_wrapper.is_a? BulkWrite::BulkWriteResponse
+        if response_wrapper.is_a? ZOHOCRMSDK::BulkWrite::BulkWriteResponse
           bulk_write_response = response_wrapper
           # Get the Job Status of the bulkWriteResponse
           print "\n Bulk write Job Status: "
@@ -394,7 +394,7 @@ class Bulkwrite
           # Get the CreatedTime of the BulkWriteResponse
           print "\n Bulk write File CreatedTime: "
           print bulk_write_response.created_time
-        elsif response_wrapper.is_a? BulkWrite::APIException
+        elsif response_wrapper.is_a? ZOHOCRMSDK::BulkWrite::APIException
           exception = response_wrapper
           # Get the Code
           print "\n code:"
@@ -438,7 +438,7 @@ class Bulkwrite
     # destination_folder = "/Users/user_name/Documents"
     # """
     # Get instance of BulkWriteOperations Class
-    bwo = BulkWrite::BulkWriteOperations.new
+    bwo = ZOHOCRMSDK::BulkWrite::BulkWriteOperations.new
     # Call download_bulk_write_result method that takes download_url as parameter
     response = bwo.download_bulk_write_result(download_url)
     unless response.nil?
@@ -454,16 +454,16 @@ class Bulkwrite
         # Get object from response
         response_handler = response.data_object
         # Check if expected FileBodyWrapper instance is received.
-        if response_handler.is_a? BulkWrite::FileBodyWrapper
+        if response_handler.is_a? ZOHOCRMSDK::BulkWrite::FileBodyWrapper
           file_body_wrapper = response_handler
           # Get StreamWrapper instance from the returned FileBodyWrapper instance
           stream_wrapper = file_body_wrapper.file
           # Open the destination file where the file needs to be written in 'w' mode
-          File.open(stream_wrapper.name, 'w') do |f|
+          File.open(destination_folder + '/' + stream_wrapper.name, 'w') do |f|
             f.write(stream_wrapper.stream)
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? BulkWrite::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::BulkWrite::APIException
           exception = response_handler
           print response_handler.inspect
           # Get the Code

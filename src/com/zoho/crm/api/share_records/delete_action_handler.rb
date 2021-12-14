@@ -1,10 +1,12 @@
-module ShareRecords
-  module DeleteActionHandler
+module ZOHOCRMSDK
+  module ShareRecords
+    module DeleteActionHandler
 
-    # Creates an instance of DeleteActionHandler
-    def initialize
+      # Creates an instance of DeleteActionHandler
+      def initialize
+      end
+
+
     end
-
-
   end
 end

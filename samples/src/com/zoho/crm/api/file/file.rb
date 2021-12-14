@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class File
   def self.upload_file(absolute_file_path)
@@ -9,13 +9,13 @@ class File
 
     # """
     # example
-    # absolute_file_path = "/Users/user_name/Desktop/download.png";
+    # absolute_file_path = "/Users/user_name/Desktop/download1.png";
     # """
 
     # Get instance of FileOperations Class
-    fo = Files::FileOperations.new
+    fo = ZOHOCRMSDK::Files::FileOperations.new
     # Get instance of FileBodyWrapper Class that will contain the request body
-    bw = Files::BodyWrapper.new
+    bw = ZOHOCRMSDK::Files::BodyWrapper.new
     # """
     # StreamWrapper can be initialized in any of the following ways
 
@@ -25,12 +25,12 @@ class File
     # """
     # stream_wrapper = StreamWrapper.new(name,stream,absolutefilepath)
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
-    pm.add(Files::FileOperations::UploadFilesParam.type, 'inline')
-    sw1 = Util::StreamWrapper.new(nil, nil, absolute_file_path)
-    # sw2 = Util::StreamWrapper.new(nil, nil, '/Users/test//assignmentrules/assignment_rules.rb')
+    pm = ZOHOCRMSDK::ParameterMap.new
+    pm.add(ZOHOCRMSDK::Files::FileOperations::UploadFilesParam.type, 'inline')
+    sw1 = ZOHOCRMSDK::Util::StreamWrapper.new(nil, nil, absolute_file_path)
+    sw2 = ZOHOCRMSDK::Util::StreamWrapper.new(nil, nil, absolute_file_path)
    # Set list of files to the BodyWrapper instance
-    files = [sw1]
+    files = [sw1, sw2]
     bw.file = files
     # Call upload_file method that takes BodyWrapper instance as parameter.
     response = fo.upload_files(bw, pm)
@@ -43,11 +43,11 @@ class File
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Files::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Files::ActionWrapper
           action_responses = action_handler.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Files::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Files::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -62,11 +62,12 @@ class File
               success_response.details.each do |k, v|
                 print "\n"
                 print k
+                print "\t"
                 print v
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Files::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Files::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -88,7 +89,7 @@ class File
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Files::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Files::APIException
           api_exception = action_handler
           # Get the Code
           print 'code:'
@@ -132,11 +133,11 @@ class File
     # destination_folder = "/Users/user_name/Desktop"
     # """
     # Get instance of FileOperations Class
-    fo = Files::FileOperations.new
+    fo = ZOHOCRMSDK::Files::FileOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Add the id to ParameterMap instance
-    pm.add(Files::FileOperations::GetFileParam.id, 'f46166fa14ce16c6e2622b3ce8283075a4aeb9c355b109cd8f502c78ffdb9324')
+    pm.add(ZOHOCRMSDK::Files::FileOperations::GetFileParam.id, id)
     # Call get_file method that takes ParameterMap instance as parameter
     response = fo.get_file(pm)
     unless response.nil?
@@ -152,7 +153,7 @@ class File
         # Get object from response
         response_handler = response.data_object
         # Check if expected FileBodyWrapper instance is received.
-        if response_handler.is_a? Files::FileBodyWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Files::FileBodyWrapper
           # Get StreamWrapper instance from the returned FileBodyWrapper instance
           file_body_wrapper = response_handler
           stream_wrapper = file_body_wrapper.file
@@ -162,7 +163,7 @@ class File
             f.write(stream_wrapper.stream)
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Files::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Files::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

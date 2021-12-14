@@ -1,7 +1,7 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Field_Attachments
-  def self.get_field_attachments(module_api_name,record_id,attachment_id,destination_folder)
+  def self.get_field_attachments(module_api_name, record_id, attachment_id, destination_folder)
     # """
     # This method is used to download the file with ID and write in the destinationFolder
     # :param attachment_id: The ID of the attachment.
@@ -16,7 +16,7 @@ class Field_Attachments
     # destination_folder = "/Users/test/Desktop"
     # """
     # Get instance of FieldAttachmentsOperations Class
-    fo = FieldAttachments::FieldAttachmentsOperations.new(module_api_name, record_id, attachment_id)
+    fo = ZOHOCRMSDK::FieldAttachments::FieldAttachmentsOperations.new(module_api_name, record_id, attachment_id)
 
     # Call get_field_attachments method 
     response = fo.get_field_attachments()
@@ -33,7 +33,7 @@ class Field_Attachments
         # Get object from response
         response_handler = response.data_object
         # Check if expected FileBodyWrapper instance is received.
-        if response_handler.is_a? FieldAttachments::FileBodyWrapper
+        if response_handler.is_a? ZOHOCRMSDK::FieldAttachments::FileBodyWrapper
           # Get StreamWrapper instance from the returned FileBodyWrapper instance
           file_body_wrapper = response_handler
           stream_wrapper = file_body_wrapper.file
@@ -43,7 +43,7 @@ class Field_Attachments
             f.write(stream_wrapper.stream)
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? FieldAttachments::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::FieldAttachments::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

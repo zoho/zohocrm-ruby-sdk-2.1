@@ -1,10 +1,12 @@
-module Tags
-  module ActionResponse
+module ZOHOCRMSDK
+  module Tags
+    module ActionResponse
 
-    # Creates an instance of ActionResponse
-    def initialize
+      # Creates an instance of ActionResponse
+      def initialize
+      end
+
+
     end
-
-
   end
 end

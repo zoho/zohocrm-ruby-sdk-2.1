@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Send_Mail
   def self.get_email_addresses()
@@ -9,7 +9,7 @@ class Send_Mail
 
     # Get instance of SendMailOperations Class 
 
-    aro = SendMail::SendMailOperations.new()
+    aro = ZOHOCRMSDK::SendMail::SendMailOperations.new()
 
     # Call get_email_addresses method
     response = aro.get_email_addresses()
@@ -26,7 +26,7 @@ class Send_Mail
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? SendMail::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::SendMail::ResponseWrapper
           # Get the list of obtained SendMail instances
             from_addresses = response_handler.from_addresses
             from_addresses.each do |from_address|
@@ -48,7 +48,7 @@ class Send_Mail
 
             end
         # Check if the request returned an exception
-        elsif response_handler.is_a? SendMail::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::SendMail::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -84,21 +84,21 @@ class Send_Mail
     # """
     # List to hold SendMail instances
     mails = []
-    record_id  = 0304001
+    record_id  = 347706112558011
     module_api_name= "Leads"
     # Get instance of Mail Class
-    mail = SendMail::Mail.new
-    user_address_from = SendMail::UserAddress.new
-    user_address_to = SendMail::UserAddress.new
-    user_address_cc = SendMail::UserAddress.new
-    template = EmailTemplates::EmailTemplate.new
+    mail = ZOHOCRMSDK::SendMail::Mail.new
+    user_address_from = ZOHOCRMSDK::SendMail::UserAddress.new
+    user_address_to = ZOHOCRMSDK::SendMail::UserAddress.new
+    user_address_cc = ZOHOCRMSDK::SendMail::UserAddress.new
+    template = ZOHOCRMSDK::EmailTemplates::EmailTemplate.new
     template.id = 347706179
     user_address_from.user_name = "patricia Boyle"
-    user_address_from.email = "patricia.k@zoho.com"
+    user_address_from.email = "abc.k@zohocorp.com"
     user_address_to.user_name = "patricia Boyle"
-    user_address_to.email = "Boyle@zoho.com"
+    user_address_to.email = "abcprabu26@gmail.com"
     user_address_cc.user_name = "patricia Boyle"
-    user_address_cc.email = "Boyle@zoho.com"
+    user_address_cc.email = "abcprabu26@gmail.com"
     mail.from = user_address_from
     user_address_tos =[user_address_to]
     mail.cc = [user_address_cc]
@@ -110,11 +110,11 @@ class Send_Mail
     mail.consent_email = false
     mails.push(mail)
     # Set the list of SendMail in BodyWrapper instance
-    body_wrapper = SendMail::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::SendMail::BodyWrapper.new
     # Get instance of BodyWrapper Class that will contain the request body
     body_wrapper.data = mails
     # Get instance of SendMailOperations Class
-    smo = SendMail::SendMailOperations.new
+    smo = ZOHOCRMSDK::SendMail::SendMailOperations.new
     # Call create_send_mail method that takes BodyWrapper instance as parameter
     response = smo.send_mail(record_id,module_api_name,body_wrapper)
     unless response.nil?
@@ -126,12 +126,12 @@ class Send_Mail
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? SendMail::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::SendMail::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? SendMail::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::SendMail::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -150,7 +150,7 @@ class Send_Mail
                 print "\n"
               end
               # Check if the request returned an exception
-            elsif action_response.is_a? SendMail::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::SendMail::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -172,7 +172,7 @@ class Send_Mail
             end
           end
           # Check if the request returned an exception
-        elsif action_handler.is_a? SendMail::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::SendMail::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

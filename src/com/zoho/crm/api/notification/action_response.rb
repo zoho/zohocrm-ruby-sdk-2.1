@@ -1,10 +1,12 @@
-module Notification
-  module ActionResponse
+module ZOHOCRMSDK
+  module Notification
+    module ActionResponse
 
-    # Creates an instance of ActionResponse
-    def initialize
+      # Creates an instance of ActionResponse
+      def initialize
+      end
+
+
     end
-
-
   end
 end

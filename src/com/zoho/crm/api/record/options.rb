@@ -1,10 +1,12 @@
-module Record
-  class Options
+module ZOHOCRMSDK
+  module Record
+    class Options
 
-    # Creates an instance of Options
-    def initialize
+      # Creates an instance of Options
+      def initialize
+      end
+
+
     end
-
-
   end
 end

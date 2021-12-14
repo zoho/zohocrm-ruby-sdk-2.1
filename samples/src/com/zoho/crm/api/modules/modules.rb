@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Module
   def self.get_modules
@@ -6,9 +6,9 @@ class Module
     # This method is used to get metadata about all the modules and print the response.
     # """
     # Get instance of ModulesOperations Class
-    mo = Modules::ModulesOperations.new
+    mo = ZOHOCRMSDK::Modules::ModulesOperations.new
     # Get instance of HeaderMap Class
-    hm = HeaderMap.new
+    hm = ZOHOCRMSDK::HeaderMap.new
     # Call get_modules method that takes header_instance as parameter
     response = mo.get_modules(hm)
     unless response.nil?
@@ -24,7 +24,7 @@ class Module
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Modules::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Modules::ResponseWrapper
           # Get the list of obtained Module instances
           modules = response_handler.modules
           modules.each do |module_ins|
@@ -227,7 +227,7 @@ class Module
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Modules::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Modules::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -269,7 +269,7 @@ class Module
     # module_api_name = "Leads";
     # """
     # Get instance of ModulesOperations Class
-    mo = Modules::ModulesOperations.new
+    mo = ZOHOCRMSDK::Modules::ModulesOperations.new
     # Call get_module method that takes module_api_name as parameter
     response = mo.get_module(module_api_name)
     unless response.nil?
@@ -285,7 +285,7 @@ class Module
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Modules::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Modules::ResponseWrapper
           # Get the list of obtained Module instances
           modules = response_handler.modules
           modules.each do |module_ins|
@@ -488,7 +488,7 @@ class Module
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Modules::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Modules::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -610,23 +610,23 @@ class Module
     # module_api_name = "Leads";
     # """
     # Get instance of ModulesOperations Class
-    mo = Modules::ModulesOperations.new
+    mo = ZOHOCRMSDK::Modules::ModulesOperations.new
     # Get instance of Profile Class
-    profile = Profiles::Profile.new
+    profile = ZOHOCRMSDK::Profiles::Profile.new
     profile.delete = true
     # To set the Profile Id
-    profile.id = 3_477_061_000_000_026_014
+    profile.id = 3_477_061___026_014
     # Add Profile instance to the list
     profiles = [profile]
     # Get instance of Module Class
-    module_ins = Modules::Module.new
+    module_ins = ZOHOCRMSDK::Modules::Module.new
     module_ins.api_name = 'apiName1'
     # Set the list to profiles in Module instance
     module_ins.profiles = profiles
     # Add the Module instance to list
     modules = [module_ins]
     # Get instance of BodyWrapper Class which contains the request body
-    request = Modules::BodyWrapper.new
+    request = ZOHOCRMSDK::Modules::BodyWrapper.new
     # Set the list to modules in BodyWrapper instance
     request.modules = modules
     # Call update_module_by_api_name method that takes BodyWrapper instance and module_api_name as parameter
@@ -640,12 +640,12 @@ class Module
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Modules::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Modules::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.modules
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Modules::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Modules::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -664,7 +664,7 @@ class Module
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Modules::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Modules::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -686,7 +686,7 @@ class Module
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Modules::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Modules::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -725,26 +725,26 @@ class Module
 
     # """
     # example
-    # module_id = 340964300252001
+    # module_id = 34096430252001
     # """
     # Get instance of ModulesOperations Class
-    mo = Modules::ModulesOperations.new
+    mo = ZOHOCRMSDK::Modules::ModulesOperations.new
     # Get instance of Profile Class
-    profile = Profiles::Profile.new
+    profile = ZOHOCRMSDK::Profiles::Profile.new
     profile.delete = true
     # To set the Profile Id
-    profile.id = 3_477_061_000_000_026_014
+    profile.id = 3_477_061___026_014
     # Add Profile instance to the list
     profiles = [profile]
     # Get instance of Module Class
-    module_ins = Modules::Module.new
+    module_ins = ZOHOCRMSDK::Modules::Module.new
     module_ins.api_name = 'apiName2'
     # Set the list to profiles in Module instance
     module_ins.profiles = profiles
     # Add the Module instance to list
     modules = [module_ins]
     # Get instance of BodyWrapper Class which contains the request body
-    request = Modules::BodyWrapper.new
+    request = ZOHOCRMSDK::Modules::BodyWrapper.new
     # Set the list to modules in BodyWrapper instance
     request.modules = modules
     # Call update_module_by_id method that takes BodyWrapper instance and module_id as parameter
@@ -758,12 +758,12 @@ class Module
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Modules::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Modules::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.modules
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Modules::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Modules::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -782,7 +782,7 @@ class Module
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Modules::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Modules::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -804,7 +804,7 @@ class Module
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Modules::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Modules::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

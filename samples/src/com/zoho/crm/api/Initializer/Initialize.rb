@@ -1,22 +1,13 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 class Initialize
   def self.Initialize
-    log = SDKLog::Log.initialize(level: Levels::ALL, path: '/Users/Documents/sdk.log')
-    
-    dbstore = Store::FileStore.new('/Users/Documents/tokens.txt')
-    
-    token =  Authenticator::OAuthToken.new(client_id:"1000.xxxx", client_secret: "xxxx", grant_token:"1000.xxxxx.xxxxx")
-    
-    user = UserSignature.new('abc@zoho.com')
-    
-    environment = DC::USDataCenter::PRODUCTION
-
-    sdk_config = SDKConfig.new(auto_refresh_fields: true, pick_list_validation: true, open_timeout: 60, read_timeout: 60, write_timeout: 60, keep_alive_timeout: 2)
-    
-    resource_path = '/Users/Documents'
-    
-    Initializer.initialize(user: user, environment: environment, token: token, store: dbstore, sdk_config: sdk_config, resources_path: resource_path, log: log)
-  rescue Exception => ex
-    print ex.inspect
+    log = ZOHOCRMSDK::SDKLog::Log.initialize(level:ZOHOCRMSDK::Levels::INFO, path:'/Users/Documents/file/ruby.log')
+    tokenstore = ZOHOCRMSDK::Store::FileStore.new('/Users/Documents/file/tokens.txt')
+    token =  ZOHOCRMSDK::Authenticator::OAuthToken.new(client_id:"1.xxxx", client_secret:"xxxx", refresh_token:"1.xxx.xxx", redirect_url:"https://www.zoho.com")
+    user = ZOHOCRMSDK::UserSignature.new('abc@zohocorp.com')
+    environment = ZOHOCRMSDK::DC::USDataCenter::PRODUCTION
+    sdk_config = ZOHOCRMSDK::SDKConfig.new(auto_refresh_fields: false, pick_list_validation: true)# open_timeout: 60, read_timeout: 60, write_timeout: 600)
+    resource_path = '/Users/Documents/file/'
+    ZOHOCRMSDK::Initializer.initialize(user: user, environment: environment, token: token, store: tokenstore, sdk_config: sdk_config, log: log, resources_path: resource_path)
   end
 end

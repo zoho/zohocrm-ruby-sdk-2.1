@@ -1,10 +1,12 @@
-module Pipeline
-  module TransferActionHandler
+module ZOHOCRMSDK
+  module Pipeline
+    module TransferActionHandler
 
-    # Creates an instance of TransferActionHandler
-    def initialize
+      # Creates an instance of TransferActionHandler
+      def initialize
+      end
+
+
     end
-
-
   end
 end

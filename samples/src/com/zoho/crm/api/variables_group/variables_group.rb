@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class VariableGroup
   def self.get_variable_groups
@@ -7,7 +7,7 @@ class VariableGroup
     # """
 
     # Get instance of VariableGroupsOperations Class
-    vgo = VariableGroups::VariableGroupsOperations.new
+    vgo = ZOHOCRMSDK::VariableGroups::VariableGroupsOperations.new
     # Call get_variable_groups method
     response = vgo.get_variable_groups
     unless response.nil?
@@ -23,7 +23,7 @@ class VariableGroup
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? VariableGroups::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::VariableGroups::ResponseWrapper
           # Get the list of obtained VariableGroup instances
           variable_groups = response_handler.variable_groups
           variable_groups.each do |variable_group|
@@ -44,7 +44,7 @@ class VariableGroup
             print variable_group.display_label
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? VariableGroups::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::VariableGroups::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -83,10 +83,10 @@ class VariableGroup
 
     # """
     # example
-    # variable_group_id = '340964302275023'
+    # variable_group_id = '34096432275023'
     # """
     # Get instance of VariableGroupsOperations Class
-    vgo = VariableGroups::VariableGroupsOperations.new
+    vgo = ZOHOCRMSDK::VariableGroups::VariableGroupsOperations.new
     # Call get_variable_group_by_id method that takes variable_group_id as parameter
     response = vgo.get_variable_group_by_id(variable_group_id)
     unless response.nil?
@@ -102,7 +102,7 @@ class VariableGroup
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? VariableGroups::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::VariableGroups::ResponseWrapper
           # Get the list of obtained VariableGroup instances
           variable_groups = response_handler.variable_groups
           variable_groups.each do |variable_group|
@@ -123,7 +123,7 @@ class VariableGroup
             print variable_group.display_label
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? VariableGroups::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::VariableGroups::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -165,7 +165,7 @@ class VariableGroup
     # """
 
     # Get instance of VariableGroupsOperations Class
-    vgo = VariableGroups::VariableGroupsOperations.new
+    vgo = ZOHOCRMSDK::VariableGroups::VariableGroupsOperations.new
     # Call get_variable_group_by_api_name method that takes variable_group_api_name as parameter
     response = vgo.get_variable_group_by_api_name(variable_group_name)
     unless response.nil?
@@ -181,7 +181,7 @@ class VariableGroup
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? VariableGroups::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::VariableGroups::ResponseWrapper
           # Get the list of obtained VariableGroup instances
           variable_groups = response_handler.variable_groups
           variable_groups.each do |variable_group|
@@ -202,7 +202,7 @@ class VariableGroup
             print variable_group.display_label
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? VariableGroups::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::VariableGroups::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

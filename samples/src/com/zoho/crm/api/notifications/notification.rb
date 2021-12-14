@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 require 'date'
 
 class Notifications
@@ -7,20 +7,20 @@ class Notifications
     # This method is used to Enable Notifications and print the response.
     # """
     # Get instance of NotificationOperations Class
-    no = Notification::NotificationOperations.new
+    no = ZOHOCRMSDK::Notification::NotificationOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Notification::BodyWrapper.new
+    bw = ZOHOCRMSDK::Notification::BodyWrapper.new
     # Get instance of Notification Class
-    notification = Notification::Notification.new
+    notification = ZOHOCRMSDK::Notification::Notification.new
     # Set channel Id of the Notification
-    notification.channel_id = 10_000_000_680_211
+    notification.channel_id = 10___680_211
     events = ['Deals.all']
     # To subscribe based on particular operations on given modules.
     notification.events = events
     # To set the expiry time for instant notifications.
     notification.channel_expiry = DateTime.new(2021, 2, 3, 4, 5, 6, '+5:30')
     # By using this value, user can validate the notifications.
-    notification.token = 'TOKEN_FOR_VERIFICATION_OF_100068002'
+    notification.token = 'TOKEN_FOR_VERIFICATION_OF_10068002'
     # URL to be notified (POST request)
     notification.notify_url = 'https://www.zohoapis.com'
     # List to hold Notification instances
@@ -38,13 +38,13 @@ class Notifications
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notification::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notification::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.watch
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notification::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notification::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -58,7 +58,7 @@ class Notifications
               success_response.details.each do |k, v|
                 data_list = v
                 if data_list.is_a? Array
-                  if data_list.length.positive? && data_list[0].is_a?(Notification::Notification)
+                  if data_list.length.positive? && data_list[0].is_a?(ZOHOCRMSDK::Notification::Notification)
                     event_list = data_list
                     event_list.each do |event|
                       # Get the ChannelExpiry of each Notification
@@ -86,7 +86,7 @@ class Notifications
                 end
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notification::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notification::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -108,7 +108,7 @@ class Notifications
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notification::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notification::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -144,11 +144,11 @@ class Notifications
     # This method is used to get details of the Notification and print the response.
     # """
     # Get instance of NotificationOperations Class
-    no = Notification::NotificationOperations.new
+    no = ZOHOCRMSDK::Notification::NotificationOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
-    pm.add(Notification::NotificationOperations::GetNotificationDetailsParam.channel_id, 10_000_000_680_211)
-    pm.add(Notification::NotificationOperations::GetNotificationDetailsParam.module_1, 'Deals')
+    pm = ZOHOCRMSDK::ParameterMap.new
+    pm.add(ZOHOCRMSDK::Notification::NotificationOperations::GetNotificationDetailsParam.channel_id, 10___680_211)
+    pm.add(ZOHOCRMSDK::Notification::NotificationOperations::GetNotificationDetailsParam.module_1, 'Deals')
     # Call get_notification_details method
     response = no.get_notification_details(pm)
     unless response.nil?
@@ -164,7 +164,7 @@ class Notifications
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Notification::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Notification::ResponseWrapper
           # Get the list of obtained Notification instances
           notifications = response_handler.watch
           notifications.each do |notification|
@@ -223,7 +223,7 @@ class Notifications
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Notification::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Notification::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -260,20 +260,20 @@ class Notifications
     # """
     # Get instance of NotificationOperations Class
     # Get instance of NotificationOperations Class
-    no = Notification::NotificationOperations.new
+    no = ZOHOCRMSDK::Notification::NotificationOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Notification::BodyWrapper.new
+    bw = ZOHOCRMSDK::Notification::BodyWrapper.new
     # Get instance of Notification Class
-    notification = Notification::Notification.new
+    notification = ZOHOCRMSDK::Notification::Notification.new
     # Set channel Id of the Notification
-    notification.channel_id = 10_000_000_680_211
+    notification.channel_id = 10___680_211
     events = ['Deals.all']
     # To subscribe based on particular operations on given modules.
     notification.events = events
     # To set the expiry time for instant notifications.
     notification.channel_expiry = DateTime.new(2021, 2, 3, 4, 5, 6, '+5:30')
     # By using this value, user can validate the notifications.
-    notification.token = 'TOKEN_FOR_VERIFICATION_OF_100068002'
+    notification.token = 'TOKEN_FOR_VERIFICATION_OF_10068002'
     # URL to be notified (POST request)
     notification.notify_url = 'https://www.zohoapis.com'
     # List to hold Notification instances
@@ -291,13 +291,13 @@ class Notifications
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notification::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notification::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.watch
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notification::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notification::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -311,7 +311,7 @@ class Notifications
               success_response.details.each do |k, v|
                 data_list = v
                 if data_list.is_a? Array
-                  if data_list.length.positive? && data_list[0].is_a?(Notification::Notification)
+                  if data_list.length.positive? && data_list[0].is_a?(ZOHOCRMSDK::Notification::Notification)
                     event_list = data_list
                     event_list.each do |event|
                       # Get the ChannelExpiry of each Notification
@@ -339,7 +339,7 @@ class Notifications
                 end
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notification::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notification::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -361,7 +361,7 @@ class Notifications
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notification::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notification::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -397,20 +397,20 @@ class Notifications
     # This method is used to update single Notification and print the response.
     # """
     # Get instance of NotificationOperations Class
-    no = Notification::NotificationOperations.new
+    no = ZOHOCRMSDK::Notification::NotificationOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Notification::BodyWrapper.new
+    bw = ZOHOCRMSDK::Notification::BodyWrapper.new
     # Get instance of Notification Class
-    notification = Notification::Notification.new
+    notification = ZOHOCRMSDK::Notification::Notification.new
     # Set channel Id of the Notification
-    notification.channel_id = 10_000_000_680_211
+    notification.channel_id = 10___680_211
     events = ['Deals.all']
     # To subscribe based on particular operations on given modules.
     notification.events = events
     # To set the expiry time for instant notifications.
     notification.channel_expiry = DateTime.new(2021, 2, 3, 4, 5, 6, '+5:30')
     # By using this value, user can validate the notifications.
-    notification.token = 'TOKEN_FOR_VERIFICATION_OF_100068002'
+    notification.token = 'TOKEN_FOR_VERIFICATION_OF_10068002'
     # URL to be notified (POST request)
     notification.notify_url = 'https://www.zohoapis.com'
     # List to hold Notification instances
@@ -428,13 +428,13 @@ class Notifications
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notification::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notification::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.watch
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notification::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notification::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -448,7 +448,7 @@ class Notifications
               success_response.details.each do |k, v|
                 data_list = v
                 if data_list.is_a? Array
-                  if data_list.length.positive? && data_list[0].is_a?(Notification::Notification)
+                  if data_list.length.positive? && data_list[0].is_a?(ZOHOCRMSDK::Notification::Notification)
                     event_list = data_list
                     event_list.each do |event|
                       # Get the ChannelExpiry of each Notification
@@ -476,7 +476,7 @@ class Notifications
                 end
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notification::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notification::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -498,7 +498,7 @@ class Notifications
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notification::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notification::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -535,11 +535,11 @@ class Notifications
     # :param channel_ids: A list containing the unique IDs of the notification channels to be disabled.
     # """
     # Get instance of NotificationOperations Class
-    no = Notification::NotificationOperations.new
+    no = ZOHOCRMSDK::Notification::NotificationOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     channel_ids.each do |channel_id|
-      pm.add(Notification::NotificationOperations::DisableNotificationsParam.channel_ids, channel_id)
+      pm.add(ZOHOCRMSDK::Notification::NotificationOperations::DisableNotificationsParam.channel_ids, channel_id)
     end
     # Call disable_notifications method that takes paramInstance as parameter
     response = no.disable_notifications(pm)
@@ -552,13 +552,13 @@ class Notifications
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notification::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notification::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.watch
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notification::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notification::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -577,7 +577,7 @@ class Notifications
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notification::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notification::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -599,7 +599,7 @@ class Notifications
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notification::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notification::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -635,13 +635,13 @@ class Notifications
     # This method is used to disable notifications for the specified events in a channel.
     # """
     # Get instance of NotificationOperations Class
-    no = Notification::NotificationOperations.new
+    no = ZOHOCRMSDK::Notification::NotificationOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Notification::BodyWrapper.new
+    bw = ZOHOCRMSDK::Notification::BodyWrapper.new
     # Get instance of Notification Class
-    notification = Notification::Notification.new
+    notification = ZOHOCRMSDK::Notification::Notification.new
     # Set channel Id of the Notification
-    notification.channel_id = 10_000_000_680_211
+    notification.channel_id = 10___680_211
     # To subscribe based on particular operations on given modules.
     events = ['Deals.edit']
     notification.deleteevents = true
@@ -660,13 +660,13 @@ class Notifications
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notification::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notification::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.watch
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notification::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notification::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -685,7 +685,7 @@ class Notifications
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notification::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notification::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -707,7 +707,7 @@ class Notifications
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notification::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notification::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

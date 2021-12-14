@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Pipelines
   def self.get_pipelines(layout_id)
@@ -6,7 +6,7 @@ class Pipelines
     # This method is used to get all the pipelines and print the response.
     # """
     # Get instance of PipelineOperations Class
-    po = Pipeline::PipelineOperations.new(layout_id)
+    po = ZOHOCRMSDK::Pipeline::PipelineOperations.new(layout_id)
     # Call get_pipelines method
     response = po.get_pipelines
     unless response.nil?
@@ -21,7 +21,7 @@ class Pipelines
       if response.is_expected
         # Get object from response
         response_handler = response.data_object
-        if response_handler.is_a? Pipeline::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Pipeline::ResponseWrapper
           # Get the list of Pipeline instances
           pipelines = response_handler.pipeline
           pipelines.each do |pipeline|
@@ -79,7 +79,7 @@ class Pipelines
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Pipeline::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Pipeline::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -118,10 +118,10 @@ class Pipelines
 
     # """
     # example
-    # pipeline_id = "340964302212003";
+    # pipeline_id = "34096432212003";
     # """
     # Get instance of PipelineOperations Class
-    po = Pipeline::PipelineOperations.new(layout_id)
+    po = ZOHOCRMSDK::Pipeline::PipelineOperations.new(layout_id)
     # Call get_pipeline method that takes pipeline_id as parameter
     response = po.get_pipeline(pipeline_id)
     unless response.nil?
@@ -136,7 +136,7 @@ class Pipelines
         if response.is_expected
           # Get object from response
           response_handler = response.data_object
-          if response_handler.is_a? Pipeline::ResponseWrapper
+          if response_handler.is_a? ZOHOCRMSDK::Pipeline::ResponseWrapper
             # Get the list of Pipeline instances
             pipelines = response_handler.pipeline
             pipelines.each do |pipeline|
@@ -194,7 +194,7 @@ class Pipelines
               end
             end
           # Check if the request returned an exception
-          elsif response_handler.is_a? Pipeline::APIException
+          elsif response_handler.is_a? ZOHOCRMSDK::Pipeline::APIException
             exception = response_handler
             # Get the Code
             print 'code:'
@@ -233,10 +233,10 @@ class Pipelines
     pipelines = []
     (6..10).each do |i|
       # Get instance of Pipeline Class
-      pipeline = Pipeline::Pipeline.new
-      pipeline.display_value="Pipeline2"
+      pipeline = ZOHOCRMSDK::Pipeline::Pipeline.new
+      pipeline.display_value="Pipeline23"
       pipeline.default = true
-      picklist = Pipeline::PickListValue.new
+      picklist = ZOHOCRMSDK::Pipeline::PickListValue.new
       picklist.sequence_number = 1
       picklist.id = 36523976815
       picklist.display_value = "Closed won"
@@ -245,11 +245,11 @@ class Pipelines
       pipelines.push(pipeline)
     end
     # Set the list of pipeline in BodyWrapper instance
-    body_wrapper = Pipeline::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::Pipeline::BodyWrapper.new
     # Get instance of BodyWrapper Class that will contain the request body
     body_wrapper.pipeline = pipelines
     # Get instance of PipelineOperations Class
-    po = Pipeline::PipelineOperations.new(layout_id)
+    po = ZOHOCRMSDK::Pipeline::PipelineOperations.new(layout_id)
     # Call create_pipelines method that takes BodyWrapper instance as parameter
     response = po.create_pipelines(body_wrapper)
     unless response.nil?
@@ -261,12 +261,12 @@ class Pipelines
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Pipeline::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Pipeline::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.pipeline
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? Pipeline::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Pipeline::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -285,7 +285,7 @@ class Pipelines
                 print "\n"
               end
               # Check if the request returned an exception
-            elsif action_response.is_a? Pipeline::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Pipeline::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -307,7 +307,7 @@ class Pipelines
             end
           end
           # Check if the request returned an exception
-        elsif action_handler.is_a? Pipeline::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Pipeline::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -346,10 +346,10 @@ class Pipelines
     pipeline_ids = [131231313,12312313]
     pipelines = []
     (0..1).each do |i|
-        pipeline = Pipeline::Pipeline.new
+        pipeline = ZOHOCRMSDK::Pipeline::Pipeline.new
         pipeline.display_value="Pipeline2"
         pipeline.default = true
-        picklist = Pipeline::PickListValue.new
+        picklist = ZOHOCRMSDK::Pipeline::PickListValue.new
         picklist.sequence_number = 1
         picklist.id = 36523976815
         picklist.display_value = "Closed won"
@@ -359,11 +359,11 @@ class Pipelines
         pipelines.push(pipeline)
     end
     # Get instance of BodyWrapper Class that will contain the request body
-    body_wrapper = Pipeline::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::Pipeline::BodyWrapper.new
     # Set the list to pipeline in BodyWrapper instance
     body_wrapper.pipeline = pipelines
     # Get instance of PipelineOperations Class
-    po = Pipeline::PipelineOperations.new(layout_id)
+    po = ZOHOCRMSDK::Pipeline::PipelineOperations.new(layout_id)
     response = po.update_pipelines(body_wrapper)
     unless response.nil?
       status_code = response.status_code
@@ -374,12 +374,12 @@ class Pipelines
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Pipeline::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Pipeline::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.pipeline
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? Pipeline::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Pipeline::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -398,7 +398,7 @@ class Pipelines
                 print "\n"
               end
               # Check if the request returned an exception
-            elsif action_response.is_a? Pipeline::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Pipeline::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -420,7 +420,7 @@ class Pipelines
             end
           end
           # Check if the request returned an exception
-        elsif action_handler.is_a? Pipeline::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Pipeline::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -459,24 +459,25 @@ class Pipelines
 
     # """
     # example
-    # pipeline_id = "340964302212003";
+    # pipeline_id = "34096432212003";
     # """
     # List to hold Pipeline instances
-    pipeline = Pipeline::Pipeline.new
-    pipeline.display_value="Pipeline2"
+    pipeline = ZOHOCRMSDK::Pipeline::Pipeline.new
+    pipeline.display_value="Adfasfsad1"
     pipeline.default = true
-    picklist = Pipeline::PickListValue.new
+    picklist = ZOHOCRMSDK::Pipeline::PickListValue.new
+    picklist.id = 34770616801
     picklist.sequence_number = 1
-    picklist.display_value = "Closed won"
+    picklist.display_value = "Adfasfsad1"
     maps = [picklist]
     pipeline.maps = maps
     pipelines =[]
     pipelines.push(pipeline)
-    body_wrapper = Pipeline::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::Pipeline::BodyWrapper.new
     # Set the list to pipeline in BodyWrapper instance
     body_wrapper.pipeline = pipelines
     # Get instance of PipelineOperations Class
-    po = Pipeline::PipelineOperations.new(layout_id)
+    po = ZOHOCRMSDK::Pipeline::PipelineOperations.new(layout_id)
     # Call update_pipeline method that takes BodyWrapper instance and pipeline_id as parameters
     response = po.update_pipeline(pipeline_id,body_wrapper)
     unless response.nil?
@@ -488,12 +489,12 @@ class Pipelines
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Pipeline::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Pipeline::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.pipeline
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? Pipeline::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Pipeline::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -512,7 +513,7 @@ class Pipelines
                 print "\n"
               end
               # Check if the request returned an exception
-            elsif action_response.is_a? Pipeline::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Pipeline::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -534,7 +535,7 @@ class Pipelines
             end
           end
           # Check if the request returned an exception
-        elsif action_handler.is_a? Pipeline::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Pipeline::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -572,12 +573,12 @@ class Pipelines
     # List to hold TransferAndDeleteWrapper instances
     transfer_pipelines = []
 
-    transfer_and_delete_wrapper = Pipeline::TransferAndDeleteWrapper.new()
-    transfer_pipeline = Pipeline::TransferPipeLine.new
-    pipeline = Pipeline::Pipeline.new
-    pipeline.from = 365239703712004
-    pipeline.to=365239703712004
-    stage = Pipeline::Stage.new
+    transfer_and_delete_wrapper = ZOHOCRMSDK::Pipeline::TransferAndDeleteWrapper.new()
+    transfer_pipeline = ZOHOCRMSDK::Pipeline::TransferPipeLine.new
+    pipeline = ZOHOCRMSDK::Pipeline::Pipeline.new
+    pipeline.from = 36523973712004
+    pipeline.to=36523973712004
+    stage = ZOHOCRMSDK::Pipeline::Stage.new
     stage.from = 36523976817
     stage.to = 36523976817
     stages = [stage]
@@ -586,11 +587,11 @@ class Pipelines
     transfer_pipelines= [transfer_pipeline]
     
     # Set the list of pipeline in BodyWrapper instance
-    body_wrapper = Pipeline::TransferAndDeleteWrapper.new
+    body_wrapper = ZOHOCRMSDK::Pipeline::TransferAndDeleteWrapper.new
     # Get instance of BodyWrapper Class that will contain the request body
     body_wrapper.transfer_pipeline = transfer_pipelines
     # Get instance of PipelineOperations Class
-    po = Pipeline::PipelineOperations.new(layout_id)
+    po = ZOHOCRMSDK::Pipeline::PipelineOperations.new(layout_id)
     # Call create_pipelines method that takes BodyWrapper instance as parameter
     response = po.transfer_and_delete(body_wrapper)
     unless response.nil?
@@ -602,12 +603,12 @@ class Pipelines
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Pipeline::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Pipeline::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.pipeline
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? Pipeline::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Pipeline::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -626,7 +627,7 @@ class Pipelines
                 print "\n"
               end
               # Check if the request returned an exception
-            elsif action_response.is_a? Pipeline::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Pipeline::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -648,7 +649,7 @@ class Pipelines
             end
           end
           # Check if the request returned an exception
-        elsif action_handler.is_a? Pipeline::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Pipeline::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

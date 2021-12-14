@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Blueprint
   def self.get_blueprint(module_api_name, record_id)
@@ -11,11 +11,11 @@ class Blueprint
     # """
     # example
     # module_api_name = "Leads"
-    # record_id = "340964302469044"
+    # record_id = "34096432469044"
     # """
 
     # Get instance of BluePrintOperations Class that takes module_api_name and record_id as parameter
-    bpo = BluePrint::BluePrintOperations.new(record_id, module_api_name)
+    bpo = ZOHOCRMSDK::BluePrint::BluePrintOperations.new(record_id, module_api_name)
     # Call get_blueprint method
     response = bpo.get_blueprint
 
@@ -32,7 +32,7 @@ class Blueprint
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? BluePrint::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::BluePrint::ResponseWrapper
           # Get the obtained BluePrint instance
           blueprint = response_handler.blueprint
           # Get the ProcessInfo instance of the obtained BluePrint
@@ -562,7 +562,7 @@ class Blueprint
             print transition.criteria_message
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? BluePrint::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::BluePrint::APIException
           exception = response_handler
           # Get the Code
           print "\n code:"
@@ -604,19 +604,19 @@ class Blueprint
     # """
     # example
     # module_api_name = "Leads"
-    # record_id = "340964302469044"
-    # transition_id = '340964301172075'
+    # record_id = "34096432469044"
+    # transition_id = '34096431172075'
     # """
     # Get instance of BluePrintOperations Class that takes module_api_name and record_id as parameter
-    bpo = BluePrint::BluePrintOperations.new(record_id, module_api_name)
+    bpo = ZOHOCRMSDK::BluePrint::BluePrintOperations.new(record_id, module_api_name)
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = BluePrint::BodyWrapper.new
+    bw = ZOHOCRMSDK::BluePrint::BodyWrapper.new
     # Get instance of BluePrint Class
-    blue_print = BluePrint::BluePrint.new
+    blue_print = ZOHOCRMSDK::BluePrint::BluePrint.new
     # Set transitionId to the BluePrint instance
     blue_print.transition_id = transition_id
     # Get instance of Record Class
-    data = Record::Record.new
+    data = ZOHOCRMSDK::Record::Record.new
     data.add_key_value('Phone', '8940372937')
     data.add_key_value('Notes', 'Updated via blueprint')
     # Set data to the BluePrint instance
@@ -638,7 +638,7 @@ class Blueprint
         # Get object from response
         action_response = response.data_object
         # Check if SuccessResponse instance is received.
-        if action_response.is_a? BluePrint::SuccessResponse
+        if action_response.is_a? ZOHOCRMSDK::BluePrint::SuccessResponse
           success_response = action_response
           # Get the Code
           print "\n code:"
@@ -657,7 +657,7 @@ class Blueprint
             print "\n"
           end
         # Check if APIException instance is received.
-        elsif action_response.is_a? BluePrint::APIException
+        elsif action_response.is_a? ZOHOCRMSDK::BluePrint::APIException
           api_exception = action_response
           # Get the Code
           print "\n code:"

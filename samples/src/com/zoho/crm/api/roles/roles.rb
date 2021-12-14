@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Role
   def self.get_roles
@@ -7,7 +7,7 @@ class Role
     # """
 
     # Get instance of RolesOperations Class
-    rlo = Roles::RolesOperations.new
+    rlo = ZOHOCRMSDK::Roles::RolesOperations.new
     # Call getRoles method
     response = rlo.get_roles
     unless response.nil?
@@ -23,7 +23,7 @@ class Role
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Roles::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Roles::ResponseWrapper
           # Get the list of obtained Role instances
           roles = response_handler.roles
           roles.each do |role|
@@ -69,7 +69,7 @@ class Role
             print role.admin_user
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Roles::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Roles::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -108,10 +108,10 @@ class Role
 
     # """
     # example
-    # role_id = 340964300026005
+    # role_id = 34096430026005
     # """
     # Get instance of RolesOperations Class
-    rlo = Roles::RolesOperations.new
+    rlo = ZOHOCRMSDK::Roles::RolesOperations.new
     # Call get_role method that takes role_id as parameter
     response = rlo.get_role(role_id)
     unless response.nil?
@@ -127,7 +127,7 @@ class Role
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Roles::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Roles::ResponseWrapper
           # Get the list of obtained Role instances
           roles = response_handler.roles
           roles.each do |role|
@@ -173,7 +173,7 @@ class Role
             print role.admin_user
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Roles::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Roles::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

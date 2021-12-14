@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class SharedRecord
   def self.get_shared_record_details(module_api_name, record_id)
@@ -12,16 +12,16 @@ class SharedRecord
     # """
     # example
     # module_api_name = Contacts
-    # record_id = 340964302112011
+    # record_id = 34096432112011
     # """
 
     # Get instance of ShareRecordsOperations Class that takes module_api_name and record_id as parameter
-    sro = ShareRecords::ShareRecordsOperations.new(record_id, module_api_name)
+    sro = ZOHOCRMSDK::ShareRecords::ShareRecordsOperations.new(record_id, module_api_name)
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Get Shared Record Details operation
     # Allowed values - summary, manage
-    pm.add(ShareRecords::ShareRecordsOperations::GetSharedRecordDetailsParam.view, 'summary')
+    pm.add(ZOHOCRMSDK::ShareRecords::ShareRecordsOperations::GetSharedRecordDetailsParam.view, 'summary')
     # Call get_shared_record_details method that takes ParameterMap instance as parameter
     response = sro.get_shared_record_details(pm)
     unless response.nil?
@@ -37,7 +37,7 @@ class SharedRecord
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? ShareRecords::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::ShareRecords::ResponseWrapper
           # Get the list of obtained ShareRecord instances
           shared_records = response_handler.share
           shared_records.each do |shared_record|
@@ -114,7 +114,7 @@ class SharedRecord
             print shareable_user.zuid
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? ShareRecords::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::ShareRecords::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -155,21 +155,21 @@ class SharedRecord
     # """
     # example
     # module_api_name = Contacts
-    # record_id = 340964302112011
+    # record_id = 34096432112011
     # """
     # List to hold ShareRecord instances
     share_records = []
     # Get instance of ShareRecordsOperations Class that takes module_api_name and record_id as parameter
-    sro = ShareRecords::ShareRecordsOperations.new(record_id, module_api_name)
+    sro = ZOHOCRMSDK::ShareRecords::ShareRecordsOperations.new(record_id, module_api_name)
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = ShareRecords::BodyWrapper.new
+    bw = ZOHOCRMSDK::ShareRecords::BodyWrapper.new
     # Get instance of User Class
-    user = Users::User.new
+    user = ZOHOCRMSDK::Users::User.new
     # Set User ID
-    user.id = 347706105791024
+    user.id = 34770615791024
     (0..1).each do |i|
       # Get instance of ShareRecord Class
-      share_record = ShareRecords::ShareRecord.new
+      share_record = ZOHOCRMSDK::ShareRecords::ShareRecord.new
       # Set boolean value to share related records
       share_record.share_related_records = true
       # Set the permission. Possible values - full_access, read_only, read_write
@@ -192,13 +192,13 @@ class SharedRecord
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? ShareRecords::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::ShareRecords::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.share
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? ShareRecords::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::ShareRecords::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -216,7 +216,7 @@ class SharedRecord
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? ShareRecords::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::ShareRecords::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -238,7 +238,7 @@ class SharedRecord
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? ShareRecords::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::ShareRecords::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -279,20 +279,20 @@ class SharedRecord
     # """
     # example
     # module_api_name = Contacts
-    # record_id = 340964302112011
+    # record_id = 34096432112011
     # """
     # List to hold ShareRecord instances
     share_records = []
     # Get instance of ShareRecordsOperations Class that takes module_api_name and record_id as parameter
-    sro = ShareRecords::ShareRecordsOperations.new(record_id, module_api_name)
+    sro = ZOHOCRMSDK::ShareRecords::ShareRecordsOperations.new(record_id, module_api_name)
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = ShareRecords::BodyWrapper.new
+    bw = ZOHOCRMSDK::ShareRecords::BodyWrapper.new
     # Get instance of User Class
-    user = Users::User.new
+    user = ZOHOCRMSDK::Users::User.new
     # Set User ID
-    user.id = 347706105791024
+    user.id = 34770615791024
     (0..1).each do |i|
-      share_record = ShareRecords::ShareRecord.new
+      share_record = ZOHOCRMSDK::ShareRecords::ShareRecord.new
       # Set boolean value to share related records
       share_record.share_related_records = true
       # Set the permission. Possible values - full_access, read_only, read_write
@@ -314,12 +314,12 @@ class SharedRecord
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? ShareRecords::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::ShareRecords::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.share
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? ShareRecords::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::ShareRecords::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -339,7 +339,7 @@ class SharedRecord
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? ShareRecords::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::ShareRecords::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -361,7 +361,7 @@ class SharedRecord
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? ShareRecords::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::ShareRecords::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -394,7 +394,7 @@ class SharedRecord
 
   def self.revoke_shared_record(module_api_name, record_id)
     # Get instance of ShareRecordsOperations Class that takes module_api_name and record_id as parameter
-    sro = ShareRecords::ShareRecordsOperations.new(record_id, module_api_name)
+    sro = ZOHOCRMSDK::ShareRecords::ShareRecordsOperations.new(record_id, module_api_name)
     # Call revoke_shared_record method
     response = sro.revoke_shared_record
     unless response.nil?
@@ -406,12 +406,12 @@ class SharedRecord
         # Get object from response
         action_handler = response.data_object
         # Check if expected DeleteActionWrapper instance is received.
-        if action_handler.is_a? ShareRecords::DeleteActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::ShareRecords::DeleteActionWrapper
           delete_action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_response = delete_action_wrapper.share
           # Check if expected SuccessResponse instance is received
-          if action_response.is_a? ShareRecords::SuccessResponse
+          if action_response.is_a? ZOHOCRMSDK::ShareRecords::SuccessResponse
             success_response = action_response
             # Get the Code
             print 'code:'
@@ -431,7 +431,7 @@ class SharedRecord
             end
 
           # Check if the request returned an exception
-          elsif action_response.is_a? ShareRecords::APIException
+          elsif action_response.is_a? ZOHOCRMSDK::ShareRecords::APIException
             api_exception = action_response
             # Get the Code
             print 'code:'
@@ -452,7 +452,7 @@ class SharedRecord
             print "\n"
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? ShareRecords::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::ShareRecords::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

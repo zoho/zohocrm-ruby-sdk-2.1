@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class User
   def self.get_users
@@ -6,16 +6,16 @@ class User
     # This method is used to retrieve the users data specified in the API request.
     # """
     # Get instance of UsersOperations Class
-    uo = Users::UsersOperations.new
+    uo = ZOHOCRMSDK::Users::UsersOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters for Get Users operation
-    pm.add(Users::UsersOperations::GetUsersParam.type, 'ActiveUsers')
-    pm.add(Users::UsersOperations::GetUsersParam.page, 1)
+    pm.add(ZOHOCRMSDK::Users::UsersOperations::GetUsersParam.type, 'ActiveUsers')
+    pm.add(ZOHOCRMSDK::Users::UsersOperations::GetUsersParam.page, 1)
     # Get instance of HeaderMap Class
-    hm = HeaderMap.new
+    hm = ZOHOCRMSDK::HeaderMap.new
     # Possible headers for Get Users operation
-    # hm.add(Users::UsersOperations::GetUsersHeader.If_modified_since,"")
+    # hm.add(ZOHOCRMSDK::Users::UsersOperations::GetUsersHeader.If_modified_since,"")
     # Call get_users method that takes ParameterMap instance and HeaderMap instance as parameters
 
     response = uo.get_users(pm, hm)
@@ -32,7 +32,7 @@ class User
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Users::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Users::ResponseWrapper
           # Get the list of obtained User instances
           users = response_handler.users
           users.each do |user|
@@ -309,7 +309,7 @@ class User
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Users::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Users::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -346,14 +346,14 @@ class User
     # """
     users = []
     # Get instance of Role Class
-    role = Roles::Role.new
+    role = ZOHOCRMSDK::Roles::Role.new
     # Set ID to Role instance
-    role.id = 347706100026008
+    role.id = 34770610026008
     # Set profile instance to profile in User instance
-    profile = Profiles::Profile.new
-    profile.id = 347706100026014
+    profile = ZOHOCRMSDK::Profiles::Profile.new
+    profile.id = 34770610026014
     # Get instance of User Class
-    user = Users::User.new
+    user = ZOHOCRMSDK::Users::User.new
     # Get instance of Profile Class
     user.profile = profile
     # Set role instance to role in User
@@ -364,11 +364,11 @@ class User
     # Set the list to users in BodyWrapper instance
     users.push(user)
     # Get instance of RequestWrapper Class that will contain the request body
-    rw = Users::RequestWrapper.new
+    rw = ZOHOCRMSDK::Users::RequestWrapper.new
     # List to hold User instances
     rw.users = users
     # Get instance of UsersOperations Class
-    uo = Users::UsersOperations.new
+    uo = ZOHOCRMSDK::Users::UsersOperations.new
     response = uo.create_user(rw)
     unless response.nil?
       status_code = response.status_code
@@ -379,13 +379,13 @@ class User
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Users::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Users::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.users
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Users::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Users::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -404,7 +404,7 @@ class User
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Users::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Users::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -426,7 +426,7 @@ class User
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Users::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Users::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -462,17 +462,17 @@ class User
     # This method is used to update the details of multiple users of your organization and print the response.
     # """
     users = []
-    user_id = 0331010
+    user_id = 347706110331010
     # Get instance of Role Class
-    role = Roles::Role.new
+    role = ZOHOCRMSDK::Roles::Role.new
     # Set ID to Role instance
-    role.id = 347706100026008
+    role.id = 34770610026008
     # Get instance of Profile Class
-    profile = Profiles::Profile.new
+    profile = ZOHOCRMSDK::Profiles::Profile.new
     # Set ID to Profile instance
-    profile.id = 347706100026014
+    profile.id = 34770610026014
     # Get instance of User Class
-    user = Users::User.new
+    user = ZOHOCRMSDK::Users::User.new
     # set instance of Profile Class to User
     user.profile = profile
     # set instance of Role Class to User
@@ -484,11 +484,11 @@ class User
     user.email = '1@zoho.com'
     users.push(user)
     # Get instance of BodyWrapper Class that will contain the request body
-    body_wrapper = Users::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::Users::BodyWrapper.new
     # Set the list to users in BodyWrapper
     body_wrapper.users = users
     # Get instance of UsersOperations Class
-    uo = Users::UsersOperations.new
+    uo = ZOHOCRMSDK::Users::UsersOperations.new
     # Call update_users method that takes BodyWrapper instance as parameter
     response = uo.update_users(body_wrapper)
     unless response.nil?
@@ -500,13 +500,13 @@ class User
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Users::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Users::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.users
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Users::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Users::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -525,7 +525,7 @@ class User
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Users::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Users::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -547,7 +547,7 @@ class User
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Users::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Users::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -586,13 +586,13 @@ class User
 
     # """
     # example
-    # user_id = 340964300302031
+    # user_id = 34096430302031
     # """
     # Get instance of UsersOperations Class
-    uo = Users::UsersOperations.new
+    uo = ZOHOCRMSDK::Users::UsersOperations.new
     # Get instance of HeaderMap Class
-    hm = HeaderMap.new
-    # hm.add(Users::UsersOperations::GetUsersHeader.If_modified_since,"")
+    hm = ZOHOCRMSDK::HeaderMap.new
+    # hm.add(ZOHOCRMSDK::Users::UsersOperations::GetUsersHeader.If_modified_since,"")
     # Call get_user method that takes HeaderMap instance and user_id as parameters
     response = uo.get_user(user_id,hm)
     unless response.nil?
@@ -608,7 +608,7 @@ class User
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Users::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Users::ResponseWrapper
           # Get the list of obtained User instances
           users = response_handler.users
           users.each do |user|
@@ -885,7 +885,7 @@ class User
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Users::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Users::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -924,19 +924,19 @@ class User
 
     # """
     # example
-    # user_id = 340964300302031
+    # user_id = 34096430302031
     # """
     users = []
     # Get instance of Role Class
-    role = Roles::Role.new
+    role = ZOHOCRMSDK::Roles::Role.new
     # Set ID to Role instance
-    role.id = 3_524_033_000_000_026_005
+    role.id = 3_524_033___026_005
     # Get instance of Profile Class
-    profile = Profiles::Profile.new
+    profile = ZOHOCRMSDK::Profiles::Profile.new
     # Set ID to Profile instance
-    profile.id = 3_524_033_000_000_026_011
+    profile.id = 3_524_033___026_011
     # Get instance of User Class
-    user = Users::User.new
+    user = ZOHOCRMSDK::Users::User.new
     # set instance of Profile Class to User
     user.profile = profile
     # set instance of Role Class to User
@@ -947,11 +947,11 @@ class User
     user.email = '1@zoho.com'
     users.push(user)
     # Get instance of BodyWrapper Class that will contain the request body
-    body_wrapper = Users::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::Users::BodyWrapper.new
     # Set the list to users in BodyWrapper
     body_wrapper.users = users
     # Get instance of UsersOperations Class
-    uo = Users::UsersOperations.new
+    uo = ZOHOCRMSDK::Users::UsersOperations.new
     # Call update_user method that takes BodyWrapper instance and user_id as parameters
     response = uo.update_user(user_id,body_wrapper)
     unless response.nil?
@@ -963,13 +963,13 @@ class User
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Users::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Users::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.users
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Users::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Users::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -988,7 +988,7 @@ class User
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Users::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Users::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -1010,7 +1010,7 @@ class User
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Users::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Users::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -1049,10 +1049,10 @@ class User
 
     # """
     # example
-    # user_id = 340964300302031
+    # user_id = 34096430302031
     # """
     # Get instance of UsersOperations Class
-    uo = Users::UsersOperations.new
+    uo = ZOHOCRMSDK::Users::UsersOperations.new
     # Call delete_user method that takes user_id as parameter
 
     response = uo.delete_user(user_id)
@@ -1065,13 +1065,13 @@ class User
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Users::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Users::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.users
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Users::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Users::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -1090,7 +1090,7 @@ class User
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Users::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Users::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -1112,7 +1112,7 @@ class User
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Users::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Users::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

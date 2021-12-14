@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Note
   def self.get_notes
@@ -6,13 +6,13 @@ class Note
     # This method is used to get the list of notes and print the response.
     # """
     # Get instance of NotesOperations Class
-    no = Notes::NotesOperations.new
+    no = ZOHOCRMSDK::Notes::NotesOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
-    # pm.add(Notes::NotesOperations::GetNotesParam.page,"1")
+    pm = ZOHOCRMSDK::ParameterMap.new
+    # pm.add(ZOHOCRMSDK::Notes::NotesOperations::GetNotesParam.page,"1")
     # Get instance of HeaderMap Class
-    hm = HeaderMap.new
-    # hm.add(Notes::NotesOperations::GetNotesHeader.If_modified_since,"2020-08-05T13:36:16+05:30")
+    hm = ZOHOCRMSDK::HeaderMap.new
+    # hm.add(ZOHOCRMSDK::Notes::NotesOperations::GetNotesHeader.If_modified_since,"2020-08-05T13:36:16+05:30")
     # Call get_notes method that takes paramInstance and headerInstance as parameters
     response = no.get_notes(pm, hm)
     unless response.nil?
@@ -28,7 +28,7 @@ class Note
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Notes::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Notes::ResponseWrapper
           # Get the list of obtained Note instances
           notes = response_handler.data
           notes.each do |note|
@@ -151,7 +151,7 @@ class Note
             end
           end
         # Get the Info object from obtained response
-        elsif response_handler.is_a? Notes::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Notes::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -280,20 +280,20 @@ class Note
     # This method is used to add new notes and print the response.
     # """
     # Get instance of NotesOperations Class
-    no = Notes::NotesOperations.new
+    no = ZOHOCRMSDK::Notes::NotesOperations.new
     # List to hold Note instances
     notes = []
     (0..5).each do |i|
       # Get instance of Note Class
-      note = Notes::Note.new
+      note = ZOHOCRMSDK::Notes::Note.new
       # Set Note Title of the Note
       note.note_title = 'Contacted'
       # Set Note Content of the Note
       note.note_content = 'Need to do further tracking'
       # Get instance of Record Class
-      parent_record = Record::Record.new
+      parent_record = ZOHOCRMSDK::Record::Record.new
       # Set ID of the Record
-      parent_record.id = 0177003
+      parent_record.id = 347706112692006
       # Set ParentId of the Note
       note.parent_id = parent_record
       # Set SeModule of the Record
@@ -301,7 +301,7 @@ class Note
       notes.push(note)
     end
     # Get instance of BodyWrapper Class that will contain the request body
-    body_wrapper = Notes::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::Notes::BodyWrapper.new
     # Set the list to notes in BodyWrapper instance
     body_wrapper.data = notes
     # Call create_notes method that takes BodyWrapper instance as parameter
@@ -315,13 +315,13 @@ class Note
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notes::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -340,7 +340,7 @@ class Note
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -362,7 +362,7 @@ class Note
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -395,13 +395,13 @@ class Note
 
   def self.update_notes
     # Get instance of NotesOperations Class
-    notes_id = [0282007, 0282006]
-    no = Notes::NotesOperations.new
+    notes_id = [347706112814001, 347706112814002]
+    no = ZOHOCRMSDK::Notes::NotesOperations.new
     # List to hold Note instances
     notes = []
     (0..1).each do |i|
       # Get instance of Note Class
-      note = Notes::Note.new
+      note = ZOHOCRMSDK::Notes::Note.new
       # Set Note Title of the Note
       note.note_title = 'Contacted'
       # Set Note ID of the Note
@@ -409,9 +409,9 @@ class Note
       # Set Note Content of the Note
       note.note_content = 'Need to do further tracking'
       # Get instance of Record Class
-      parent_record = Record::Record.new
+      parent_record = ZOHOCRMSDK::Record::Record.new
       # Set ID of the Record
-      parent_record.id = 0177003
+      parent_record.id = 347706112692006
       # Set ParentId of the Note
       note.parent_id = parent_record
       # Set SeModule of the Record
@@ -419,7 +419,7 @@ class Note
       notes.push(note)
     end
     # Get instance of BodyWrapper Class that will contain the request body
-    body_wrapper = Notes::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::Notes::BodyWrapper.new
     # Set the list to notes in BodyWrapper instance
     body_wrapper.data = notes
     # Call update_notes method that takes BodyWrapper instance as parameter
@@ -433,13 +433,13 @@ class Note
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notes::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -458,7 +458,7 @@ class Note
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -480,7 +480,7 @@ class Note
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -519,15 +519,15 @@ class Note
 
     # """
     # example
-    # note_ids = ["340964300648001", "340964300648005"]
+    # note_ids = ["34096430648001", "34096430648005"]
     # """
     # Get instance of NotesOperations Class
-    no = Notes::NotesOperations.new
+    no = ZOHOCRMSDK::Notes::NotesOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Add the ids to ParameterMap instance
     notes_id.each do |note_id|
-      pm.add(Notes::NotesOperations::DeleteNotesParam.ids, note_id)
+      pm.add(ZOHOCRMSDK::Notes::NotesOperations::DeleteNotesParam.ids, note_id)
     end
     # Call delete_notes method that takes param_instance as parameter
     response = no.delete_notes(pm)
@@ -540,13 +540,13 @@ class Note
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notes::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -565,7 +565,7 @@ class Note
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -587,7 +587,7 @@ class Note
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -626,17 +626,17 @@ class Note
 
     # """
     # example
-    # note_id = "340964300549003"
+    # note_id = "34096430549003"
     # """
     # Get instance of NotesOperations Class
-    no = Notes::NotesOperations.new
+    no = ZOHOCRMSDK::Notes::NotesOperations.new
     # Call get_note method that takes note_id as parameter
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
-    # pm.add(Notes::NotesOperations::GetNoteParam.fields,"")
+    pm = ZOHOCRMSDK::ParameterMap.new
+    # pm.add(ZOHOCRMSDK::Notes::NotesOperations::GetNoteParam.fields,"")
     # Get instance of HeaderMap Class
-    hm = HeaderMap.new
-    # hm.add(Notes::NotesOperations::GetNoteHeader.If_modified_since,"2020-08-05T13:36:16+05:30")
+    hm = ZOHOCRMSDK::HeaderMap.new
+    # hm.add(ZOHOCRMSDK::Notes::NotesOperations::GetNoteHeader.If_modified_since,"2020-08-05T13:36:16+05:30")
     response = no.get_note(note_id,pm, hm)
     unless response.nil?
       status_code = response.status_code
@@ -651,7 +651,7 @@ class Note
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Notes::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Notes::ResponseWrapper
           # Get the list of obtained Note instances
           notes = response_handler.data
           notes.each do |note|
@@ -774,7 +774,7 @@ class Note
             end
           end
         # Get the Info object from obtained response
-        elsif response_handler.is_a? Notes::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Notes::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -813,27 +813,27 @@ class Note
 
     # """
     # example
-    # note_id = '340964302193004'
+    # note_id = '34096432193004'
     # """
     # Get instance of NotesOperations Class
-    no = Notes::NotesOperations.new
+    no = ZOHOCRMSDK::Notes::NotesOperations.new
     # Get instance of Note Class
-    note = Notes::Note.new
+    note = ZOHOCRMSDK::Notes::Note.new
     # Set Note Title of the Note
     note.note_title = 'Contacted'
     # Set Note Content of the Note
     # note.note_content = 'Need to do further tracking'
     # Get instance of Record Class
-    parent_record = Record::Record.new
+    parent_record = ZOHOCRMSDK::Record::Record.new
     # Set ID of the Record
-    parent_record.id = 3_524_033_000_005_495_066
+    parent_record.id = 3_524_033__005_495_066
     # Set ParentId of the Note
     note.parent_id = parent_record
     # Set SeModule of the Record
     note.se_module = 'Leads'
     notes = [note]
     # Get instance of BodyWrapper Class that will contain the request body
-    body_wrapper = Notes::BodyWrapper.new
+    body_wrapper = ZOHOCRMSDK::Notes::BodyWrapper.new
     # Set the list to notes in BodyWrapper instance
     body_wrapper.data = notes
     # Call update_notes method that takes BodyWrapper instance as parameter
@@ -847,13 +847,13 @@ class Note
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notes::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -872,7 +872,7 @@ class Note
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -894,7 +894,7 @@ class Note
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -933,10 +933,10 @@ class Note
 
     # """
     # example
-    # note_id = "340964300549003"
+    # note_id = "34096430549003"
     # """
     # Get instance of NotesOperations Class
-    no = Notes::NotesOperations.new
+    no = ZOHOCRMSDK::Notes::NotesOperations.new
     # Call delete_note method that takes note_id as parameter
     response = no.delete_note(note_id)
     unless response.nil?
@@ -948,13 +948,13 @@ class Note
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Notes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Notes::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Notes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Notes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -973,7 +973,7 @@ class Note
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Notes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Notes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -995,7 +995,7 @@ class Note
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Notes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Notes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

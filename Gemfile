@@ -2,5 +2,5 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in ZCRMSDK.gemspec
+# Specify your gem's dependencies in ZOHOCRMSDK2_1.gemspec
 gemspec

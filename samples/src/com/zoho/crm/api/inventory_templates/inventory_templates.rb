@@ -1,21 +1,25 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Inventory_Templates
-  def self.get_inventory_templates(module_api_name=nil)
+  def self.get_inventory_templates()
     # """
     # This method is used to get the Inventory templates data.
     # """
 
-    # module_api_name = "Leads";
-    sort_by = "";
-    sort_order = "";
-    category = "";
+    module_api_name = "Quotes"
+    sort_by = ""
+    sort_order = ""
+    category = ""
     # Get instance of InventoryTemplateOperations Class 
 
-    aro = InventoryTemplates::InventoryTemplatesOperations.new(module_api_name,sort_by,sort_order,category)
+    aro = ZOHOCRMSDK::InventoryTemplates::InventoryTemplatesOperations.new(sort_by,sort_order,category)
+
+    param_instance = ZOHOCRMSDK::ParameterMap.new
+
+    param_instance.add(ZOHOCRMSDK::InventoryTemplates::InventoryTemplatesOperations::GetInventoryTemplatesParam.module_1, module_api_name)
 
     # Call get_inventory_templates method
-    response = aro.get_inventory_templates()
+    response = aro.get_inventory_templates(param_instance)
     unless response.nil?
       status_code = response.status_code
       # Get the status code from response
@@ -29,7 +33,7 @@ class Inventory_Templates
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? InventoryTemplates::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::InventoryTemplates::ResponseWrapper
           # Get the list of obtained InventoryTemplate instances
             inventory_templates = response_handler.inventory_templates
             inventory_templates.each do |it|
@@ -106,8 +110,32 @@ class Inventory_Templates
                 print "\nInventoryTemplate Subject: "
                 print it.subject
             end
+
+            info = response_handler.info
+            unless info.nil?
+              # Get the PerPage from Info
+              unless info.per_page.nil?
+                print "\n RelatedRecord Info PerPage: "
+                print info.per_page
+              end
+              # Get the Count from Info
+              unless info.count.nil?
+                print "\n RelatedRecord Info Count:  "
+                print info.count
+              end
+              # Get the Page from Info
+              unless info.count.nil?
+                print "\n RelatedRecord Info Page: "
+                print info.page
+              end
+              # Get the MoreRecords from Info
+              unless info.more_records.nil?
+                print "\n RelatedRecord Info more records: "
+                print info.more_records
+              end
+            end
         # Check if the request returned an exception
-        elsif response_handler.is_a? InventoryTemplates::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::InventoryTemplates::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -144,7 +172,7 @@ class Inventory_Templates
     # """
 
     # Get instance of InventoryTemplateOperations Class 
-    aro = InventoryTemplates::InventoryTemplatesOperations.new()
+    aro = ZOHOCRMSDK::InventoryTemplates::InventoryTemplatesOperations.new()
 
     # Call get_inventory_templates method
     response = aro.get_inventory_template_by_id(inventory_template_id)
@@ -161,7 +189,7 @@ class Inventory_Templates
             # Get object from response
             response_handler = response.data_object
             # Check if expected ResponseWrapper instance is received
-            if response_handler.is_a? InventoryTemplates::ResponseWrapper
+            if response_handler.is_a? ZOHOCRMSDK::InventoryTemplates::ResponseWrapper
             # Get the list of obtained InventoryTemplate instances
                 inventory_templates = response_handler.inventory_templates
                 inventory_templates.each do |it|
@@ -239,7 +267,7 @@ class Inventory_Templates
                     print it.subject
                 end
             # Check if the request returned an exception
-            elsif response_handler.is_a? InventoryTemplates::APIException
+            elsif response_handler.is_a? ZOHOCRMSDK::InventoryTemplates::APIException
             exception = response_handler
             # Get the Code
             print 'code:'

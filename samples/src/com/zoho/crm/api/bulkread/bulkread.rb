@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Bulkread
   def self.create_bulk_read_job(module_api_name)
@@ -11,22 +11,22 @@ class Bulkread
     # example
     # module_api_name = 'Leads'
     # """
-    # cvid = '300087501'
+    # cvid = '30087501'
     # Get instance of BulkReadOperations Class
-    bro = BulkRead::BulkReadOperations.new
+    bro = ZOHOCRMSDK::BulkRead::BulkReadOperations.new
     # Get instance of RequestWrapper Class that will contain the request body
-    request_wrapper = BulkRead::RequestWrapper.new
+    request_wrapper = ZOHOCRMSDK::BulkRead::RequestWrapper.new
     # Get instance of CallBack Class
-    call_back = BulkRead::CallBack.new
+    call_back = ZOHOCRMSDK::BulkRead::CallBack.new
     # Set valid callback URL
     call_back.url = 'https://www.example.com/callback'
     # Set the HTTP method of the callback URL. The allowed value is post.
-    call_back.method = Util::Choice.new('post')
+    call_back.method = ZOHOCRMSDK::Util::Choice.new('post')
     # The Bulk Read Job's details is posted to this URL on successful completion / failure of the job.
     request_wrapper.callback = call_back
     # Get instance of Query Class
-    query = BulkRead::Query.new
-    module_1 =  Modules::Module.new
+    query = ZOHOCRMSDK::BulkRead::Query.new
+    module_1 =  ZOHOCRMSDK::Modules::Module.new
     module_1.api_name = module_api_name
     # Specifies the API Name of the module to be read
     query.module = module_1
@@ -39,13 +39,13 @@ class Bulkread
     # To set page value, By default value is 1.
     query.page = 1
     # Get instance of Criteria Class
-    criteria = BulkRead::Criteria.new
-    field = Fields::Field.new
+    criteria = ZOHOCRMSDK::BulkRead::Criteria.new
+    field = ZOHOCRMSDK::Fields::Field.new
     field.api_name = 'Created_Time'
     # To set API name of a field
     criteria.field = field
     # To set comparator(eg: equal, greater_than)
-    criteria.comparator = Util::Choice.new('between')
+    criteria.comparator = ZOHOCRMSDK::Util::Choice.new('between')
     created_time = ['2020-06-03T17:31:48+05:30', '2020-06-03T17:31:48+05:30']
     # To set the value to be compared
     criteria.value = created_time
@@ -54,7 +54,7 @@ class Bulkread
     # Set the query object
     request_wrapper.query = query
     # Specify the value for this key as "ics" to export all records in the Events module as an ICS file.
-    # request.set_file_type(Util::Choice.new('ics'))
+    # request.set_file_type(ZOHOCRMSDK::Util::Choice.new('ics'))
 
     # Call create_bulk_read_job method that takes RequestWrapper instance as parameter
     response = bro.create_bulk_read_job(request_wrapper)
@@ -67,12 +67,12 @@ class Bulkread
         # Get object from response
         action_handler = response.data_object
         # Check if ActionWrapper instance is received.
-        if action_handler.is_a? BulkRead::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::BulkRead::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if the request is successful
-            if action_response.is_a? BulkRead::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::BulkRead::SuccessResponse
               success_response = action_response
               # Get the Code
               print "\ncode:"
@@ -92,7 +92,7 @@ class Bulkread
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? BulkRead::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::BulkRead::APIException
               api_exception = action_response
               # Get the Code
               print "\ncode:"
@@ -115,7 +115,7 @@ class Bulkread
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? BulkRead::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::BulkRead::APIException
           exception = action_handler
           # Get the Code
           print "\n code:"
@@ -155,10 +155,10 @@ class Bulkread
 
     # """
     # example
-    # job_id = '340964302461001'
+    # job_id = '34096432461001'
     # """
     # Get instance of BulkReadOperations Class
-    bro = BulkRead::BulkReadOperations.new
+    bro = ZOHOCRMSDK::BulkRead::BulkReadOperations.new
     # Call get_bulk_read_job_details method that takes jobId as parameter
     response = bro.get_bulk_read_job_details(job_id)
     unless response.nil?
@@ -174,7 +174,7 @@ class Bulkread
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? BulkRead::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::BulkRead::ResponseWrapper
           # Get the list of JobDetail instances
           job_details = response_handler.data
           job_details.each do |job_detail|
@@ -249,7 +249,7 @@ class Bulkread
             print "\nBulkread File Type:"
             print job_detail.file_type
           end
-        elsif response_handler.is_a? BulkRead::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::BulkRead::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -289,10 +289,10 @@ class Bulkread
 
     # """
     # example
-    # job_id = '340964302461001'
+    # job_id = '34096432461001'
     # """
     # Get instance of BulkReadOperations Class
-    bro = BulkRead::BulkReadOperations.new
+    bro = ZOHOCRMSDK::BulkRead::BulkReadOperations.new
     # Call download_result method that takes job_id as parameter
     response = bro.download_result(job_id)
     unless response.nil?
@@ -308,17 +308,17 @@ class Bulkread
         # Get object from response
         response_handler = response.data_object
         # Check if expected FileBodyWrapper instance is received.
-        if response_handler.is_a? BulkRead::FileBodyWrapper
+        if response_handler.is_a? ZOHOCRMSDK::BulkRead::FileBodyWrapper
           file_body_wrapper = response_handler
           # Get StreamWrapper instance from the returned FileBodyWrapper instance
           stream_wrapper = file_body_wrapper.file
           # Construct the file name by joining the destinationFolder and the name from StreamWrapper instance
           # Open the destination file where the file needs to be written in 'w' mode
-          File.open(stream_wrapper.name, 'w') do |f|
+          File.open(destination_folder + '/' + stream_wrapper.name, 'w') do |f|
             f.write(stream_wrapper.stream)
           end
         # Check if the request returned an exception`
-        elsif response_handler.is_a? BulkRead::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::BulkRead::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -375,7 +375,7 @@ class Bulkread
     # Get the List of Criteria instance of each Criteria
     unless criteria.group_operator.nil?
       # Get the Group Operator of the Criterias
-      print "\Bulk read Query  Criteria Group Operator: "
+      print "\n Bulk read Query  Criteria Group Operator: "
       print criteria.group_operator.value
     end
   end

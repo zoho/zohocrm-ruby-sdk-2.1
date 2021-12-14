@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Field
   def self.get_fields(module_api_name)
@@ -11,10 +11,10 @@ class Field
     # example
     # module_api_name = "Leads";
     # """
-    fo = Fields::FieldsOperations.new(module_api_name)
+    fo = ZOHOCRMSDK::Fields::FieldsOperations.new(module_api_name)
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
-    # pm.add(Fields::FieldsOperations::GetFieldsParam.type,"Unused")
+    pm = ZOHOCRMSDK::ParameterMap.new
+    # pm.add(ZOHOCRMSDK::Fields::FieldsOperations::GetFieldsParam.type,"unused")
     response = fo.get_fields(pm)
     unless response.nil?
       status_code = response.status_code
@@ -29,7 +29,7 @@ class Field
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Fields::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Fields::ResponseWrapper
           # Get the list of obtained Field instances
           fields = response_handler.fields
           fields.each do |field|
@@ -436,7 +436,7 @@ class Field
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Fields::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Fields::APIException
           exception = response_handler
           # Get the Code
           print "\ncode:"
@@ -477,9 +477,9 @@ class Field
     # """
     # example
     # module_api_name = "Leads"
-    # field_id = "340964302293043"
+    # field_id = "34096432293043"
     # """
-    fo = Fields::FieldsOperations.new(module_api_name)
+    fo = ZOHOCRMSDK::Fields::FieldsOperations.new(module_api_name)
     # Call get_field method which takes field_id as parameter
     response = fo.get_field(field_id)
     unless response.nil?
@@ -495,7 +495,7 @@ class Field
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Fields::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Fields::ResponseWrapper
           # Get the list of obtained Field instances
           fields = response_handler.fields
           fields.each do |field|
@@ -527,18 +527,19 @@ class Field
               # Get the Crypt Notify
               print "\nField Crypt Notify:"
               print crypt.notify
-              print "\n Field  PickListValuesSortedLexically :"
-              print field.pick_list_values_sorted_lexically
-              # Get the Sortable of each Field
-              print "\n Sortable"
-              print field.sortable
-              enc_fld_ids = crypt.enc_fld_ids
+
+              enc_fld_ids = crypt.encfldids
               unless enc_fld_ids.nil?
                 print "\n EncFldIds :"
                 enc_fld_ids.each do |enc_fld_id|
                   print enc_fld_id
                 end
               end
+              print "\n Field  PickListValuesSortedLexically :"
+              print field.pick_list_values_sorted_lexically
+              # Get the Sortable of each Field
+              print "\n Sortable"
+              print field.sortable
               print "\n Field is UiType :"
               print field.ui_type
               print "Field sequence number " 
@@ -753,7 +754,7 @@ class Field
                 print "Module  module name"
                 print module_1.module_name
               end
-              duration_configured = field.history_tracking.duration_configured
+              duration_configured = field.history_tracking.duration_configured_field
               unless duration_configured.nil?
                 print duration_configured.id
               end
@@ -902,7 +903,7 @@ class Field
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Fields::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Fields::APIException
           exception = response_handler
           # Get the Code
           print "\ncode:"

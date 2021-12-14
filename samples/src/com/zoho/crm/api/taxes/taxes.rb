@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Tax
   def self.get_taxes
@@ -7,7 +7,7 @@ class Tax
     # """
 
     # Get instance of TaxesOperations Class
-    to = Taxes::TaxesOperations.new
+    to = ZOHOCRMSDK::Taxes::TaxesOperations.new
     # Call get_taxes method
     response = to.get_taxes
     unless response.nil?
@@ -23,7 +23,7 @@ class Tax
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is receiveds
-        if response_handler.is_a? Taxes::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Taxes::ResponseWrapper
           # Get the list of obtained Tax instances
           taxes = response_handler.taxes
           taxes.each do |tax|
@@ -50,7 +50,7 @@ class Tax
             print preference.modify_tax_rates
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Taxes::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Taxes::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -86,14 +86,14 @@ class Tax
     # This method is used to create Organization Taxes and print the response.
     # """
     # Get instance of TaxesOperations Class
-    to = Taxes::TaxesOperations.new
+    to = ZOHOCRMSDK::Taxes::TaxesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    request = Taxes::BodyWrapper.new
+    request = ZOHOCRMSDK::Taxes::BodyWrapper.new
     # List to hold Tax instances
     taxes = []
     for i in 3..4
       # Get instance of Tax Class
-      tax = Taxes::Tax.new
+      tax = ZOHOCRMSDK::Taxes::Tax.new
       # Set Name
       tax.name = i.to_s
       # Set value
@@ -116,12 +116,12 @@ class Tax
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Taxes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Taxes::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.taxes
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Taxes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Taxes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -139,7 +139,7 @@ class Tax
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Taxes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Taxes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -161,7 +161,7 @@ class Tax
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Taxes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Taxes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -197,14 +197,14 @@ class Tax
     # This method is used to update Organization Taxes and print the response.
     # """
     # Get instance of TaxesOperations Class
-    to = Taxes::TaxesOperations.new
+    to = ZOHOCRMSDK::Taxes::TaxesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    request = Taxes::BodyWrapper.new
+    request = ZOHOCRMSDK::Taxes::BodyWrapper.new
     # List to hold Tax instances
     taxes = []
-    taxes_ids = [0329013, 3_524_033_000_005_555_002]
+    taxes_ids = [347706112833002, 3_524_033__005_555_002]
     for i in 0..1
-      tax = Taxes::Tax.new
+      tax = ZOHOCRMSDK::Taxes::Tax.new
       # Set ID
       tax.id = taxes_ids[i]
       # Set value
@@ -225,12 +225,12 @@ class Tax
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Taxes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Taxes::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.taxes
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Taxes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Taxes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -248,7 +248,7 @@ class Tax
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Taxes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Taxes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -270,7 +270,7 @@ class Tax
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Taxes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Taxes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -310,16 +310,16 @@ class Tax
 
     # """
     # example
-    # tax_ids = ["340964302407046", "340964302407047"]
+    # tax_ids = ["34096432407046", "34096432407047"]
     # """
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters for Delete Taxes operation
     tax_ids.each do |tax_id|
-      pm.add(Taxes::TaxesOperations::DeleteTaxesParam.ids, tax_id)
+      pm.add(ZOHOCRMSDK::Taxes::TaxesOperations::DeleteTaxesParam.ids, tax_id)
     end
     # Get instance of TaxesOperations Class
-    to = Taxes::TaxesOperations.new
+    to = ZOHOCRMSDK::Taxes::TaxesOperations.new
     # Call delete_taxes method that takes ParameterMap instance as parameter
     response = to.delete_taxes(pm)
     unless response.nil?
@@ -331,12 +331,12 @@ class Tax
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Taxes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Taxes::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.taxes
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Taxes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Taxes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -354,7 +354,7 @@ class Tax
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Taxes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Taxes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -376,7 +376,7 @@ class Tax
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Taxes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Taxes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -415,10 +415,10 @@ class Tax
 
     # """
     # example
-    # tax_id = '340964302317003'
+    # tax_id = '34096432317003'
     # """
     # Get instance of TaxesOperations Class
-    to = Taxes::TaxesOperations.new
+    to = ZOHOCRMSDK::Taxes::TaxesOperations.new
     # Call get_tax method that takes tax_id as parameter
     response = to.get_tax(tax_id)
     unless response.nil?
@@ -434,7 +434,7 @@ class Tax
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is receiveds
-        if response_handler.is_a? Taxes::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Taxes::ResponseWrapper
           # Get the list of obtained Tax instances
           taxes = response_handler.taxes
           taxes.each do |tax|
@@ -461,7 +461,7 @@ class Tax
             print preference.modify_tax_rates
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Taxes::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Taxes::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -500,10 +500,10 @@ class Tax
 
     # """
     # example
-    # tax_id = '340964302407046'
+    # tax_id = '34096432407046'
     # """
     # Get instance of TaxesOperations Class
-    to = Taxes::TaxesOperations.new
+    to = ZOHOCRMSDK::Taxes::TaxesOperations.new
     # Call delete_tax method that takes tax_id as parameter
     response = to.delete_tax(tax_id)
     unless response.nil?
@@ -515,12 +515,12 @@ class Tax
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Taxes::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Taxes::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.taxes
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Taxes::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Taxes::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -538,7 +538,7 @@ class Tax
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Taxes::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Taxes::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -560,7 +560,7 @@ class Tax
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Taxes::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Taxes::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

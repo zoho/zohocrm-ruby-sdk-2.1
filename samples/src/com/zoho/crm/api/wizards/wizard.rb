@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Wizard
   def self.get_wizards()
@@ -9,7 +9,7 @@ class Wizard
 
     # Get instance of WizardOperations Class 
 
-    wo = Wizards::WizardsOperations.new()
+    wo = ZOHOCRMSDK::Wizards::WizardsOperations.new()
 
     # Call get_wizards method
     response = wo.get_wizards()
@@ -26,7 +26,7 @@ class Wizard
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Wizards::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Wizards::ResponseWrapper
           # Get the list of obtained Wizard instances
             wizards = response_handler.wizards
             wizards.each do |wizard|
@@ -226,7 +226,7 @@ class Wizard
                 end		
             end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Wizards::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Wizards::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -264,11 +264,11 @@ class Wizard
 
     # Get instance of WizardOperations Class 
     
-    wo = Wizards::WizardsOperations.new()
+    wo = ZOHOCRMSDK::Wizards::WizardsOperations.new()
 
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters for Get Users operation
-    pm.add(Wizards::WizardsOperations::GetWizardbyIDParam.layout_id, '347706100091055')
+    pm.add(ZOHOCRMSDK::Wizards::WizardsOperations::GetWizardbyIDParam.layout_id, '34770610091055')
 
     # Call get_wizard method
     response = wo.get_wizard_by_id(wizard_id, pm)
@@ -285,7 +285,7 @@ class Wizard
             # Get object from response
             response_handler = response.data_object
             # Check if expected ResponseWrapper instance is received
-            if response_handler.is_a? Wizards::ResponseWrapper
+            if response_handler.is_a? ZOHOCRMSDK::Wizards::ResponseWrapper
             # Get the list of obtained Wizard instances
                 wizards = response_handler.wizards
                 wizards.each do |wizard|
@@ -491,7 +491,7 @@ class Wizard
                     end		
                 end
             # Check if the request returned an exception
-            elsif response_handler.is_a? Wizards::APIException
+            elsif response_handler.is_a? ZOHOCRMSDK::Wizards::APIException
             exception = response_handler
             # Get the Code
             print 'code:'
