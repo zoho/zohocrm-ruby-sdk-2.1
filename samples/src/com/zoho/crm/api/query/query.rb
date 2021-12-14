@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Queries
   def self.get_records
@@ -6,9 +6,9 @@ class Queries
     # This method is used to get records from the module through a COQL query.
     # """
     # Get instance of QueryOperations Class
-    qo = Query::QueryOperations.new
+    qo = ZOHOCRMSDK::Query::QueryOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Query::BodyWrapper.new
+    bw = ZOHOCRMSDK::Query::BodyWrapper.new
     select_query = 'select Last_Name from Leads where Last_Name is not null limit 5'
     bw.select_query = select_query
     # Call get_records method that takes BodyWrapper instance as parameter
@@ -22,7 +22,7 @@ class Queries
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Query::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Query::ResponseWrapper
           # Get the list of obtained Record instances
           records = response_handler.data
           records.each do |record|
@@ -114,7 +114,7 @@ class Queries
               print info.more_records
             end
           end
-        elsif response_handler.is_a? Query::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Query::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

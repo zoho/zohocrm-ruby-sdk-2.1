@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Attachment
   # """
@@ -10,16 +10,16 @@ class Attachment
   # """
   # example
   # module_api_name = 'Leads'
-  # record_id = 340964302267003
+  # record_id = 34096432267003
   # """
   def self.get_attachments(module_api_name, record_id)
     # Get instance of AttachmentsOperations Class that takes record_id and module_api_name as parameters
-    ao = Attachments::AttachmentsOperations.new(module_api_name,record_id)
+    ao = ZOHOCRMSDK::Attachments::AttachmentsOperations.new(module_api_name,record_id)
 
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
-    pm.add(Attachments::AttachmentsOperations::GetAttachmentsParam.page, 1)
-    pm.add(Attachments::AttachmentsOperations::GetAttachmentsParam.per_page, 1)
+    pm = ZOHOCRMSDK::ParameterMap.new
+    pm.add(ZOHOCRMSDK::Attachments::AttachmentsOperations::GetAttachmentsParam.page, 1)
+    pm.add(ZOHOCRMSDK::Attachments::AttachmentsOperations::GetAttachmentsParam.per_page, 1)
     # Call get_attachments method
     response = ao.get_attachments(pm)
 
@@ -37,7 +37,7 @@ class Attachment
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Attachments::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Attachments::ResponseWrapper
 
           attachments = response_handler.data
           attachments.each do |attachment|
@@ -85,15 +85,9 @@ class Attachment
             # Get the file ID of each attachment
             print "\n Attachment File ID:"
             print attachment.file_id
-            # Get the attachment SharingPermission
-            print "\n Attachment SharingPermission:"
-            print attachment.sharing_permission
             # Get the type of each attachment
             print "\n Attachment File Type:"
             print attachment.type
-            # Get the Attachmenttype of each attachment
-            print "\n Attachment Type:"
-            print attachment.attachment_type
             # Get the seModule of each attachment
             print "\n Attachment seModule:"
             print attachment.se_module
@@ -163,11 +157,11 @@ class Attachment
               print info.more_records
             end
           end
-        # Check if the request returned an exception
-        elsif response_handler.is_a? Attachments::APIException
+          # Check if the request returned an exception
+        elsif response_handler.is_a? ZOHOCRMSDK::Attachments::APIException
           exception = response_handler
           # Get the Code
-          print "\n code:"
+          print 'code:'
           print exception.code.value
           # Get the Status
           print "\n status:"
@@ -206,14 +200,14 @@ class Attachment
 
     # """
     # example
-    # module_api_name= "module_api_name"
-    # record_id = "267003";
+    # module_api_name= "Leads"
+    # record_id = "34096432267003";
     # absolute_file_path = "/Users/user-name/Documents/image.jpg";
     # """
     # Get instance of AttachmentsOperations Class that takes record_id and module_api_name as parameters
-    ao = Attachments::AttachmentsOperations.new(module_api_name,record_id)
+    ao = ZOHOCRMSDK::Attachments::AttachmentsOperations.new(module_api_name,record_id)
     # Get instance of FileBodyWrapper class that will contain the request file
-    fbw = Attachments::FileBodyWrapper.new
+    fbw = ZOHOCRMSDK::Attachments::FileBodyWrapper.new
     # """
     # StreamWrapper can be initialized in any of the following ways
 
@@ -222,123 +216,11 @@ class Attachment
     # * param 3 -> Absolute File Path of the file to be attached
     # """
     # stream_wrapper = StreamWrapper.new(name,stream,absolutefilepath)
-    sw = Util::StreamWrapper.new(nil, nil, absolute_file_path)
+    sw = ZOHOCRMSDK::Util::StreamWrapper.new(nil, nil, absolute_file_path)
     # Set file to the FileBodyWrapper instance
     fbw.file = sw
     # Call upload_attachment method that takes FileBodyWrapper instance as parameter
     response = ao.upload_attachment(fbw)
-    unless response.nil?
-      status_code = response.status_code
-      # Get the status code from response
-      print "\n Status Code : " + status_code.to_s
-      # Check if expected instance is received.
-      if response.is_expected
-        # Get object from response
-        action_handler = response.data_object
-        # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Attachments::ActionWrapper
-          action_wrapper = action_handler
-          action_responses = action_wrapper.data
-          action_responses.each do |action_response|
-            # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Attachments::SuccessResponse
-              success_response = action_response
-              # Get the Code
-              print "\n code:"
-              print success_response.code.value
-              # Get the Status
-              print "\n status:"
-              print success_response.status.value
-              # Get the Message
-              print "\n message:"
-              print success_response.message.value
-              success_response.details.each do |k, v|
-                print "\n"
-                print k 
-                print " : "
-                print v
-                print "\n"
-              end
-
-            # Check if the request returned an exception
-            elsif action_response.is_a? Attachments::APIException
-              api_exception = action_response
-              # Get the Code
-              print "\n code:"
-              print api_exception.code.value
-              # Get the Status
-              print "\n status:"
-              print api_exception.status.value
-              # Get the Message
-              print "\n message:"
-              print api_exception.message.value
-              # Get the details map
-              api_exception.details.each do |k, v|
-                print "\n"
-                print k
-                print v
-                print "\n"
-              end
-              print "\n"
-            end
-          end
-        # Check if the request returned an exception
-        elsif action_handler.is_a? Attachments::APIException
-          exception = action_handler
-          # Get the Code
-          print "\n code:"
-          print exception.code.value
-          # Get the Status
-          print "\n status:"
-          print exception.status.value
-          # Get the Message
-          print "\n message:"
-          print exception.message.value
-
-          exception.details.each do |k, v|
-            print "\n"
-            print k
-            print v
-            print "\n"
-          end
-          print "\n"
-        end
-      else
-        response_object = response.data_object
-        response_object.instance_variables.each do |field|
-          print field
-          print "\n"
-          print response_object.instance_variable_get(field)
-        end
-      end
-    end
-  end
-
-  def self.delete_attachments(module_api_name, record_id, attachment_ids)
-    # """
-    # This method is used to Delete attachments of a single record with ID and print the response.
-    # :param module_api_name: The API Name of the record's module
-    # :param record_id: The ID of the record to delete attachments
-    # :param attachment_ids: The list of attachment IDs to be deleted
-    # """
-
-    # """
-    # example
-    # module_api_name= "module_api_name"
-    # record_id = "340964302267003";
-    # attachment_ids = ['340964302267012', '340964302267018', '340964302267010']
-    # """
-
-    # Get instance of ParameterMap Class
-    pm = ParameterMap.new
-    # Add the ids to parameter map instance
-    attachment_ids.each do |attachment_id|
-      pm.add(Attachments::AttachmentsOperations::DeleteAttachmentsParam.ids, attachment_id)
-    end
-    # Get instance of AttachmentsOperations Class that takes recordId and moduleAPIName as parameter
-    ao = Attachments::AttachmentsOperations.new(module_api_name,record_id)
-    # Call delete_attachments method that takes pm as parameter
-    response = ao.delete_attachments(pm)
     unless response.nil?
       status_code = response.status_code
       # Get the status code from response
@@ -348,15 +230,15 @@ class Attachment
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Attachments::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Attachments::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Attachments::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Attachments::SuccessResponse
               success_response = action_response
               # Get the Code
-              print "\n code:"
+              print 'code:'
               print success_response.code.value
               # Get the Status
               print "\n status:"
@@ -364,18 +246,18 @@ class Attachment
               # Get the Message
               print "\n message:"
               print success_response.message.value
-              # Get the details map
               success_response.details.each do |k, v|
                 print "\n"
                 print k
                 print v
                 print "\n"
               end
-            # Check if the request returned an exception
-            elsif action_response.is_a? Attachments::APIException
+
+              # Check if the request returned an exception
+            elsif action_response.is_a? ZOHOCRMSDK::Attachments::APIException
               api_exception = action_response
               # Get the Code
-              print "\n code:"
+              print 'code:'
               print api_exception.code.value
               # Get the Status
               print "\n status:"
@@ -393,11 +275,11 @@ class Attachment
               print "\n"
             end
           end
-        # Check if the request returned an exception
-        elsif action_handler.is_a? Attachments::APIException
+          # Check if the request returned an exception
+        elsif action_handler.is_a? ZOHOCRMSDK::Attachments::APIException
           exception = action_handler
           # Get the Code
-          print "\n code:"
+          print 'code:'
           print exception.code.value
           # Get the Status
           print "\n status:"
@@ -405,7 +287,7 @@ class Attachment
           # Get the Message
           print "\n message:"
           print exception.message.value
-          # Get the details map
+
           exception.details.each do |k, v|
             print "\n"
             print k
@@ -436,12 +318,12 @@ class Attachment
 
     # """
     # example
-    # module_api_name = "module_api_name";
-    # record_id = "340964302267003";
-    # attachment_id = "340964302267024";
+    # module_api_name = "Leads";
+    # record_id = "34096432267003";
+    # attachment_id = "34096432267024";
     # destination_folder = "/Users/user-name/Desktop";
     # """
-    ao = Attachments::AttachmentsOperations.new(module_api_name,record_id)
+    ao = ZOHOCRMSDK::Attachments::AttachmentsOperations.new(module_api_name,record_id)
     response = ao.download_attachment(attachment_id)
     unless response.nil?
       status_code = response.status_code
@@ -456,14 +338,14 @@ class Attachment
         # Get object from response
         response_handler = response.data_object
         # Check if expected FileBodyWrapper instance is receive
-        if response_handler.is_a? Attachments::FileBodyWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Attachments::FileBodyWrapper
           file_body_wrapper = response_handler
           stream_wrapper = file_body_wrapper.file
-          File.open(stream_wrapper.name, 'w') do |f|
+          File.open(destination_folder + '/' + stream_wrapper.name, 'w') do |f|
             f.write(stream_wrapper.stream)
           end
-        # Check if expected APIException instance is received.
-        elsif response_handler.is_a? Attachments::APIException
+          # Check if expected APIException instance is received.
+        elsif response_handler.is_a? ZOHOCRMSDK::Attachments::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -494,26 +376,31 @@ class Attachment
     end
   end
 
-  
-  def self.delete_attachment(module_api_name, record_id, attachment_id)
+  def self.delete_attachments(module_api_name, record_id, attachment_ids)
     # """
-    # This method is used to delete an attachment of a single record with ID and attachment ID and print the response
+    # This method is used to Delete attachments of a single record with ID and print the response.
     # :param module_api_name: The API Name of the record's module
-    # :param record_id: The ID of the record to delete attachment
-    # :param attachment_id: The ID of the attachment to be deleted
+    # :param record_id: The ID of the record to delete attachments
+    # :param attachment_ids: The list of attachment IDs to be deleted
     # """
 
     # """
     # example
-    # module_api_name = "module_api_name";
-    # record_id = "340964302267003";
-    # attachment_id = "340964302267024";
+    # module_api_name= "Leads"
+    # record_id = "34096432267003";
+    # attachment_ids = ['34096432267012', '34096432267018', '34096432267010']
     # """
 
+    # Get instance of ParameterMap Class
+    pm = ZOHOCRMSDK::ParameterMap.new
+    # Add the ids to parameter map instance
+    attachment_ids.each do |attachment_id|
+      pm.add(ZOHOCRMSDK::Attachments::AttachmentsOperations::DeleteAttachmentsParam.ids, attachment_id)
+    end
     # Get instance of AttachmentsOperations Class that takes recordId and moduleAPIName as parameter
-    ao = Attachments::AttachmentsOperations.new(module_api_name,record_id)
-    # Call delete_attachment method that takes attachment_id as parameter
-    response = ao.delete_attachment(attachment_id)
+    ao = ZOHOCRMSDK::Attachments::AttachmentsOperations.new(module_api_name,record_id)
+    # Call delete_attachments method that takes pm as parameter
+    response = ao.delete_attachments(pm)
     unless response.nil?
       status_code = response.status_code
       # Get the status code from response
@@ -523,15 +410,15 @@ class Attachment
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Attachments::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Attachments::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Attachments::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Attachments::SuccessResponse
               success_response = action_response
               # Get the Code
-              print "\n code:"
+              print 'code:'
               print success_response.code.value
               # Get the Status
               print "\n status:"
@@ -539,18 +426,18 @@ class Attachment
               # Get the Message
               print "\n message:"
               print success_response.message.value
+              # Get the details map
               success_response.details.each do |k, v|
                 print "\n"
                 print k
                 print v
                 print "\n"
               end
-
-            # Check if the request returned an exception
-            elsif action_response.is_a? Attachments::APIException
+              # Check if the request returned an exception
+            elsif action_response.is_a? ZOHOCRMSDK::Attachments::APIException
               api_exception = action_response
               # Get the Code
-              print "\n code:"
+              print 'code:'
               print api_exception.code.value
               # Get the Status
               print "\n status:"
@@ -568,11 +455,116 @@ class Attachment
               print "\n"
             end
           end
-        # Check if the request returned an exception
-        elsif action_handler.is_a? Attachments::APIException
+          # Check if the request returned an exception
+        elsif action_handler.is_a? ZOHOCRMSDK::Attachments::APIException
           exception = action_handler
           # Get the Code
-          print "\n code:"
+          print 'code:'
+          print exception.code.value
+          # Get the Status
+          print "\n status:"
+          print exception.status.value
+          # Get the Message
+          print "\n message:"
+          print exception.message.value
+          # Get the details map
+          exception.details.each do |k, v|
+            print "\n"
+            print k
+            print v
+            print "\n"
+          end
+          print "\n"
+        end
+      else
+        response_object = response.data_object
+        response_object.instance_variables.each do |field|
+          print field
+          print "\n"
+          print response_object.instance_variable_get(field)
+        end
+      end
+    end
+  end
+
+  def self.delete_attachment(module_api_name, record_id, attachment_id)
+    # """
+    # This method is used to delete an attachment of a single record with ID and attachment ID and print the response
+    # :param module_api_name: The API Name of the record's module
+    # :param record_id: The ID of the record to delete attachment
+    # :param attachment_id: The ID of the attachment to be deleted
+    # """
+
+    # """
+    # example
+    # module_api_name = "Leads";
+    # record_id = "34096432267003";
+    # attachment_id = "34096432267024";
+    # """
+
+    # Get instance of AttachmentsOperations Class that takes recordId and moduleAPIName as parameter
+    ao = ZOHOCRMSDK::Attachments::AttachmentsOperations.new(module_api_name,record_id)
+    # Call delete_attachment method that takes attachment_id as parameter
+    response = ao.delete_attachment(attachment_id)
+    unless response.nil?
+      status_code = response.status_code
+      # Get the status code from response
+      print "\n Status Code :" + status_code.to_s
+      # Check if expected instance is received.
+      if response.is_expected
+        # Get object from response
+        action_handler = response.data_object
+        # Check if expected ActionWrapper instance is received.
+        if action_handler.is_a? ZOHOCRMSDK::Attachments::ActionWrapper
+          action_wrapper = action_handler
+          action_responses = action_wrapper.data
+          action_responses.each do |action_response|
+            # Check if expected SuccessResponse instance is received.
+            if action_response.is_a? ZOHOCRMSDK::Attachments::SuccessResponse
+              success_response = action_response
+              # Get the Code
+              print 'code:'
+              print success_response.code.value
+              # Get the Status
+              print "\n status:"
+              print success_response.status.value
+              # Get the Message
+              print "\n message:"
+              print success_response.message.value
+              success_response.details.each do |k, v|
+                print "\n"
+                print k
+                print v
+                print "\n"
+              end
+
+              # Check if the request returned an exception
+            elsif action_response.is_a? ZOHOCRMSDK::Attachments::APIException
+              api_exception = action_response
+              # Get the Code
+              print 'code:'
+              print api_exception.code.value
+              # Get the Status
+              print "\n status:"
+              print api_exception.status.value
+              # Get the Message
+              print "\n message:"
+              print api_exception.message.value
+              # Get the details map
+              api_exception.details.each do |k, v|
+                print "\n"
+                print k
+                print v
+                print "\n"
+              end
+              print "\n"
+            end
+          end
+          # Check if the request returned an exception
+        elsif action_handler.is_a? ZOHOCRMSDK::Attachments::APIException
+          exception = action_handler
+          # Get the Code
+          print 'code:'
           print exception.code.value
           # Get the Status
           print "\n status:"
@@ -610,16 +602,16 @@ class Attachment
 
     # """
     # example
-    # module_api_name = "module_api_name";
-    # record_id = "340964302267003";
+    # module_api_name = "Leads";
+    # record_id = "34096432267003";
     # attachment_url = "https://5.imimg.com/data5/KJ/UP/MY-8655440/zoho-crm-500x500.png";
     # """
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Add the attachment_url to parameter Instance
-    pm.add(Attachments::AttachmentsOperations::UploadLinkAttachmentParam.attachmentUrl, attachment_url)
+    pm.add(ZOHOCRMSDK::Attachments::AttachmentsOperations::UploadLinkAttachmentParam.attachmentUrl, attachment_url)
     # Get instance of AttachmentsOperations Class that takes recordId and moduleAPIName as parameter
-    ao = Attachments::AttachmentsOperations.new(module_api_name,record_id)
+    ao = ZOHOCRMSDK::Attachments::AttachmentsOperations.new(module_api_name,record_id)
     # Call upload_link_attachment method that takes ParameterMap instance as parameter
     response = ao.upload_link_attachment(pm)
     unless response.nil?
@@ -631,15 +623,15 @@ class Attachment
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Attachments::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Attachments::ActionWrapper
           action_wrapper = action_handler
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Attachments::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Attachments::SuccessResponse
               success_response = action_response
               # Get the Code
-              print "\n code:"
+              print 'code:'
               print success_response.code.value
               # Get the Status
               print "\n status:"
@@ -654,11 +646,11 @@ class Attachment
                 print "\n"
               end
 
-            # Check if the request returned an exception
-            elsif action_response.is_a? Attachments::APIException
+              # Check if the request returned an exception
+            elsif action_response.is_a? ZOHOCRMSDK::Attachments::APIException
               api_exception = action_response
               # Get the Code
-              print "\n code:"
+              print 'code:'
               print api_exception.code.value
               # Get the Status
               print "\n status:"
@@ -676,11 +668,11 @@ class Attachment
               print "\n"
             end
           end
-        # Check if the request returned an exception
-        elsif action_handler.is_a? Attachments::APIException
+          # Check if the request returned an exception
+        elsif action_handler.is_a? ZOHOCRMSDK::Attachments::APIException
           exception = action_handler
           # Get the Code
-          print "\n code:"
+          print 'code:'
           print exception.code.value
           # Get the Status
           print "\n status:"

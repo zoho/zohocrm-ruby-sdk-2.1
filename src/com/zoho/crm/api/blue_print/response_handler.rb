@@ -1,10 +1,12 @@
-module BluePrint
-  module ResponseHandler
+module ZOHOCRMSDK
+  module BluePrint
+    module ResponseHandler
 
-    # Creates an instance of ResponseHandler
-    def initialize
+      # Creates an instance of ResponseHandler
+      def initialize
+      end
+
+
     end
-
-
   end
 end

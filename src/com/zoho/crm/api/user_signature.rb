@@ -1,27 +1,29 @@
 require_relative '../../api/logger/sdk_logger'
-# This class represents the CRM user email.
-class UserSignature
-  attr_reader :email
+module ZOHOCRMSDK
+  # This class represents the CRM user email.
+  class UserSignature
+    attr_reader :email
 
-  # Creates an UserSignature class instance with the specified user email.
-  # @param email [String] A String containing the CRM user email
-  # @raise SDKException
-  def initialize(email)
-    require_relative 'util/constants'
+    # Creates an UserSignature class instance with the specified user email.
+    # @param email [String] A String containing the CRM user email
+    # @raise SDKException
+    def initialize(email)
+      require_relative 'util/constants'
 
-    error = {}
+      error = {}
 
-    if (email.match Constants::EMAIL_REGEX).nil?
-      error[Constants::ERROR_HASH_FIELD] = Constants::EMAIL
+      if (email.match Constants::EMAIL_REGEX).nil?
+        error[Constants::ERROR_HASH_FIELD] = Constants::EMAIL
 
-      error[Constants::ERROR_HASH_EXPECTED_TYPE] = Constants::EMAIL
+        error[Constants::ERROR_HASH_EXPECTED_TYPE] = Constants::EMAIL
 
-      ex = SDKException.new(Constants::USER_SIGNATURE_ERROR, nil, error, nil)
+        ex = SDKException.new(Constants::USER_SIGNATURE_ERROR, nil, error, nil)
 
-      raise ex
+        raise ex
 
+      end
+
+      @email = email
     end
-
-    @email = email
   end
 end

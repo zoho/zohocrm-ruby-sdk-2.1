@@ -1,3 +1,3 @@
-module ZCRMSDK
-  VERSION = '3.0.0'
+module ZOHOCRMSDK2_1
+  VERSION = '1.0.0'
 end

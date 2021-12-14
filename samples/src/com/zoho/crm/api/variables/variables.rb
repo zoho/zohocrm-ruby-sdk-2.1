@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Variable
   def self.get_variables
@@ -6,11 +6,11 @@ class Variable
     # This method is used to retrieve all the available variables through an API request and print the response.
     # """
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Get Variables operation
-    pm.add(Variables::VariablesOperations::GetVariablesParam.group, 'created')
+    pm.add(ZOHOCRMSDK::Variables::VariablesOperations::GetVariablesParam.group, 'created')
     # Call get_variables method that takes ParameterMap instance as parameter
     response = vo.get_variables(pm)
     unless response.nil?
@@ -26,7 +26,7 @@ class Variable
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Variables::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Variables::ResponseWrapper
           # Get the list of obtained Variable instances
           variables = response_handler.variables
           variables.each do |variable|
@@ -60,7 +60,7 @@ class Variable
             print variable.value
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Variables::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -96,26 +96,26 @@ class Variable
     # This method is used to create variables and print the response.
     # """
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Variables::BodyWrapper.new
+    bw = ZOHOCRMSDK::Variables::BodyWrapper.new
     # List to hold Variable instances
     variables = []
     # Get instance of VariableGroup Class
-    group = VariableGroups::VariableGroup.new
+    group = ZOHOCRMSDK::VariableGroups::VariableGroup.new
     # Set Name to variable_group
-    group.name = 'created'
+    group.name = "created"
     for i in 10..14
       # Get instance of Variable Class
-      variable = Variables::Variable.new
+      variable = ZOHOCRMSDK::Variables::Variable.new
       # Set the type to Variable
       variable.type = 'integer'
       # Set the value
       variable.value = 1
       # Set the name to variable
-      variable.name = i.to_s
+      variable.name = 'Variable' + i.to_s
       # Set the API name to variable
-      variable.api_name = i.to_s
+      variable.api_name = 'Variable' + i.to_s
       # Set the VariableGroup to Variable instance
       variable.variable_group = group
       # Set the description to variable
@@ -136,13 +136,13 @@ class Variable
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Variables::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Variables::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.variables
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Variables::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Variables::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -160,7 +160,7 @@ class Variable
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Variables::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Variables::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -182,7 +182,7 @@ class Variable
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Variables::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -218,17 +218,17 @@ class Variable
     # This method is used to update details of variables in CRM and print the response.
     # """
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Variables::BodyWrapper.new
+    bw = ZOHOCRMSDK::Variables::BodyWrapper.new
     # Get instance of VariableGroup Class
-    group = VariableGroups::VariableGroup.new
+    group = ZOHOCRMSDK::VariableGroups::VariableGroup.new
     # Set Name to variable_group
     group.name = 'created'
     variables = []
     for i in 0..1
       # Get instance of Variable Class
-      variable = Variables::Variable.new
+      variable = ZOHOCRMSDK::Variables::Variable.new
       # Set the type to Variable
       # variable.type = 'integer'
       # # Set the value
@@ -238,7 +238,7 @@ class Variable
       # # Set the name to variable
       # variable.name = i.to_s
       # # Set the API name to variable
-      variable.api_name = i.to_s
+      variable.api_name = 'Variable' + i.to_s
 
       # # Set the description to variable
       # variable.description = i.to_s
@@ -258,13 +258,13 @@ class Variable
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Variables::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Variables::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.variables
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Variables::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Variables::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -282,7 +282,7 @@ class Variable
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Variables::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Variables::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -304,7 +304,7 @@ class Variable
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Variables::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -343,16 +343,16 @@ class Variable
 
     # """
     # example
-    # variable_ids = ["340964302275025", "340964302275035"]
+    # variable_ids = ["34096432275025", "34096432275035"]
     # """
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     variable_ids.each do |variable_id|
       # Possible parameters of Delete Variables operation
-      pm.add(Variables::VariablesOperations::DeleteVariablesParam.ids, variable_id)
+      pm.add(ZOHOCRMSDK::Variables::VariablesOperations::DeleteVariablesParam.ids, variable_id)
     end
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Call delete_variables method that takes ParameterMap instance as parameter
     response = vo.delete_variables(pm)
     unless response.nil?
@@ -364,13 +364,13 @@ class Variable
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Variables::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Variables::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.variables
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Variables::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Variables::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -388,7 +388,7 @@ class Variable
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Variables::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Variables::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -410,7 +410,7 @@ class Variable
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Variables::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -449,14 +449,14 @@ class Variable
 
     # """
     # example
-    # variable_id = 340964302275025
+    # variable_id = 34096432275025
     # """
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Get instance of pm Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Get Variable By ID operation
-    pm.add(Variables::VariablesOperations::GetVariableByIDParam.group, 'created')
+    pm.add(ZOHOCRMSDK::Variables::VariablesOperations::GetVariableByIDParam.group, 'created')
     # Call get_variable_by_id method that takes ParameterMap instance and variable_id as parameters
     response = vo.get_variable_by_id(variable_id, pm)
     unless response.nil?
@@ -472,7 +472,7 @@ class Variable
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Variables::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Variables::ResponseWrapper
           # Get the list of obtained Variable instances
           variables = response_handler.variables
           variables.each do |variable|
@@ -506,7 +506,7 @@ class Variable
             print variable.value
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Variables::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -546,16 +546,16 @@ class Variable
 
     # """
     # example
-    # variable_id = 340964302275025
+    # variable_id = 34096432275025
     # """
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Variables::BodyWrapper.new
+    bw = ZOHOCRMSDK::Variables::BodyWrapper.new
     # List to hold Variable instances
     variables = []
     # Get instance of Variable Class
-    variable = Variables::Variable.new
+    variable = ZOHOCRMSDK::Variables::Variable.new
     # Set the value
     variable.value = 3434
     # Add the variable instance to the array
@@ -573,13 +573,13 @@ class Variable
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Variables::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Variables::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.variables
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Variables::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Variables::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -597,7 +597,7 @@ class Variable
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Variables::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Variables::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -619,7 +619,7 @@ class Variable
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Variables::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -658,10 +658,10 @@ class Variable
 
     # """
     # example
-    # variable_id = 340964302275025
+    # variable_id = 34096432275025
     # """
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Call delete_variable method that takes variable_id as parameter
     response = vo.delete_variable(variable_id)
     unless response.nil?
@@ -673,13 +673,13 @@ class Variable
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Variables::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Variables::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.variables
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Variables::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Variables::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -697,7 +697,7 @@ class Variable
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Variables::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Variables::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -719,7 +719,7 @@ class Variable
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Variables::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -761,11 +761,11 @@ class Variable
     # variable_api_name = 'Variable55'
     # """
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Get Variable For API Name operation
-    pm.add(Variables::VariablesOperations::GetVariableForAPINameParam.group, 'General')
+    pm.add(ZOHOCRMSDK::Variables::VariablesOperations::GetVariableForAPINameParam.group, 'created')
     # Call get_variable_for_api_name method that takes ParameterMap instance and variable_api_name as parameters
     response = vo.get_variable_for_api_name(variable_name,pm)
     unless response.nil?
@@ -781,7 +781,7 @@ class Variable
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Variables::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Variables::ResponseWrapper
           # Get the list of obtained Variable instances
           variables = response_handler.variables
           variables.each do |variable|
@@ -815,7 +815,7 @@ class Variable
             print variable.value
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Variables::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -857,13 +857,13 @@ class Variable
     # variable_api_name = 'Variable55'
     # """
     # Get instance of VariablesOperations Class
-    vo = Variables::VariablesOperations.new
+    vo = ZOHOCRMSDK::Variables::VariablesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Variables::BodyWrapper.new
+    bw = ZOHOCRMSDK::Variables::BodyWrapper.new
     # List to hold Variable instances
     variables = []
     # Get instance of Variable Class
-    variable = Variables::Variable.new
+    variable = ZOHOCRMSDK::Variables::Variable.new
     # Set the value
     variable.value = '45'
     # Add the variable instance to the array
@@ -881,13 +881,13 @@ class Variable
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Variables::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Variables::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.variables
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Variables::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Variables::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -905,7 +905,7 @@ class Variable
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Variables::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Variables::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -927,7 +927,7 @@ class Variable
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Variables::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Variables::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

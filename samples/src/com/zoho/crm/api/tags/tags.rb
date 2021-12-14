@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Tag
   def self.get_tags(module_api_name)
@@ -12,11 +12,11 @@ class Tag
     # module_api_name = "Leads"
     # """
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Get Tags operation
-    pm.add(Tags::TagsOperations::GetTagsParam.module_1, module_api_name)
+    pm.add(ZOHOCRMSDK::Tags::TagsOperations::GetTagsParam.module_1, module_api_name)
     # Call get_tags method that takes ParameterMap instance as parameter
     response = to.get_tags(pm)
     unless response.nil?
@@ -32,7 +32,7 @@ class Tag
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Tags::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Tags::ResponseWrapper
           # Get the list of obtained Tag instances
           tags = response_handler.tags
           tags.each do |tag|
@@ -90,7 +90,7 @@ class Tag
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Tags::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -136,22 +136,22 @@ class Tag
     tags = []
     (3..4).each do |i|
       # Get instance of Tag Class
-      tag = Tags::Tag.new
+      tag = ZOHOCRMSDK::Tags::Tag.new
       # Set Name to tag
       tag.name = i.to_s
       # Add the Tag instance to list
       tags.push(tag)
     end
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Tags::BodyWrapper.new
+    bw = ZOHOCRMSDK::Tags::BodyWrapper.new
     # Set the list to tags in BodyWrapper instance
     bw.tags = tags
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Create Tags operation
-    pm.add(Tags::TagsOperations::CreateTagsParam.module_1, module_api_name)
+    pm.add(ZOHOCRMSDK::Tags::TagsOperations::CreateTagsParam.module_1, module_api_name)
     # Call create_tags method that takes BodyWrapper instance and ParameterMap instance as parameter
     response = to.create_tags(bw,pm)
     unless response.nil?
@@ -163,14 +163,14 @@ class Tag
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Tags::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.tags
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -189,7 +189,7 @@ class Tag
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -211,7 +211,7 @@ class Tag
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -254,10 +254,10 @@ class Tag
     # """
     # List to hold Tag instances
     tags = []
-    tags_id = [0329007, 0329006]
+    tags_id = [347706111405001, 347706110329006]
     for i in 0..1
       # Get instance of Tag Class
-      tag = Tags::Tag.new
+      tag = ZOHOCRMSDK::Tags::Tag.new
       #Set ID
       tag.id = tags_id[i]
       #Set name
@@ -266,15 +266,15 @@ class Tag
       tags.push(tag)
     end
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Tags::BodyWrapper.new
+    bw = ZOHOCRMSDK::Tags::BodyWrapper.new
     # Set the list to tags in BodyWrapper instance
     bw.tags = tags
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Update Tags operation
-    pm.add(Tags::TagsOperations::UpdateTagsParam.module_1, module_api_name)
+    pm.add(ZOHOCRMSDK::Tags::TagsOperations::UpdateTagsParam.module_1, module_api_name)
     # Call update_tags method that takes BodyWrapper instance and ParameterMap instance as parameter
     response = to.update_tags(bw,pm)
     unless response.nil?
@@ -286,13 +286,13 @@ class Tag
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Tags::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.tags
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -312,7 +312,7 @@ class Tag
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -334,7 +334,7 @@ class Tag
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -375,28 +375,28 @@ class Tag
     # """
     # example
     # module_api_name = "Leads"
-    # tag_id = '340964300661047'
+    # tag_id = '34096430661047'
     # """
     # List to hold Tag instances
     tags = []
     for i in 0..0
       # Get instance of Tag Class
-      tag = Tags::Tag.new
+      tag = ZOHOCRMSDK::Tags::Tag.new
       #Set name
       tag.name = 'sd'
       # Add the instance to list
       tags.push(tag)
     end
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Tags::BodyWrapper.new
+    bw = ZOHOCRMSDK::Tags::BodyWrapper.new
     # Set the list to tags in BodyWrapper instance
     bw.tags = tags
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Update Tag operation
-    pm.add(Tags::TagsOperations::UpdateTagParam.module_1, module_api_name)
+    pm.add(ZOHOCRMSDK::Tags::TagsOperations::UpdateTagParam.module_1, module_api_name)
     # Call update_tag method that takes BodyWrapper instance, ParameterMap instance and tag_id as parameter
     response = to.update_tag(tag_id, bw,pm )
     unless response.nil?
@@ -408,13 +408,13 @@ class Tag
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Tags::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.tags
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -434,7 +434,7 @@ class Tag
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -456,7 +456,7 @@ class Tag
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -489,7 +489,7 @@ class Tag
 
   def self.delete_tag(tag_id)
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Call delete_tag method that takes tag_id as parameter
     response = to.delete_tag(tag_id)
     unless response.nil?
@@ -501,13 +501,13 @@ class Tag
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Tags::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.tags
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -527,7 +527,7 @@ class Tag
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -549,7 +549,7 @@ class Tag
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -589,21 +589,21 @@ class Tag
 
     # """
     # example
-    # tag_id = 340964300661047
-    # conflict_id = 340964300661026
+    # tag_id = 34096430661047
+    # conflict_id = 34096430661026
     # """
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Array to hold ConflictWrapper instances
     tags = []
     # Get instance of ConflictWrapper Class
-    merge_tag = Tags::ConflictWrapper.new
+    merge_tag = ZOHOCRMSDK::Tags::ConflictWrapper.new
     # Set the conflict ID
     merge_tag.conflict_id = conflict_id
     # Add the instance to list
     tags.push(merge_tag)
     # Get instance of MergeWrapper Class that will contain the request body
-    mw = Tags::MergeWrapper.new
+    mw = ZOHOCRMSDK::Tags::MergeWrapper.new
     # Set the list to tags in BodyWrapper instance
     mw.tags = tags
     # Call merge_tags method that takes MergeWrapper instance and tag_id as parameter
@@ -617,13 +617,13 @@ class Tag
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Tags::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::ActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.tags
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -643,7 +643,7 @@ class Tag
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -665,7 +665,7 @@ class Tag
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -707,18 +707,18 @@ class Tag
     # """
     # example
     # module_api_name = "Leads"
-    # record_id = 340964302157023
+    # record_id = 34096432157023
     # tag_names = ["addtag1,addtag12"]
     # """
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of Add Tags to record operation
     tag_names.each do |tag_name|
-      pm.add(Tags::TagsOperations::AddTagsToRecordParam.tag_names, tag_name)
+      pm.add(ZOHOCRMSDK::Tags::TagsOperations::AddTagsToRecordParam.tag_names, tag_name)
     end
-    # pm.add(Tags::TagsOperations::AddTagsToRecordParam.over_write,"false")
+    # pm.add(ZOHOCRMSDK::Tags::TagsOperations::AddTagsToRecordParam.over_write,"false")
     # Call add_tags_to_record method that takes ParameterMap instance, module_api_name and record_id as parameter
     response = to.add_tags_to_record(record_id, module_api_name, pm)
     unless response.nil?
@@ -731,14 +731,14 @@ class Tag
         action_handler = response.data_object
         # Check if expected RecordActionWrapper instance is received.
         # Check if expected RecordActionWrapper instance is received.
-        if action_handler.is_a? Tags::RecordActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::RecordActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -758,7 +758,7 @@ class Tag
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -780,7 +780,7 @@ class Tag
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -823,19 +823,19 @@ class Tag
     # """
     # example
     # module_api_name = "Leads"
-    # record_id = 340964302157023
+    # record_id = 34096432157023
     # tag_names = ["addtag1,addtag12"]
     # """
 
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of remove Tags to record  operation
     tag_names.each do |tag_name|
-      pm.add(Tags::TagsOperations::RemoveTagsFromRecordParam.tag_names, tag_name)
+      pm.add(ZOHOCRMSDK::Tags::TagsOperations::RemoveTagsFromRecordParam.tag_names, tag_name)
     end
-    # pm.add(Tags::TagsOperations::RemoveTagsFromRecordParam.over_write,"false")
+    # pm.add(ZOHOCRMSDK::Tags::TagsOperations::RemoveTagsFromRecordParam.over_write,"false")
     # Call remove_tags_from_record method that takes ParameterMap instance and module_api_name as parameter
     response = to.remove_tags_from_record(record_id, module_api_name, pm)
     unless response.nil?
@@ -847,13 +847,13 @@ class Tag
         # Get object from response
         action_handler = response.data_object
         # Check if expected RecordActionWrapper instance is received.
-        if action_handler.is_a? Tags::RecordActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::RecordActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -873,7 +873,7 @@ class Tag
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -895,7 +895,7 @@ class Tag
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -934,17 +934,17 @@ class Tag
     # :param tag_names: The list of tag names to be added
     # """
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters for Add Tags To Multiple Records operation
     tag_names.each do |tag_name|
-      pm.add(Tags::TagsOperations::AddTagsToMultipleRecordsParam.tag_names, tag_name)
+      pm.add(ZOHOCRMSDK::Tags::TagsOperations::AddTagsToMultipleRecordsParam.tag_names, tag_name)
     end
     record_ids.each do |record_id|
-      pm.add(Tags::TagsOperations::AddTagsToMultipleRecordsParam.ids, record_id)
+      pm.add(ZOHOCRMSDK::Tags::TagsOperations::AddTagsToMultipleRecordsParam.ids, record_id)
     end
-    pm.add(Tags::TagsOperations::AddTagsToRecordParam.over_write, 'true')
+    pm.add(ZOHOCRMSDK::Tags::TagsOperations::AddTagsToRecordParam.over_write, 'true')
     # Call add_tags_to_multiple_records method that takes ParameterMap instance and module_api_name as parameter
     response = to.add_tags_to_multiple_records(module_api_name,pm)
     unless response.nil?
@@ -956,13 +956,13 @@ class Tag
         # Get object from response
         action_handler = response.data_object
         # Check if expected RecordActionWrapper instance is received.
-        if action_handler.is_a? Tags::RecordActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::RecordActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -982,7 +982,7 @@ class Tag
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -1019,7 +1019,7 @@ class Tag
             print action_wrapper.wf_scheduler
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -1061,21 +1061,21 @@ class Tag
     # """
     # example
     # module_api_name = "Leads"
-    # record_ids = ['340964302157023', '340964302157025', '340964302157020']
+    # record_ids = ['34096432157023', '34096432157025', '34096432157020']
     # tag_names = ["addtag1,addtag12"]
     # """
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of remove Tags from records operation
     tag_names.each do |tag_name|
-      pm.add(Tags::TagsOperations::RemoveTagsFromMultipleRecordsParam.tag_names, tag_name)
+      pm.add(ZOHOCRMSDK::Tags::TagsOperations::RemoveTagsFromMultipleRecordsParam.tag_names, tag_name)
     end
     record_ids.each do |record_id|
-      pm.add(Tags::TagsOperations::RemoveTagsFromMultipleRecordsParam.ids, record_id)
+      pm.add(ZOHOCRMSDK::Tags::TagsOperations::RemoveTagsFromMultipleRecordsParam.ids, record_id)
     end
-    pm.add(Tags::TagsOperations::AddTagsToRecordParam.over_write, 'false')
+    pm.add(ZOHOCRMSDK::Tags::TagsOperations::AddTagsToRecordParam.over_write, 'false')
     # Call remove_tags_from_multiple_records method that takes ParameterMap instance, module_api_name as parameters
     response = to.remove_tags_from_multiple_records(module_api_name,pm)
     unless response.nil?
@@ -1087,13 +1087,13 @@ class Tag
         # Get object from response
         action_handler = response.data_object
         # Check if expected RecordActionWrapper instance is received.
-        if action_handler.is_a? Tags::RecordActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Tags::RecordActionWrapper
           action_wrapper = action_handler
           # Get the list of obtained ActionResponse instances
           action_responses = action_wrapper.data
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received.
-            if action_response.is_a? Tags::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Tags::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -1113,7 +1113,7 @@ class Tag
               end
 
             # Check if the request returned an exception
-            elsif action_response.is_a? Tags::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Tags::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -1150,7 +1150,7 @@ class Tag
             print action_wrapper.wf_scheduler
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Tags::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -1191,15 +1191,15 @@ class Tag
     # """
     # example
     # module_api_name = "Leads"
-    # tag_id = "340964300661047";
+    # tag_id = "34096430661047";
     # """
     # Get instance of TagsOperations Class
-    to = Tags::TagsOperations.new
+    to = ZOHOCRMSDK::Tags::TagsOperations.new
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Possible parameters of get record count for Tags operation
     # Possible parameters for Get Record Count operation
-    pm.add(Tags::TagsOperations::GetRecordCountForTagParam.module_1, module_api_name)
+    pm.add(ZOHOCRMSDK::Tags::TagsOperations::GetRecordCountForTagParam.module_1, module_api_name)
     # Call get_record_count_for_tag method that takes param_instance and tag_id as parameter
     response = to.get_record_count_for_tag(tag_id,pm)
     unless response.nil?
@@ -1215,13 +1215,13 @@ class Tag
         # Get object from response
         response_handler = response.data_object
         # Check if expected CountWrapper instance is received.
-        if response_handler.is_a? Tags::CountWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Tags::CountWrapper
           counter_wrapper = response_handler
           # Get the obtained tag count
           print "\n Tag Count: "
           print counter_wrapper.count
         # Check if the request returned an exception
-        elsif response_handler.is_a? Tags::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Tags::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

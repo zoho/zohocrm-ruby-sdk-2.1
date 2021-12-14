@@ -1,10 +1,12 @@
-module Notes
-  module ActionResponse
+module ZOHOCRMSDK
+  module Notes
+    module ActionResponse
 
-    # Creates an instance of ActionResponse
-    def initialize
+      # Creates an instance of ActionResponse
+      def initialize
+      end
+
+
     end
-
-
   end
 end

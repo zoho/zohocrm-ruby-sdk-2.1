@@ -1,10 +1,12 @@
-module Variables
-  module ResponseHandler
+module ZOHOCRMSDK
+  module Variables
+    module ResponseHandler
 
-    # Creates an instance of ResponseHandler
-    def initialize
+      # Creates an instance of ResponseHandler
+      def initialize
+      end
+
+
     end
-
-
   end
 end

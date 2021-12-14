@@ -1,10 +1,12 @@
-module FieldAttachments
-  module ResponseHandler
+module ZOHOCRMSDK
+  module FieldAttachments
+    module ResponseHandler
 
-    # Creates an instance of ResponseHandler
-    def initialize
+      # Creates an instance of ResponseHandler
+      def initialize
+      end
+
+
     end
-
-
   end
 end

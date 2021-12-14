@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Territory
   def self.get_territories
@@ -6,7 +6,7 @@ class Territory
     # This method is used to get the list of territories enabled for your organization and print the response.
     # """
     # Get instance of TerritoriesOperations Class
-    to = Territories::TerritoriesOperations.new
+    to = ZOHOCRMSDK::Territories::TerritoriesOperations.new
     # Call get_territories method
     response = to.get_territories
     unless response.nil?
@@ -22,7 +22,7 @@ class Territory
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Territories::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Territories::ResponseWrapper
           # Get the list of obtained Territory instances
           territories = response_handler.territories
           territories.each do |territory|
@@ -108,7 +108,7 @@ class Territory
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Territories::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Territories::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -147,10 +147,10 @@ class Territory
 
     # """
     # example
-    # territory_id = '340964300505351'
+    # territory_id = '34096430505351'
     # """
     # Get instance of TerritoriesOperations Class
-    to = Territories::TerritoriesOperations.new
+    to = ZOHOCRMSDK::Territories::TerritoriesOperations.new
     # Call get_territory method that takes territory_id as parameter
     response = to.get_territory(territory_id)
     unless response.nil?
@@ -166,7 +166,7 @@ class Territory
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Territories::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Territories::ResponseWrapper
           # Get the list of obtained Territory instances
           territories = response_handler.territories
           territories.each do |territory|
@@ -239,7 +239,7 @@ class Territory
              end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Territories::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Territories::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

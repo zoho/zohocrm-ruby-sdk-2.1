@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Email_Templates
   def self.get_email_templates(module_api_name)
@@ -6,13 +6,16 @@ class Email_Templates
     # This method is used to get the email templates data.
     # """
 
-
     # Get instance of EmailTemplateOperations Class 
     # module_api_name = "Leads"
-    aro = EmailTemplates::EmailTemplatesOperations.new(module_api_name)
+    aro = ZOHOCRMSDK::EmailTemplates::EmailTemplatesOperations.new()
+
+    param_instance = ZOHOCRMSDK::ParameterMap.new
+
+    param_instance.add(ZOHOCRMSDK::EmailTemplates::EmailTemplatesOperations::GetEmailTemplatesParam.module_1, module_api_name)
 
     # Call get_email_templates method
-    response = aro.get_email_templates()
+    response = aro.get_email_templates(param_instance)
     unless response.nil?
       status_code = response.status_code
       # Get the status code from response
@@ -26,7 +29,7 @@ class Email_Templates
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? EmailTemplates::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::EmailTemplates::ResponseWrapper
           # Get the list of obtained EmailTemplate instances
             email_templates = response_handler.email_templates
             email_templates.each do |et|
@@ -124,8 +127,32 @@ class Email_Templates
                 print "\nEmailTemplate Subject: "
                 print et.subject
             end
+
+            info = response_handler.info
+            unless info.nil?
+              # Get the PerPage from Info
+              unless info.per_page.nil?
+                print "\n RelatedRecord Info PerPage: "
+                print info.per_page
+              end
+              # Get the Count from Info
+              unless info.count.nil?
+                print "\n RelatedRecord Info Count:  "
+                print info.count
+              end
+              # Get the Page from Info
+              unless info.count.nil?
+                print "\n RelatedRecord Info Page: "
+                print info.page
+              end
+              # Get the MoreRecords from Info
+              unless info.more_records.nil?
+                print "\n RelatedRecord Info more records: "
+                print info.more_records
+              end
+            end
         # Check if the request returned an exception
-        elsif response_handler.is_a? EmailTemplates::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::EmailTemplates::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -163,7 +190,7 @@ class Email_Templates
 
 
     # Get instance of EmailTemplateOperations Class
-    aro = EmailTemplates::EmailTemplatesOperations.new()
+    aro = ZOHOCRMSDK::EmailTemplates::EmailTemplatesOperations.new()
 
     # Call get_email_templates method
     response = aro.get_email_template_by_id(email_template_id)
@@ -180,7 +207,7 @@ class Email_Templates
             # Get object from response
             response_handler = response.data_object
             # Check if expected ResponseWrapper instance is received
-            if response_handler.is_a? EmailTemplates::ResponseWrapper
+            if response_handler.is_a? ZOHOCRMSDK::EmailTemplates::ResponseWrapper
             # Get the list of obtained EmailTemplate instances
                 email_templates = response_handler.email_templates
                 email_templates.each do |et|
@@ -279,7 +306,7 @@ class Email_Templates
                     print et.subject
                 end
             # Check if the request returned an exception
-            elsif response_handler.is_a? EmailTemplates::APIException
+            elsif response_handler.is_a? ZOHOCRMSDK::EmailTemplates::APIException
             exception = response_handler
             # Get the Code
             print 'code:'

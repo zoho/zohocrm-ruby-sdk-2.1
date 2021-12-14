@@ -1,10 +1,12 @@
-module Pipeline
-  module ActionResponse
+module ZOHOCRMSDK
+  module Pipeline
+    module ActionResponse
 
-    # Creates an instance of ActionResponse
-    def initialize
+      # Creates an instance of ActionResponse
+      def initialize
+      end
+
+
     end
-
-
   end
 end

@@ -1,10 +1,12 @@
-module SendMail
-  module ResponseHandler
+module ZOHOCRMSDK
+  module SendMail
+    module ResponseHandler
 
-    # Creates an instance of ResponseHandler
-    def initialize
+      # Creates an instance of ResponseHandler
+      def initialize
+      end
+
+
     end
-
-
   end
 end

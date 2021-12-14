@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Currency
   def self.get_currencies
@@ -6,7 +6,7 @@ class Currency
     # This method is used to get all the available currencies in your organization.
     # """
     # Get instance of CurrenciesOperations Class
-    co = Currencies::CurrenciesOperations.new
+    co = ZOHOCRMSDK::Currencies::CurrenciesOperations.new
     # Call get_currencies method
     response = co.get_currencies
 
@@ -23,7 +23,7 @@ class Currency
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Currencies::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Currencies::ResponseWrapper
           # Get the list of Currency instances
           currencies = response_handler.currencies
           currencies.each do |currency|
@@ -94,7 +94,7 @@ class Currency
             print currency.iso_code
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Currencies::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Currencies::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -130,11 +130,11 @@ class Currency
     # This method is used to add new currencies to your organization.
     # """
     # Get instance of CurrenciesOperations Class
-    co = Currencies::CurrenciesOperations.new
+    co = ZOHOCRMSDK::Currencies::CurrenciesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Currencies::BodyWrapper.new
+    bw = ZOHOCRMSDK::Currencies::BodyWrapper.new
     # Get instance of Currency Class
-    currency = Currencies::Currency.new
+    currency = ZOHOCRMSDK::Currencies::Currency.new
     currency.prefix_symbol = true
     # To set the name of the currency.
     currency.name = 'Angolan Kwanza - AOA'
@@ -148,18 +148,18 @@ class Currency
     # To set the symbol of the currency.
     currency.symbol = 'Kz'
     # To set the rate at which the currency has to be exchanged for home currency
-    currency.exchange_rate = '20.0'
+    currency.exchange_rate = '20.'
     # To set the status of the currency.
     # True: The currency is active.
     # False: The currency is inactive.
     currency.is_active = true
-    format = Currencies::Format.new
+    format = ZOHOCRMSDK::Currencies::Format.new
     # It can be a Period or Comma, depending on the currency.
-    format.decimal_separator = Util::Choice.new('Period')
+    format.decimal_separator = ZOHOCRMSDK::Util::Choice.new('Period')
     # It can be a Period, Comma, or Space, depending on the currency.
-    format.thousand_separator = Util::Choice.new('Comma')
+    format.thousand_separator = ZOHOCRMSDK::Util::Choice.new('Comma')
     # To set the number of decimal places allowed for the currency. It can be 0, 2, or 3
-    format.decimal_places = Util::Choice.new('2')
+    format.decimal_places = ZOHOCRMSDK::Util::Choice.new('2')
     # To set the format of the currency
     # currency.set_format(format)
     currency.format = format
@@ -178,13 +178,13 @@ class Currency
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Currencies::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Currencies::ActionWrapper
           action_wrapper = action_handler
           # Get the obtained ActionResponse instances
           action_responses = action_wrapper.currencies
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? Currencies::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Currencies::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -203,7 +203,7 @@ class Currency
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Currencies::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Currencies::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -225,7 +225,7 @@ class Currency
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Currencies::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Currencies::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -261,11 +261,11 @@ class Currency
     # This method is used to update currency details.
     # """
     # Get instance of CurrenciesOperations Class
-    co = Currencies::CurrenciesOperations.new
+    co = ZOHOCRMSDK::Currencies::CurrenciesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Currencies::BodyWrapper.new
+    bw = ZOHOCRMSDK::Currencies::BodyWrapper.new
     # Get instance of Currency Class
-    currency = Currencies::Currency.new
+    currency = ZOHOCRMSDK::Currencies::Currency.new
     currency.prefix_symbol = true
     # To set the name of the currency.
     currency.name = 'Angolan Kwanza - AOA'
@@ -276,23 +276,23 @@ class Currency
     # To set the ISO code of the currency.
     # currency.set_iso_code("AOA")
     # To set ID of the currency.
-    currency.id = 3_524_033_000_002_007_001
+    currency.id = 3_524_033__002_007_001
 
     # To set the symbol of the currency.
     currency.symbol = 'Kz'
     # To set the rate at which the currency has to be exchanged for home currency
-    currency.exchange_rate = '20.0'
+    currency.exchange_rate = '20.'
     # To set the status of the currency.
     # True: The currency is active.
     # False: The currency is inactive.
     currency.is_active = true
-    format = Currencies::Format.new
+    format = ZOHOCRMSDK::Currencies::Format.new
     # It can be a Period or Comma, depending on the currency.
-    format.decimal_separator = Util::Choice.new('Period')
+    format.decimal_separator = ZOHOCRMSDK::Util::Choice.new('Period')
     # It can be a Period, Comma, or Space, depending on the currency.
-    format.thousand_separator = Util::Choice.new('Comma')
+    format.thousand_separator = ZOHOCRMSDK::Util::Choice.new('Comma')
     # To set the number of decimal places allowed for the currency. It can be 0, 2, or 3
-    format.decimal_places = Util::Choice.new('2')
+    format.decimal_places = ZOHOCRMSDK::Util::Choice.new('2')
     # To set the format of the currency
     # currency.set_format(format)
     currency.format = format
@@ -311,13 +311,13 @@ class Currency
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Currencies::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Currencies::ActionWrapper
           action_wrapper = action_handler
           # Get the obtained ActionResponse instances
           action_responses = action_wrapper.currencies
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? Currencies::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Currencies::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -336,7 +336,7 @@ class Currency
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Currencies::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Currencies::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -358,7 +358,7 @@ class Currency
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Currencies::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Currencies::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -391,10 +391,10 @@ class Currency
 
   def self.enable_multiple_currencies
     # Get instance of CurrenciesOperations Class
-    co = Currencies::CurrenciesOperations.new
-    bcw = Currencies::BaseCurrencyWrapper.new
+    co = ZOHOCRMSDK::Currencies::CurrenciesOperations.new
+    bcw = ZOHOCRMSDK::Currencies::BaseCurrencyWrapper.new
     # Get instance of Currency Class
-    currency = Currencies::Currency.new
+    currency = ZOHOCRMSDK::Currencies::Currency.new
     currency.prefix_symbol = true
     # To set the name of the currency.
     currency.name = 'Angolan Kwanza - AOA'
@@ -408,18 +408,18 @@ class Currency
     # To set the symbol of the currency.
     currency.symbol = 'Kz'
     # To set the rate at which the currency has to be exchanged for home currency
-    currency.exchange_rate = '20.0'
+    currency.exchange_rate = '20.'
     # To set the status of the currency.
     # True: The currency is active.
     # False: The currency is inactive.
     currency.is_active = true
-    format = Currencies::Format.new
+    format = ZOHOCRMSDK::Currencies::Format.new
     # It can be a Period or Comma, depending on the currency.
-    format.decimal_separator = Util::Choice.new('Period')
+    format.decimal_separator = ZOHOCRMSDK::Util::Choice.new('Period')
     # It can be a Period, Comma, or Space, depending on the currency.
-    format.thousand_separator = Util::Choice.new('Comma')
+    format.thousand_separator = ZOHOCRMSDK::Util::Choice.new('Comma')
     # To set the number of decimal places allowed for the currency. It can be 0, 2, or 3
-    format.decimal_places = Util::Choice.new('2')
+    format.decimal_places = ZOHOCRMSDK::Util::Choice.new('2')
     # To set the format of the currency
     # currency.set_format(format)
     currency.format = format
@@ -436,13 +436,13 @@ class Currency
         # Get object from response
         action_handler = response.data_object
         # Check if expected BaseCurrencyActionWrapper instance is received.
-        if action_handler.is_a? Currencies::BaseCurrencyActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Currencies::BaseCurrencyActionWrapper
           action_wrapper = action_handler
           # Get the obtained ActionResponse instances
           action_response = action_wrapper.base_currency
 
           # Check if expected SuccessResponse instance is received
-          if action_response.is_a? Currencies::SuccessResponse
+          if action_response.is_a? ZOHOCRMSDK::Currencies::SuccessResponse
             success_response = action_response
             # Get the Code
             print 'code:'
@@ -461,7 +461,7 @@ class Currency
               print "\n"
             end
           # Check if the request returned an exception
-          elsif action_response.is_a? Currencies::APIException
+          elsif action_response.is_a? ZOHOCRMSDK::Currencies::APIException
             api_exception = action_response
             # Get the Code
             print 'code:'
@@ -482,7 +482,7 @@ class Currency
             print "\n"
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Currencies::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Currencies::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -518,11 +518,11 @@ class Currency
     # This method is used to update base currency details.
     # """
     # Get instance of CurrenciesOperations Class
-    co = Currencies::CurrenciesOperations.new
+    co = ZOHOCRMSDK::Currencies::CurrenciesOperations.new
     # Get instance of BaseCurrencyWrapper Class that will contain the request body
-    bcw = Currencies::BaseCurrencyWrapper.new
+    bcw = ZOHOCRMSDK::Currencies::BaseCurrencyWrapper.new
     # Get instance of Currency Class
-    currency = Currencies::Currency.new
+    currency = ZOHOCRMSDK::Currencies::Currency.new
     currency.prefix_symbol = true
     # To set the name of the currency.
     currency.name = 'Angolan Kwanza - AOA'
@@ -533,22 +533,22 @@ class Currency
     # To set the ISO code of the currency.
     # currency.set_iso_code("AOA")
     # To set ID of the currency.
-    currency.id = 3_524_033_000_002_007_001
+    currency.id = 3_524_033__002_007_001
     # To set the symbol of the currency.
     currency.symbol = 'Kz'
     # To set the rate at which the currency has to be exchanged for home currency
-    currency.exchange_rate = '20.0'
+    currency.exchange_rate = '20.'
     # To set the status of the currency.
     # True: The currency is active.
     # False: The currency is inactive.
     currency.is_active = true
-    format = Currencies::Format.new
+    format = ZOHOCRMSDK::Currencies::Format.new
     # It can be a Period or Comma, depending on the currency.
-    format.decimal_separator = Util::Choice.new('Period')
+    format.decimal_separator = ZOHOCRMSDK::Util::Choice.new('Period')
     # It can be a Period, Comma, or Space, depending on the currency.
-    format.thousand_separator = Util::Choice.new('Comma')
+    format.thousand_separator = ZOHOCRMSDK::Util::Choice.new('Comma')
     # To set the number of decimal places allowed for the currency. It can be 0, 2, or 3
-    format.decimal_places = Util::Choice.new('2')
+    format.decimal_places = ZOHOCRMSDK::Util::Choice.new('2')
     # To set the format of the currency
     # currency.set_format(format)
     currency.format = format
@@ -565,11 +565,11 @@ class Currency
         # Get object from response
         action_handler = response.data_object
         # Check if expected BaseCurrencyActionWrapper instance is received.
-        if action_handler.is_a? Currencies::BaseCurrencyActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Currencies::BaseCurrencyActionWrapper
           action_response = action_handler.base_currency
 
           # Check if expected SuccessResponse instance is received
-          if action_response.is_a? Currencies::SuccessResponse
+          if action_response.is_a? ZOHOCRMSDK::Currencies::SuccessResponse
             success_response = action_response
             # Get the Code
             print 'code:'
@@ -588,7 +588,7 @@ class Currency
               print "\n"
             end
           # Check if the request returned an exception
-          elsif action_response.is_a? Currencies::APIException
+          elsif action_response.is_a? ZOHOCRMSDK::Currencies::APIException
             api_exception = action_response
             # Get the Code
             print 'code:'
@@ -609,7 +609,7 @@ class Currency
             print "\n"
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Currencies::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Currencies::APIException
           exception = action_handler
           # Get the Code
           print 'code:'
@@ -648,10 +648,10 @@ class Currency
 
     # """
     # example
-    # currency_id = "340964302293037";
+    # currency_id = "34096432293037";
     # """
     # Get instance of CurrenciesOperations Class
-    co = Currencies::CurrenciesOperations.new
+    co = ZOHOCRMSDK::Currencies::CurrenciesOperations.new
     # Call get_currency method that takes currency_id as parameter
     response = co.get_currency(current_id)
 
@@ -668,7 +668,7 @@ class Currency
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? Currencies::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::Currencies::ResponseWrapper
           # Get the list of Currency instances
           currencies = response_handler.currencies
           currencies.each do |currency|
@@ -739,7 +739,7 @@ class Currency
             print currency.iso_code
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? Currencies::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::Currencies::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -778,14 +778,14 @@ class Currency
 
     # """
     # example
-    # currency_id = "340964302293037";
+    # currency_id = "34096432293037";
     # """
     # Get instance of CurrenciesOperations Class
-    co = Currencies::CurrenciesOperations.new
+    co = ZOHOCRMSDK::Currencies::CurrenciesOperations.new
     # Get instance of BodyWrapper Class that will contain the request body
-    bw = Currencies::BodyWrapper.new
+    bw = ZOHOCRMSDK::Currencies::BodyWrapper.new
     # Get instance of Currency Class
-    currency = Currencies::Currency.new
+    currency = ZOHOCRMSDK::Currencies::Currency.new
 
     currency.prefix_symbol = true
     # To set the name of the currency.
@@ -800,18 +800,18 @@ class Currency
     # To set the symbol of the currency.
     currency.symbol = 'Kz'
     # To set the rate at which the currency has to be exchanged for home currency
-    currency.exchange_rate = '20.0'
+    currency.exchange_rate = '20.'
     # To set the status of the currency.
     # True: The currency is active.
     # False: The currency is inactive.
     currency.is_active = true
-    format = Currencies::Format.new
+    format = ZOHOCRMSDK::Currencies::Format.new
     # It can be a Period or Comma, depending on the currency.
-    format.decimal_separator = Util::Choice.new('Period')
+    format.decimal_separator = ZOHOCRMSDK::Util::Choice.new('Period')
     # It can be a Period, Comma, or Space, depending on the currency.
-    format.thousand_separator = Util::Choice.new('Comma')
+    format.thousand_separator = ZOHOCRMSDK::Util::Choice.new('Comma')
     # To set the number of decimal places allowed for the currency. It can be 0, 2, or 3
-    format.decimal_places = Util::Choice.new('2')
+    format.decimal_places = ZOHOCRMSDK::Util::Choice.new('2')
     # To set the format of the currency
     # currency.set_format(format)
     currency.format = format
@@ -830,13 +830,13 @@ class Currency
         # Get object from response
         action_handler = response.data_object
         # Check if expected ActionWrapper instance is received.
-        if action_handler.is_a? Currencies::ActionWrapper
+        if action_handler.is_a? ZOHOCRMSDK::Currencies::ActionWrapper
           action_wrapper = action_handler
           # Get the obtained ActionResponse instances
           action_responses = action_wrapper.currencies
           action_responses.each do |action_response|
             # Check if expected SuccessResponse instance is received
-            if action_response.is_a? Currencies::SuccessResponse
+            if action_response.is_a? ZOHOCRMSDK::Currencies::SuccessResponse
               success_response = action_response
               # Get the Code
               print 'code:'
@@ -855,7 +855,7 @@ class Currency
                 print "\n"
               end
             # Check if the request returned an exception
-            elsif action_response.is_a? Currencies::APIException
+            elsif action_response.is_a? ZOHOCRMSDK::Currencies::APIException
               api_exception = action_response
               # Get the Code
               print 'code:'
@@ -877,7 +877,7 @@ class Currency
             end
           end
         # Check if the request returned an exception
-        elsif action_handler.is_a? Currencies::APIException
+        elsif action_handler.is_a? ZOHOCRMSDK::Currencies::APIException
           exception = action_handler
           # Get the Code
           print 'code:'

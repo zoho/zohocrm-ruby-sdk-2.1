@@ -1,10 +1,12 @@
-module Currencies
-  module ActionHandler
+module ZOHOCRMSDK
+  module Currencies
+    module ActionHandler
 
-    # Creates an instance of ActionHandler
-    def initialize
+      # Creates an instance of ActionHandler
+      def initialize
+      end
+
+
     end
-
-
   end
 end

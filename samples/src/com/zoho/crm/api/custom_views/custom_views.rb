@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Custom_Views
   def self.get_custom_views(module_api_name)
@@ -14,9 +14,9 @@ class Custom_Views
     # """
     # Get instance of CustomViewOperations Class that takes module_api_name as parameter
 
-    cvo = CustomViews::CustomViewsOperations.new(module_api_name)
+    cvo = ZOHOCRMSDK::CustomViews::CustomViewsOperations.new(module_api_name)
     # Get instance of ParameterMap Class
-    pm = ParameterMap.new
+    pm = ZOHOCRMSDK::ParameterMap.new
     # Call get_custom_views method
     response = cvo.get_custom_views(pm)
     unless response.nil?
@@ -32,7 +32,7 @@ class Custom_Views
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? CustomViews::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::CustomViews::ResponseWrapper
           # Get the list of obtained CustomView instances
           custom_views = response_handler.custom_views
           custom_views.each do |cv|
@@ -139,7 +139,7 @@ class Custom_Views
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? CustomViews::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::CustomViews::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -178,7 +178,7 @@ class Custom_Views
     # :return:
     # """
     # Get instance of CustomViewOperations Class that takes module_api_name as parameter
-    cvo = CustomViews::CustomViewsOperations.new(module_api_name)
+    cvo = ZOHOCRMSDK::CustomViews::CustomViewsOperations.new(module_api_name)
 
     # Call get_custom_view method that takes custom_view_id as parameter
     response = cvo.get_custom_view(custom_view_id)
@@ -195,7 +195,7 @@ class Custom_Views
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? CustomViews::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::CustomViews::ResponseWrapper
           # Get the list of obtained CustomView instances
           custom_views = response_handler.custom_views
           custom_views.each do |cv|
@@ -310,7 +310,7 @@ class Custom_Views
             end
           end
         # Check if the request returned an exception
-        elsif response_handler.is_a? CustomViews::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::CustomViews::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

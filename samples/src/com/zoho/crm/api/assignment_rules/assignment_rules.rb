@@ -1,4 +1,4 @@
-require 'ZCRMSDK'
+require 'ZOHOCRMSDK2_1'
 
 class Assignment_Rules
   def self.get_assignment_rules()
@@ -9,7 +9,7 @@ class Assignment_Rules
 
     # Get instance of AssignmentRuleOperations Class 
 
-    aro = AssignmentRules::AssignmentRulesOperations.new()
+    aro = ZOHOCRMSDK::AssignmentRules::AssignmentRulesOperations.new()
 
     # Call get_assignment_rules method
     response = aro.get_assignment_rules()
@@ -26,7 +26,7 @@ class Assignment_Rules
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? AssignmentRules::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::AssignmentRules::ResponseWrapper
           # Get the list of obtained AssignmentRule instances
             assignment_rules = response_handler.assignment_rules
             assignment_rules.each do |ar|
@@ -84,7 +84,7 @@ class Assignment_Rules
                 print ar.description
             end
         # Check if the request returned an exception
-        elsif response_handler.is_a? AssignmentRules::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::AssignmentRules::APIException
           exception = response_handler
           # Get the Code
           print 'code:'
@@ -123,9 +123,9 @@ class Assignment_Rules
 
     # Get instance of AssignmentRuleOperations Class 
 
-    aro = AssignmentRules::AssignmentRulesOperations.new()
-    pm = ParameterMap.new
-    pm.add(AssignmentRules::AssignmentRulesOperations::GetAssignmentRuleParam.module_1, "Leads")
+    aro = ZOHOCRMSDK::AssignmentRules::AssignmentRulesOperations.new()
+    pm = ZOHOCRMSDK::ParameterMap.new
+    pm.add(ZOHOCRMSDK::AssignmentRules::AssignmentRulesOperations::GetAssignmentRuleParam.module_1, "Leads")
     # Call get_assignment_rule method
     response = aro.get_assignment_rule(assignment_rule_id, pm)
     unless response.nil?
@@ -141,7 +141,7 @@ class Assignment_Rules
         # Get object from response
         response_handler = response.data_object
         # Check if expected ResponseWrapper instance is received
-        if response_handler.is_a? AssignmentRules::ResponseWrapper
+        if response_handler.is_a? ZOHOCRMSDK::AssignmentRules::ResponseWrapper
           # Get the list of obtained AssignmentRule instances
             assignment_rules = response_handler.assignment_rules
             assignment_rules.each do |ar|
@@ -199,7 +199,7 @@ class Assignment_Rules
                 print ar.description
             end
         # Check if the request returned an exception
-        elsif response_handler.is_a? AssignmentRules::APIException
+        elsif response_handler.is_a? ZOHOCRMSDK::AssignmentRules::APIException
           exception = response_handler
           # Get the Code
           print 'code:'

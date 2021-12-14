@@ -6,11 +6,11 @@ require 'version'
 
 Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.6'
-  spec.name = 'ZCRMSDK'
-  spec.version       = ZCRMSDK::VERSION
+  spec.name = 'ZOHOCRMSDK2_1'
+  spec.version       = ZOHOCRMSDK2_1::VERSION
   spec.authors       = ['ZOHO CRM API TEAM']
   spec.email         = ['support@zohocrm.com']
-  spec.metadata["source_code_uri"] = "https://github.com/zoho/zohocrm-ruby-sdk"
+  spec.metadata["source_code_uri"] = "https://github.com/zoho/zohocrm-ruby-sdk-2.1"
   spec.summary       = 'API client for Zoho CRM '
   spec.description   = 'An API client for CRM customers, with which they can call ZOHO CRM APIs with ease'
   spec.homepage      = 'https://www.zoho.com/crm/'

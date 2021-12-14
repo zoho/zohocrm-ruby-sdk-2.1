@@ -1,10 +1,12 @@
-module Record
-  module ConvertActionResponse
+module ZOHOCRMSDK
+  module Record
+    module ConvertActionResponse
 
-    # Creates an instance of ConvertActionResponse
-    def initialize
+      # Creates an instance of ConvertActionResponse
+      def initialize
+      end
+
+
     end
-
-
   end
 end
