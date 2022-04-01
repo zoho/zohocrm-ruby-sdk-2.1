@@ -161,7 +161,7 @@ module ZOHOCRMSDK
 
     ZOHO_SDK = 'X-ZOHO-SDK'
 
-    SDK_VERSION = '1.0.0'
+    SDK_VERSION = '1.1.0'
 
     SET_CONTENT_TYPE_HEADER = ['/crm/bulk/v2.1/read', '/crm/bulk/v2.1/write']
 
