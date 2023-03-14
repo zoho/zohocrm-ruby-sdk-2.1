@@ -7,6 +7,7 @@ require_relative '../sample/attachments/attachments'
 require_relative '../sample/blueprint/blueprint'
 require_relative '../sample/bulkread/bulkread'
 require_relative '../sample/bulkwrite/bulkwrite'
+require_relative '../sample/cancel_meetings/cancel_meetings'
 require_relative '../sample/currencies/currencies'
 require_relative '../sample/fields/field'
 require_relative '../sample/file/file'
@@ -49,6 +50,7 @@ class Test
     Test.blueprint
     Test.bulkread
     Test.bulkwrite
+    Test.cancel_meetings
     Test.contact_roles
     Test.currencies
     Test.custom_views
@@ -133,6 +135,12 @@ class Test
     Bulkwrite.get_bulk_write_job_details(job_id)
     Bulkwrite.download_bulk_write_result(download_url, destination_folder)
   end
+
+  def self.cancel_meetings
+    event_id = 440248000000740003
+    send_cancel_mail = false
+    CancelMeetings.cancel_meeting(event_id,send_cancel_mail)
+  end 
 
   def self.contact_roles
     contact_role_id = 347706112654001

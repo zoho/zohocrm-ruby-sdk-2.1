@@ -122,22 +122,27 @@ module ZOHOCRMSDK
 
             Dir.mkdir resoures_folder_path unless File.exist? resoures_folder_path
             record_field_details_path = get_record_json_file_path()
-            module_api_name = verify_module_api_name(module_api_name)
-            set_handler_api_path(module_api_name,handler_instance)
+            unless module_api_name.nil?
+              module_api_name = verify_module_api_name(module_api_name)
+              set_handler_api_path(module_api_name, handler_instance)
 
-            return if !handler_instance.nil? && handler_instance.module_api_name.nil? && (!Constants::SKIP_MODULES.include? module_api_name.downcase)
-            
+              return if !handler_instance.nil? && handler_instance.module_api_name.nil? && (!Constants::SKIP_MODULES.include? module_api_name.downcase)
+            end
             if File.exist? record_field_details_path
               file_exists_flow(module_api_name,record_field_details_path,last_modified_time)
             elsif initializer.sdk_config.auto_refresh_fields
               @@new_file = true
               fill_data_type()
               @@api_supported_module = @@api_supported_module.length == 0 ? get_modules(nil) : @@api_supported_module
-            
-              record_field_details_json  = File.exist? record_field_details_path ? JSON.parse(File.read(record_field_details_path)) : {}
-            
-              record_field_details_json = { Constants::FIELDS_LAST_MODIFIED_TIME => get_current_time_in_millis }
-              
+
+              record_field_details_json={}
+
+              if File.exists? record_field_details_path
+                record_field_details_json= JSON.parse(File.read(record_field_details_path))
+              end
+
+              record_field_details_json[Constants::FIELDS_LAST_MODIFIED_TIME] = get_current_time_in_millis
+
               if @@api_supported_module.length > 0
                 @@api_supported_module.each_key do |module_name|
                   unless record_field_details_json.key? module_name.downcase

@@ -9,6 +9,7 @@ module ZOHOCRMSDK
       def initialize
         @data = nil
         @trigger = nil
+        @apply_feature_execution = nil
         @process = nil
         @duplicate_check_fields = nil
         @wf_trigger = nil
@@ -50,6 +51,24 @@ module ZOHOCRMSDK
         end
         @trigger = trigger
         @key_modified['trigger'] = 1
+      end
+
+        # The method to get the apply_feature_execution
+        # @return An instance of Array
+
+      def apply_feature_execution
+        @apply_feature_execution
+      end
+
+        # The method to set the value to apply_feature_execution
+        # @param apply_feature_execution [Array] An instance of Array
+
+      def apply_feature_execution=(apply_feature_execution)
+        if apply_feature_execution!=nil and !apply_feature_execution.is_a? Array
+          raise SDKException.new(Constants::DATA_TYPE_ERROR, 'KEY: apply_feature_execution EXPECTED TYPE: Array', nil, nil)
+        end
+        @apply_feature_execution = apply_feature_execution
+        @key_modified['apply_feature_execution'] = 1
       end
 
         # The method to get the process
