@@ -34,6 +34,10 @@ module ZOHOCRMSDK
       end
 
       def self.delete_fields(module_api_name)
+
+        if module_api_name.nil?
+          raise Exception.new("module_api_name should not be nil")
+        end
         record_field_details_path = Converter.new(nil).get_record_json_file_path
         if File.exist? record_field_details_path
           record_field_details_json = JSON.parse(File.read(record_field_details_path))
@@ -51,6 +55,9 @@ module ZOHOCRMSDK
 
       def self.refresh_fields(module_api_name)
         @@sync_lock.synchronize do
+          if module_api_name.nil?
+            raise Exception.new("module_api_name should not be nil")
+          end
           delete_fields(module_api_name)
           Utility.get_fields_info(module_api_name)
         end
@@ -59,7 +66,7 @@ module ZOHOCRMSDK
         raise e
       rescue StandardError => e
         ex = SDKException.new(nil, nil, nil, e)
-        SDKLog::SDKLogger.severe(Constants::REFRESH_SINGLE_MODULE_FIELDS_ERROR + module_api_name, ex)
+        SDKLog::SDKLogger.severe(Constants::REFRESH_SINGLE_MODULE_FIELDS_ERROR , ex)
         raise ex
       end
 
