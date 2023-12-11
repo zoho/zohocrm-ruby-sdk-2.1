@@ -370,7 +370,7 @@ class Initialize
         # Available Domains: USDataCenter, EUDataCenter, INDataCenter, CNDataCenter, AUDataCenter
         # Available Environments: PRODUCTION, DEVELOPER, SANDBOX
         
-        environment = ZOHOCRMSDK::DC::USDataCenter.PRODUCTION
+        environment = ZOHOCRMSDK::DC::USDataCenter::PRODUCTION
 
          #Create a Token instance
          #1 -> OAuth client id.
@@ -392,7 +392,7 @@ class Initialize
 
         tokenstore = ZOHOCRMSDK::Store::DBStore.new(host: "host_name", database_name: "database_name" ,table_name: "table_name",user_name: "user_name",password: "password",port_number:"port_number")
 
-        #tokenstore = ZOHOCRMSDK::Store::FileStore.new("/Users/user_name/Documents/ruby_sdk_token.txt"
+        #tokenstore = ZOHOCRMSDK::Store::FileStore.new("/Users/user_name/Documents/ruby_sdk_token.txt")
 
         # auto_refresh_fields
         # if true - all the modules' fields will be auto-refreshed in the background, every    hour.
@@ -709,7 +709,7 @@ class Records
 
     store = ZOHOCRMSDK::Store::DBStore.new(host: "host_name", database_name: "database_name" ,table_name: "table_name",user_name: "user_name",password: "password",port_number:"port_number")
 
-    #store = ZOHOCRMSDK::Store::FileStore.new("/Users/user_name/Documents/ruby_sdk_token.txt"
+    #store = ZOHOCRMSDK::Store::FileStore.new("/Users/user_name/Documents/ruby_sdk_token.txt")
 
     # auto_refresh_fields
     # if true - all the modules' fields will be auto-refreshed in the background, every    hour.
